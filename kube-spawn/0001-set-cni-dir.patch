@@ -1,0 +1,71 @@
+diff --git a/cmd/kube-spawn/cni-spawn.go b/cmd/kube-spawn/cni-spawn.go
+index e8b3555..5299f28 100644
+--- a/cmd/kube-spawn/cni-spawn.go
++++ b/cmd/kube-spawn/cni-spawn.go
+@@ -37,7 +37,7 @@ var (
+ 
+ func init() {
+ 	kubespawnCmd.AddCommand(cniSpawnCmd)
+-	cniSpawnCmd.Flags().StringVar(&cniPluginDir, "cni-plugin-dir", "/opt/cni/bin", "path to CNI plugin directory")
++	cniSpawnCmd.Flags().StringVar(&cniPluginDir, "cni-plugin-dir", "/usr/libexec/cni", "path to CNI plugin directory")
+ }
+ 
+ func runCNISpawn(cmd *cobra.Command, args []string) {
+diff --git a/cmd/kube-spawn/create.go b/cmd/kube-spawn/create.go
+index a303616..5ff2f21 100644
+--- a/cmd/kube-spawn/create.go
++++ b/cmd/kube-spawn/create.go
+@@ -48,10 +48,10 @@ func init() {
+ 
+ 	createCmd.Flags().String("container-runtime", "docker", "Runtime to use for the cluster (can be docker or rkt)")
+ 	createCmd.Flags().String("machinectl-image", "coreos", "Name of the machinectl image to use for the kube-spawn containers")
+-	createCmd.Flags().String("kubernetes-version", "v1.9.3", "Kubernetes version to install")
++	createCmd.Flags().String("kubernetes-version", "v1.10.1", "Kubernetes version to install")
+ 	createCmd.Flags().String("kubernetes-source-dir", "", "Path to directory with Kubernetes sources")
+ 	createCmd.Flags().String("hyperkube-image", "", "Kubernetes hyperkube image to use (if unset, upstream k8s is installed)")
+-	createCmd.Flags().String("cni-plugin-dir", "/opt/cni/bin", "Path to directory with CNI plugins")
++	createCmd.Flags().String("cni-plugin-dir", "/usr/libexec/cni", "Path to directory with CNI plugins")
+ 	createCmd.Flags().String("rkt-binary-path", "/usr/local/bin/rkt", "Path to rkt binary")
+ 	createCmd.Flags().String("rkt-stage1-image-path", "/usr/local/bin/stage1-coreos.aci", "Path to rkt stage1-coreos.aci image")
+ 	createCmd.Flags().String("rktlet-binary-path", "/usr/local/bin/rktlet", "Path to rktlet binary")
+diff --git a/cmd/kube-spawn/start.go b/cmd/kube-spawn/start.go
+index 4c039ea..d1c8ddd 100644
+--- a/cmd/kube-spawn/start.go
++++ b/cmd/kube-spawn/start.go
+@@ -40,7 +40,7 @@ func init() {
+ 
+ 	startCmd.Flags().BoolVar(&flagSkipInit, "skip-cluster-init", false, "Skips cluster initialization through kubeadm")
+ 	startCmd.Flags().IntP("nodes", "n", 3, "Number of nodes to start")
+-	startCmd.Flags().String("cni-plugin-dir", "/opt/cni/bin", "Path to directory with CNI plugins")
++	startCmd.Flags().String("cni-plugin-dir", "/usr/libexec/cni", "Path to directory with CNI plugins")
+ 
+ 	viper.BindPFlags(startCmd.Flags())
+ }
+diff --git a/pkg/cluster/cluster.go b/pkg/cluster/cluster.go
+index 0d98629..85d0049 100644
+--- a/pkg/cluster/cluster.go
++++ b/pkg/cluster/cluster.go
+@@ -191,8 +191,8 @@ func (c *Cluster) Create(clusterSettings *ClusterSettings, clusterCache *cache.C
+ 	socatPath := path.Join(clusterCache.Dir(), "socat")
+ 	copyItems = append(copyItems, copyItem{dst: "/usr/bin/socat", src: socatPath})
+ 
+-	copyItems = append(copyItems, copyItem{dst: "/opt/cni/bin/bridge", src: path.Join(clusterSettings.CNIPluginDir, "bridge")})
+-	copyItems = append(copyItems, copyItem{dst: "/opt/cni/bin/loopback", src: path.Join(clusterSettings.CNIPluginDir, "loopback")})
++	copyItems = append(copyItems, copyItem{dst: "/usr/libexec/cni/bridge", src: path.Join(clusterSettings.CNIPluginDir, "bridge")})
++	copyItems = append(copyItems, copyItem{dst: "/usr/libexec/cni/loopback", src: path.Join(clusterSettings.CNIPluginDir, "loopback")})
+ 
+ 	if clusterSettings.ContainerRuntime == "rkt" {
+ 		copyItems = append(copyItems, copyItem{dst: "/usr/bin/rkt", src: clusterSettings.RktBinaryPath})
+diff --git a/pkg/cluster/clusterfiles.go b/pkg/cluster/clusterfiles.go
+index 246fbf1..b374c2d 100644
+--- a/pkg/cluster/clusterfiles.go
++++ b/pkg/cluster/clusterfiles.go
+@@ -67,7 +67,7 @@ systemctl enable sshd.service
+ {{ if eq .ContainerRuntime "docker" -}}systemctl start --no-block docker.service{{- end}}
+ {{ if eq .ContainerRuntime "rkt" -}}systemctl start --no-block rktlet.service
+ mkdir -p /usr/lib/rkt/plugins
+-ln -s /opt/cni/bin/ /usr/lib/rkt/plugins/net
++ln -s /usr/libexec/cni/ /usr/lib/rkt/plugins/net
+ ln -sfT /etc/cni/net.d /etc/rkt/net.d{{- end}}
+ 
+ mkdir -p /var/lib/weave
