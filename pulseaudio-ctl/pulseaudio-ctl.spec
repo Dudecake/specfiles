@@ -9,7 +9,7 @@ Requires:   pulseaudio-libs
 Requires:   pulseaudio-utils
 BuildArch:  noarch
 
-Source0:    https://github.com/graysky2/pulseaudio-ctl/archive/v%{version}.tar.gz
+Source0:    %{url}/archive/v%{version}.tar.gz
 
 %description
 Control pulseaudio volume from the shell or mapped to keyboard shortcuts
@@ -27,7 +27,7 @@ Control pulseaudio volume from the shell or mapped to keyboard shortcuts
 
 %files
 %{_bindir}/pulseaudio-ctl
-%{_mandir}/man1/pulseaudio-ctl.1.gz
+%{_mandir}/man1/pulseaudio-ctl.1.*
 %{_datadir}/pulseaudio-ctl/config.skel
 %{_datadir}/zsh/site-functions/_pulseaudio-ctl
 

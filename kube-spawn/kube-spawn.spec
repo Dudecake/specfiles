@@ -6,10 +6,9 @@ Release:       1.git924bb3b%{?dist}
 Summary:       A tool for creating multi-node Kubernetes clusters on a Linux machine using kubeadm & systemd-nspawn. Brought to you by the Kinvolk team. https://kinvolk.io
 URL:           https://github.com/kinvolk/kube-spawn
 License:       Apache
-BuildRequires: docker
+BuildRequires: golang
 Requires:      systemd-container
 Requires:      containernetworking-cni
-#BuildArch:     noarch
 
 Source0:    %{url}/archive/%{githash}.tar.gz
 Source1:    0001-set-cni-dir.patch
@@ -19,19 +18,15 @@ Control pulseaudio volume from the shell or mapped to keyboard shortcuts
 
 %global debug_package %{nil}
 
-# %prep
-# %autosetup
+%prep
+%autosetup -n %{name}-%{githash}
 
 %build
-%__rm -r kube-spawn-%{githash}
-%__tar -xf %_sourcedir/%{githash}.tar.gz
-cd kube-spawn-%{githash}
 %__patch -p1 -i %_sourcedir/0001-set-cni-dir.patch
 %__make
 
 %install
 #%make_install
-cd kube-spawn-%{githash}
 #%__install -dm755 %{?buildroot}%{_libexecdir}/kube-spawn/
 %__install -dm755 %{?buildroot}/usr/bin/
 %__install kube-spawn %{?buildroot}/usr/bin/

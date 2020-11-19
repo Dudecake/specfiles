@@ -1,6 +1,6 @@
 Name:       java-11-compat
 Version:    1
-Release:    1
+Release:    1%{?dist}
 Summary:    Compatibility package for Java
 License:    GPLv3
 Requires:   java-11

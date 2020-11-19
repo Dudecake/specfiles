@@ -1,12 +1,12 @@
 Name:       pth-compat
-Version:    1
-Release:    1
+Version:    1.6
+Release:    1%{?dist}
 Summary:    Compatibility package for pth
 License:    GPLv3
-Requires:   npth
+Requires:   npth = 1.6
 BuildArch:  noarch
 
-Provides:   pth
+Provides:   pth = 1.6
 
 %description
 %{summary}
