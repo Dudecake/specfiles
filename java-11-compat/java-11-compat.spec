@@ -41,6 +41,12 @@ Provides:   libverify.so(SUNWprivate_1.1)(64bit)
 
 %global debug_package %{nil}
 
+%prep
+
+%build
+
+%install
+
 %files
 
 %changelog

@@ -1,17 +1,17 @@
 %define githash 225a49a40941e350899e456366265cf82b87ad25
-%define module_name vendor-reset
+%define module_name v4l2loopback
 
 Name:               %{module_name}-dkms
-Version:            0.1.1
-Release:            1.git225a49a%{?dist}
-Summary:            Linux kernel vendor specific hardware reset module
-URL:                https://github.com/gnif/vendor-reset
+Version:            0.12.5
+Release:            1%{?dist}
+Summary:            Linux kernel module to create V4L2 loopback devices
+URL:                https://github.com/umlaeute/%{module_name}
 License:            GPLv2
 Requires:           dkms
 Requires(post):     dkms
 Requires(preun):    dkms
 
-Source0:    %{url}/archive/%{githash}.tar.gz
+Source0:    %{url}/archive/v%{version}.tar.gz
 
 BuildArch:      noarch
 
@@ -21,7 +21,7 @@ BuildArch:      noarch
 %global debug_package %{nil}
 
 %prep
-%autosetup -n %{module_name}-%{githash}
+%autosetup -n %{module_name}-%{version}
 
 %build
 
