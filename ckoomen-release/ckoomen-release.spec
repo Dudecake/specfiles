@@ -3,7 +3,7 @@ Version:        0.0.1
 Release:        1%{?dist}
 Summary:        RPM Package containing my repository file and GPG Key
 
-License:        GPLv3
+License:        EUPL-1.2
 URL:            http://repo.ckoomen.eu
 Source0:        http://repo.ckoomen.eu/fedora/ckoomen.repo
 Source1:        http://repo.ckoomen.eu/fedora/RPM-GPG-KEY-ckoomen
