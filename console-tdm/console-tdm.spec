@@ -1,13 +1,14 @@
 %define githash 3bd96990f0ffd467889964ee206f0155bf4a2396
 
-Name:       console-tdm
-Version:    1.4
-Release:    1.git3bd9699%{?dist}
-Summary:    Bash based display manager
-URL:        https://github.com/dopsi/console-tdm
-License:    GPLv3
-Requires:   xorg-x11-xinit
-BuildArch:  noarch
+Name:           console-tdm
+Version:        1.4
+Release:        1.git3bd9699%{?dist}
+Summary:        Bash based display manager
+URL:            https://github.com/dopsi/%{name}
+License:        GPLv3
+Requires:       xorg-x11-xinit
+BuildRequires:  make
+BuildArch:      noarch
 
 Source0:    %{url}/archive/%{githash}.tar.gz
 

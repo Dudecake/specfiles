@@ -6,7 +6,7 @@ Version: 0.3.2
 Release: 1%{?dist}
 Summary: ZFSTools
 License: BSD
-URL: http://github.com/bdrewery/zfstools
+URL: http://github.com/bdrewery/%{gem_name}
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel

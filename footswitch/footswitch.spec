@@ -4,7 +4,7 @@ Name:               footswitch
 Version:            1.0
 Release:            1.gited1211d%{?dist}
 Summary:            Command line utlities for programming PCsensor and Scythe foot switches.
-URL:                https://github.com/rgerganov/footswitch
+URL:                https://github.com/rgerganov/%{name}
 License:            GPLv2
 BuildRequires:      gcc
 BuildRequires:      hidapi-devel

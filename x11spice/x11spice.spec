@@ -2,7 +2,7 @@ Name:           x11spice
 Version:        1.2
 Release:        1%{?dist}
 Summary:        x11spice
-URL:            https://gitlab.freedesktop.org/spice/x11spice
+URL:            https://gitlab.freedesktop.org/spice/%{name}
 License:        GPLv3
 BuildRequires:  gcc
 BuildRequires:  make

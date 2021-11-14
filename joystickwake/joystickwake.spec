@@ -1,10 +1,10 @@
 Name:           joystickwake
-Version:        0.2.4
+Version:        0.2.5
 Release:        1%{?dist}
 Summary:        A joystick-aware screen waker
 
 License:        GPLv3+
-URL:            https://github.com/foresto/joystickwake
+URL:            https://github.com/foresto/%{name}
 Source0:        %{url}/archive/v%{version}.tar.gz
 
 BuildRequires:  python

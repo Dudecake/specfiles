@@ -4,7 +4,7 @@ Name:          kube-spawn
 Version:       0.2.1
 Release:       1.git924bb3b%{?dist}
 Summary:       A tool for creating multi-node Kubernetes clusters on a Linux machine using kubeadm & systemd-nspawn. Brought to you by the Kinvolk team. https://kinvolk.io
-URL:           https://github.com/kinvolk/kube-spawn
+URL:           https://github.com/kinvolk/%{name}
 License:       Apache
 BuildRequires: golang
 Requires:      systemd-container
