@@ -2,3 +2,4 @@
 *.src.rpm
 *.gem
 target
+repo
