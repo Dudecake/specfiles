@@ -23,7 +23,7 @@ Source0:    %{url}/archive/%{githash}.tar.gz
 %build
 
 %install
-%make_install PREFIX=/usr
+%make_install PREFIX=%{_prefix}
 
 %files
 %{_bindir}/tdm

@@ -7,6 +7,8 @@ License:    EPL-2.0
 
 Source0:    %{url}/releases/download/%{version}/chectl-linux-${BASEARCH}.tar.gz
 
+Provides:   chectl = %{version}
+
 %description
 
 %global debug_package %{nil}
