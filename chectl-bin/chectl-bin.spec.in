@@ -1,0 +1,24 @@
+Name:       chectl-bin
+Version:    7.39.1
+Release:    1%{?dist}
+Summary:    Production-Grade Container Scheduling and Management
+URL:        https://github.com/che-incubator/chectl
+License:    EPL-2.0
+
+Source0:    %{url}/releases/download/%{version}/chectl-linux-${BASEARCH}.tar.gz
+
+%description
+
+%global debug_package %{nil}
+
+%prep
+%autosetup -n chectl
+
+%build
+
+%install
+%__mkdir -p %{?buildroot}/opt
+%__cp -a . %{?buildroot}/opt/chectl
+
+%files
+/opt/chectl

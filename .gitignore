@@ -3,3 +3,5 @@
 *.gem
 target
 repo
+chectl-bin/chectl-bin.spec
+kubernetes-bin/kubernetes-bin.spec
