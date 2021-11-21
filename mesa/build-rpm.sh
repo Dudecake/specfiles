@@ -5,6 +5,7 @@ if [[ ! -d mesa/.git ]]; then
   git clone https://src.fedoraproject.org/rpms/mesa.git --branch rawhide --single-branch
 else
   pushd ./mesa > /dev/null
+  git restore mesa.spec
   git pull
   popd > /dev/null
 fi

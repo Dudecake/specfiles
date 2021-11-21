@@ -6,3 +6,4 @@ repo
 chectl-bin/chectl-bin.spec
 kubernetes-bin/kubernetes-bin.spec
 helm-bin/helm-bin.spec
+zfs/zfs-*
