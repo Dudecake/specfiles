@@ -17,6 +17,7 @@ spectool -g ./mesa/mesa.spec -C mesa
 rpmbuild -bs ./mesa/mesa.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/mesa"
 RPM_FILE=$(rpm -q ./*.src.rpm --qf 'mesa-filesystem-%{version}-%{release}.%{arch}.rpm\n')
 ARCH="$(uname -m)"
+set +e
 if [[ ! -f "${3}/${ARCH}/os/${RPM_FILE}" ]]; then
   [[ "${ARCH}" = "x86_64" ]] && mock -r "${1}-i386" rebuild ./*.src.rpm --resultdir "${2}"
   exec mock -r "${1}-${ARCH}" rebuild ./*.src.rpm --resultdir "${2}"

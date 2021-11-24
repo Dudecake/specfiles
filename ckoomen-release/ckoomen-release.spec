@@ -12,10 +12,10 @@ Source1:        %{url}/fedora/RPM-GPG-KEY-ckoomen
 Installs my custom made repo configuration file and GPG key
 
 %install
-%__install -Dm644 ckoomen.repo %{buildroot}%{_sysconfdir}/yum.repos.d/
-%__install -Dm644 RPM-GPG-KEY-ckoomen %{buildroot}%{_sysconfdir}/pki/rpm-gpg/
+%__install -Dm644 %{Source0} %{buildroot}%{_sysconfdir}/yum.repos.d/ckoomen.repo
+%__install -Dm644 %{Source1} %{buildroot}%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
 
 %files
 #%defattr(-,root,root,-)
-/etc/yum.repos.d/ckoomen.repo
-/etc/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
+%{_sysconfdir}/yum.repos.d/ckoomen.repo
+%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
