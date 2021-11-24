@@ -29,11 +29,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build Fedora 35 packages
-        run: ./build-rpms.sh fedora-35
-        env:
-          RESULTDIR: /data/fedora/35
+        run: ./build-rpms.sh fedora-35 "${PWD}/target" /data/fedora/35
 
       - name: Build CentOS 8 packages
-        run: ./build-rpms.sh centos-8
-        env:
-          RESULTDIR: /data/centos/8
+        run: ./build-rpms.sh centos-8 "${PWD}/target" /data/centos/8
