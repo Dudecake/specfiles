@@ -9,7 +9,7 @@ set -e
 for dir in ./*/; do
   popd > /dev/null
   pushd ${dir} > /dev/null
-  [[ -f "./.${1}.skip" ]] && continue
+  [[ -f ./.skip || -f "./.${1}.skip" ]] && continue
   SCRIPT="../build-rpm.sh"
   if [[ -x ./build-rpm.sh ]]; then
     SCRIPT="./build-rpm.sh"
