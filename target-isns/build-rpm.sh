@@ -8,6 +8,7 @@ else
   git pull
   popd > /dev/null
 fi
+sed -i 's/\.tar\.gz/\.tar\.xz/g' ./target-isns/target-isns.spec
 spectool -g ./target-isns/target-isns.spec -C target-isns
 rpmbuild -bs ./target-isns/target-isns.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/target-isns"
 RPM_FILE=$(rpm -q ./*.src.rpm --qf '%{name}-%{version}-%{release}.%{arch}.rpm\n')
