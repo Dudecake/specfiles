@@ -7,7 +7,7 @@ License:        Apache-2.0
 
 Source0:        https://get.helm.sh/helm-v%{version}-linux-${BASEARCH}.tar.gz
 
-Provides:       helm = ${version}
+Provides:       helm = %{version}
 Provides:       bundled(golang(github.com/asaskevich/govalidator)
 Provides:       bundled(golang(github.com/BurntSushi/toml)
 Provides:       bundled(golang(github.com/containerd/containerd/content)

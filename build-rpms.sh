@@ -32,6 +32,7 @@ rm ${BUILDDIR}/*.noarch.rpm
 mv ${BUILDDIR}/*.rpm "${RESULTDIR}/${ARCH}/os"
 set -x
 for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESULTDIR}/${ARCH}/os"; do
-  [[ -d "${repo}/repodata" ]] && rm -f $(repomanage --old "${repo}")
   createrepo "${repo}"
+  rm -f $(repomanage --old "${repo}")
 done
+find "${RESULTDIR}" -type d -name repodata.old\* -exec rm -rf {} +
