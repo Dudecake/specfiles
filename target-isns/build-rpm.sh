@@ -13,6 +13,6 @@ spectool -g ./target-isns/target-isns.spec -C target-isns
 rpmbuild -bs ./target-isns/target-isns.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/target-isns"
 RPM_FILE=$(rpm -q ./*.src.rpm --qf '%{name}-%{version}-%{release}.%{arch}.rpm\n')
 ARCH="$(uname -m)"
-if [[ ! -f "${3}/${ARCH}/os/${RPM_FILE}" ]]; then
-  exec mock -r "${1}-${ARCH}" rebuild ./*.src.rpm --resultdir "${2}"
+if [[ ! -f "${2}/${ARCH}/os/${RPM_FILE}" ]]; then
+  exec rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
 fi

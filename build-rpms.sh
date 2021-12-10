@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ARCH="$(uname -m)"
-BUILDDIR="${2:-${PWD}/target}"
-RESULTDIR="${3:-${PWD}/repo}"
+BUILDDIR="${1:-${PWD}/target}"
+RESULTDIR="${2:-${PWD}/repo}"
 
 pushd . > /dev/null
 set -e
@@ -18,7 +18,7 @@ for dir in ./*/; do
       continue
     fi
   fi
-  ${SCRIPT} "${1}" "${BUILDDIR}" "${RESULTDIR}" || true
+  ${SCRIPT} "${BUILDDIR}" "${RESULTDIR}" || true
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 # TODO: sign rpms
