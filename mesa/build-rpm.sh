@@ -20,5 +20,6 @@ ARCH="$(uname -m)"
 set +e
 if [[ ! -f "${2}/${ARCH}/os/${RPM_FILE}" ]]; then
   [[ "${ARCH}" = "x86_64" ]] && rpmbuild --target i686 --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
-  exec rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  mv ./*.src.rpm "${1}"
 fi

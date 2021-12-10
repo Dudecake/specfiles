@@ -8,5 +8,6 @@ tar -cf ./boringtun-0.3.0.tar.gz boringtun-0.3.0
 rpmbuild -bs ./*.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}"
 RPM_FILE=$(rpm -q ./*.src.rpm --qf '%{name}-%{version}-%{release}.%{arch}.rpm\n')
 if [[ ! -f "${2}/${ARCH}/os/${RPM_FILE}" ]]; then
-  exec rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  mv ./*.src.rpm "${1}"
 fi

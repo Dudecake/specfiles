@@ -13,5 +13,6 @@ rpmbuild -bs ./golang-helm-3/golang-helm-3.spec -D "_srcrpmdir ${PWD}" -D "_sour
 RPM_FILE=$(rpm -q ./*.src.rpm --qf '%{name}-%{version}-%{release}.%{arch}.rpm\n')
 ARCH="$(uname -m)"
 if [[ ! -f "${2}/${ARCH}/os/${RPM_FILE}" ]]; then
-  exec rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  mv ./*.src.rpm "${1}"
 fi

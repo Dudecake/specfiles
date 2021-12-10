@@ -1,9 +1,12 @@
 #!/bin/bash
 
 ARCH="$(uname -m)"
-BUILDDIR="${1:-${PWD}/target}"
-RESULTDIR="${2:-${PWD}/repo}"
+BUILDDIR="${BUILDDIR:-${PWD}/target}"
+RESULTDIR="${RESULTDIR:-${PWD}/repo}"
 
+mkdir -p ${BUILDDIR}
+ln -s . ${BUILDDIR}/noarch
+ln -s . ${BUILDDIR}/${ARCH}
 pushd . > /dev/null
 set -e
 for dir in ./*/; do
