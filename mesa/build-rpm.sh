@@ -15,10 +15,9 @@ sed -i "s/${VER}/22.0.0/; s/%autorelease/1.$(date -u +%Y%m%d).git${HASH:0:7}%{?d
 
 spectool -g ./mesa/mesa.spec -C mesa
 rpmbuild -bs ./mesa/mesa.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/mesa"
-RPM_FILE=$(rpm -q ./*.src.rpm --qf 'mesa-filesystem-%{version}-%{release}.%{arch}.rpm\n')
-ARCH="$(uname -m)"
 set +e
-if [[ ! -f "${2}/${ARCH}/os/${RPM_FILE}" ]]; then
+RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
+if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   cp /etc/dnf/dnf.conf ./
   echo multilib_policy=all >> ./dnf.conf
   dnf builddep ./*.src.rpm -c ./dnf.conf

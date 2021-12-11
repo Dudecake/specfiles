@@ -7,8 +7,8 @@ BASEARCH="${MACHINE}"
 BASEARCH=${BASEARCH} envsubst < ./chectl-bin.spec.in > ./chectl-bin.spec
 spectool -g ./chectl-bin.spec
 rpmbuild -bs ./chectl-bin.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}"
-RPM_FILE=$(rpm -q ./*.src.rpm --qf '%{name}-%{version}-%{release}.%{arch}.rpm\n')
-if [[ ! -f "${2}/${ARCH}/os/${RPM_FILE}" ]]; then
+RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
+if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   dnf builddep ./*.src.rpm
   rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   mv ./*.src.rpm "${1}"
