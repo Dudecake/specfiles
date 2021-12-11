@@ -9,7 +9,7 @@ if [[ ! -f "${2}/${ARCH}/os/zfs-${ZFS_VERSION}-1.${MACHINE}.*.rpm" ]]; then
   PYTHON=/usr/bin/python3.9 ./configure
   make -j1 srpm
   popd > /dev/null
-  dnf builddep ./*.src.rpm
+  dnf builddep -y ./*.src.rpm
   rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   mv ./*.src.rpm "${1}"
 fi

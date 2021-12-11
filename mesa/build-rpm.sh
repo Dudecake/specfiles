@@ -20,8 +20,8 @@ RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
 if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   cp /etc/dnf/dnf.conf ./
   echo multilib_policy=all >> ./dnf.conf
-  dnf builddep ./*.src.rpm -c ./dnf.conf
-  [[ "${ARCH}" = "x86_64" ]] && dnf builddep ./.src.rpm --forcearch && rpmbuild --target i686 --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  dnf builddep -y ./*.src.rpm -c ./dnf.conf
+  [[ "${ARCH}" = "x86_64" ]] && rpmbuild --target i686 --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   mv ./*.src.rpm "${1}"
 fi
