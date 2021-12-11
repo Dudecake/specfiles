@@ -4,6 +4,7 @@ SCRIPTDIR="$(dirname "$(readlink -f "$0")")"
 ARCH="$(uname -m)"
 BUILDDIR="${BUILDDIR:-${PWD}/target}"
 RESULTDIR="${RESULTDIR:-${PWD}/repo}"
+. /etc/os-release
 
 set -e
 cd ${SCRIPTDIR}
@@ -14,7 +15,7 @@ pushd . > /dev/null
 for dir in ./*/; do
   popd > /dev/null
   pushd ${dir} > /dev/null
-  [[ -f ./.skip || -f "./.${1}.skip" ]] && continue
+  [[ -f ./.skip || -f "./.${ID}-${VERSION_ID}.skip" ]] && continue
   SCRIPT="../build-rpm.sh"
   if [[ -x ./build-rpm.sh ]]; then
     SCRIPT="./build-rpm.sh"

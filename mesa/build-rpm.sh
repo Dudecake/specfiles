@@ -19,7 +19,10 @@ RPM_FILE=$(rpm -q ./*.src.rpm --qf 'mesa-filesystem-%{version}-%{release}.%{arch
 ARCH="$(uname -m)"
 set +e
 if [[ ! -f "${2}/${ARCH}/os/${RPM_FILE}" ]]; then
-  [[ "${ARCH}" = "x86_64" ]] && rpmbuild --target i686 --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  cp /etc/dnf/dnf.conf ./
+  echo multilib_policy=all >> ./dnf.conf
+  dnf builddep ./*.src.rpm -c ./dnf.conf
+  [[ "${ARCH}" = "x86_64" ]] && dnf builddep ./.src.rpm --forcearch && rpmbuild --target i686 --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   mv ./*.src.rpm "${1}"
 fi
