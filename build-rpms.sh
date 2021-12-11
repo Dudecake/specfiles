@@ -1,14 +1,16 @@
 #!/bin/bash
 
+SCRIPTDIR="$(dirname "$(readlink -f "$0")")"
 ARCH="$(uname -m)"
 BUILDDIR="${BUILDDIR:-${PWD}/target}"
 RESULTDIR="${RESULTDIR:-${PWD}/repo}"
 
+set -e
+cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}
 ln -s . ${BUILDDIR}/noarch
 ln -s . ${BUILDDIR}/${ARCH}
 pushd . > /dev/null
-set -e
 for dir in ./*/; do
   popd > /dev/null
   pushd ${dir} > /dev/null
