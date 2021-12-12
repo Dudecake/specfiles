@@ -1,10 +1,10 @@
 %if 0%{?rhel}
 %global distro centos
-%elif 0%{?fedora}
+%elseif 0%{?fedora}
 %global distro fedora
-%elif%{?mageia}
+%elseif 0%{?mageia}
 %global distro mageia
-%elif%{?suse_version}
+%elseif 0%{?suse_version}
 %global distro suse
 %endif
 
