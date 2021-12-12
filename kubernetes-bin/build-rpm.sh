@@ -15,5 +15,5 @@ if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   mv ./*.src.rpm "${1}"
 else
-  echo "No rebuild neccesary for package $(dirname $PWD/.)" >&2
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
 fi
