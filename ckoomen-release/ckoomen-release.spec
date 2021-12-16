@@ -23,9 +23,9 @@ Installs my custom made repo configuration file and GPG key
 
 %install
 %__install -Dm644 %{Source0} %{buildroot}%{_sysconfdir}/yum.repos.d/ckoomen.repo
-%__install -Dm644 %{Source1} %{buildroot}%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
+#%__install -Dm644 %{Source1} %{buildroot}%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
 
 %files
 #%defattr(-,root,root,-)
 %{_sysconfdir}/yum.repos.d/ckoomen.repo
-%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
+#%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
