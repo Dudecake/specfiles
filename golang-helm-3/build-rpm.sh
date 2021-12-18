@@ -1,15 +1,16 @@
 #!/bin/bash
 
+PKG=golang-helm-3
 set -e
-if [[ ! -d golang-helm-3/.git ]]; then
-  git clone https://src.fedoraproject.org/rpms/golang-helm-3.git --branch rawhide --single-branch
+if [[ ! -d ${PKG}/.git ]]; then
+  git clone https://src.fedoraproject.org/rpms/${PKG}.git --branch rawhide --single-branch
 else
-  pushd ./golang-helm-3 > /dev/null
+  pushd ./${PKG} > /dev/null
   git pull
   popd > /dev/null
 fi
-spectool -g ./golang-helm-3/golang-helm-3.spec -C golang-helm-3
-rpmbuild -bs ./golang-helm-3/golang-helm-3.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/golang-helm-3"
+spectool -g ./${PKG}/${PKG}.spec -C ${PKG}
+rpmbuild -bs ./${PKG}/${PKG}.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/${PKG}"
 RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
 if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   dnf builddep -y ./*.src.rpm
