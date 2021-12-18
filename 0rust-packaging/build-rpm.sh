@@ -9,6 +9,7 @@ else
   git pull
   popd > /dev/null
 fi
+sed -i 's/%autorelease/1%{?dist}/; /%autochangelog/d' ${PKG}/${PKG}.spec
 spectool -g ./${PKG}/${PKG}.spec -C ${PKG}
 rpmbuild -bs ./${PKG}/${PKG}.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/${PKG}"
 RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
