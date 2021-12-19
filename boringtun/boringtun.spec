@@ -25,4 +25,7 @@ BuildRequires:  rust-packaging
 
 %install
 %cargo_install -a
-setcap cap_net_admin+epi %{?buildroot}%{_bindir}/boringtun
+rm -rf %{?buildroot}%{_datadir}
+
+%files
+%caps(cap_net_admin+epi) %{_bindir}/boringtun
