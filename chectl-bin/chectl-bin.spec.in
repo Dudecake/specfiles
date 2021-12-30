@@ -1,5 +1,5 @@
 Name:       chectl-bin
-Version:    7.39.1
+Version:    7.41.1
 Release:    1%{?dist}
 Summary:    Production-Grade Container Scheduling and Management
 URL:        https://github.com/che-incubator/chectl

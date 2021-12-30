@@ -1,5 +1,5 @@
 Name:           joystickwake
-Version:        0.2.5
+Version:        0.3
 Release:        1%{?dist}
 Summary:        A joystick-aware screen waker
 

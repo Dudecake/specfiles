@@ -1,8 +1,8 @@
-%define githash aa0b10f00d3e76dac27b55b88c8d44c0c406f7f0
+%define githash d2eb3d8f23a128c51ff1c1c373e81e63e10cd3fd
 
 Name:               footswitch
 Version:            1.0
-Release:            1.gitaa0b10f%{?dist}
+Release:            1.gitd2eb3d8%{?dist}
 Summary:            Command line utlities for programming PCsensor and Scythe foot switches.
 URL:                https://github.com/rgerganov/%{name}
 License:            GPLv2
