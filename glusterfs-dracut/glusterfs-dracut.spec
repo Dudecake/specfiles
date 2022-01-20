@@ -3,11 +3,14 @@
 
 Name:       glusterfs-dracut
 Version:    0.0.1
-Release:    1.git594d192%{?dist}
+Release:    2.git594d192%{?dist}
 Summary:    GlusterFS Client Dracut Module
 URL:        https://github.com/stracy-esu/dracut-glusterfs
 License:    MIT
 Requires:   dracut-network
+Requires:   glusterfs-fuse
+Requires:   gawk
+Requires:   which
 
 Source0:    %{url}/archive/%{githash}.tar.gz
 
