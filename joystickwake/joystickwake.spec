@@ -1,6 +1,6 @@
 Name:           joystickwake
 Version:        0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A joystick-aware screen waker
 
 License:        GPLv3+
@@ -9,8 +9,12 @@ Source0:        %{url}/archive/v%{version}.tar.gz
 
 BuildRequires:  python
 Requires:       python
-Requires:       xorg-x11-server-utils
 Requires:       python3-pyudev
+Requires:       xset
+Suggests:       xscreensaver-base
+Suggests:       mate-screensaver
+Suggests:       xfce4-screensaver
+
 
 BuildArch:      noarch
 
