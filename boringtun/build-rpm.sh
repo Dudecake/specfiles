@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -L https://github.com/cloudflare/boringtun/archive/refs/tags/v0.3.0.tar.gz | tar -xzf -
+curl -sSL https://github.com/cloudflare/boringtun/archive/refs/tags/v0.3.0.tar.gz | tar -xzf -
 pushd boringtun-0.3.0 > /dev/null
 cargo vendor
 popd > /dev/null
