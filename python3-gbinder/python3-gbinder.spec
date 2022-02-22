@@ -11,7 +11,7 @@ Patch0:         %{url}/commit/79d40e9e564772973f7f085ed5c48e3fc625e0f5.patch
 BuildRequires:  python3-devel
 BuildRequires:  python3-cython
 BuildRequires:  python3-setuptools
-Requires:       libgbinder
+BuildRequires:  libgbinder-devel
 
 %description
 %{summary}
