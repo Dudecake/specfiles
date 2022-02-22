@@ -29,7 +29,7 @@ mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/%{name}
 mkdir -p %{buildroot}%{_datadir}/applications/
 
-cat > %{buildroot}/%{_bindir}/%{name} <<-EOF
+cat > %{buildroot}%{_bindir}/%{name} <<-EOF
 #!/usr/bin/bash
 exec /usr/bin/python %{_datadir}/%{name}/%{name}.py
 EOF
@@ -39,7 +39,6 @@ chmod 0755 %{buildroot}/%{_bindir}/%{name}
 %{__install} -m 0644 %{name}.py %{buildroot}%{_datadir}/%{name}/
 %{__cp} -r tools data %{buildroot}%{_datadir}/%{name}/
 %{__mv} %{buildroot}%{_datadir}/%{name}/data/Waydroid.desktop %{buildroot}%{_datadir}/applications/
-# %{__install} -Dm644 "$srcdir/gbinder.conf" -t "$pkgdir/etc"
 %{__install} -Dm644 gbinder/anbox.conf -t %{buildroot}%{_sysconfdir}/gbinder.d
 %{__install} -Dm644 debian/waydroid-container.service -t %{buildroot}%{_unitdir}
 
@@ -54,5 +53,5 @@ chmod 0755 %{buildroot}/%{_bindir}/%{name}
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/Waydroid.desktop
-%{_sysconfdir}/gbinder.d/anbox.conf
+%config %{_sysconfdir}/gbinder.d/anbox.conf
 %{_unitdir}/waydroid-container.service

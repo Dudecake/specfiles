@@ -32,11 +32,16 @@ Requires:       pkgconfig
 %install
 %make_install install-dev
 %{__mv} %{buildroot}%{_prefix}/lib %{buildroot}%{_libdir}
+%{__cat} > %{buildroot}%{_sysconfdir}/gbinder.conf <<-EOF
+[General]
+ApiLevel = 29
+EOF
 
 %files
 %license LICENSE
 %doc README
 %{_libdir}/%{name}.so*
+%config %{_sysconfdir}/gbinder.conf
 
 %files devel
 %{_prefix}/include/gbinder
