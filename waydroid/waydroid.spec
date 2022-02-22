@@ -3,7 +3,7 @@ Version:        1.2.0
 Release:        1%{?dist}
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 
-License:        GPLv3
+License:        GPLv3+
 URL:            https://waydro.id/
 Source0:        https://github.com/waydroid/%{name}/archive/refs/tags/%{version}.tar.gz
 Patch0:         https://github.com/waydroid/%{name}/commit/71f9249c9e08e9abbd08f6ce95d2906c23cfe433.patch
@@ -21,7 +21,7 @@ BuildArch:      noarch
 %{summary}
 
 %prep
-%autosetup
+%autosetup -p1
 
 %install
 
