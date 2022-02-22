@@ -9,7 +9,7 @@ Source0:        %{url}/archive/refs/tags/%{version}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  make
-Requires:       libglibutil
+BuildRequires:  libglibutil
 
 %description
 %{summary}
