@@ -1,6 +1,6 @@
 Name:           helm-bin
 Version:        3.7.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Production-Grade Container Scheduling and Management
 URL:            https://github.com/helm/helm
 License:        Apache-2.0
@@ -113,4 +113,6 @@ Provides:       bundled(golang(sigs.k8s.io/yaml)
 %__install -Dm755 helm  %{?buildroot}%{_bindir}/helm
 
 %files
+%license LICENSE
+%doc README.md
 %{_bindir}/helm

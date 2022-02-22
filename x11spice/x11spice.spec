@@ -1,6 +1,6 @@
 Name:           x11spice
 Version:        1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        x11spice
 URL:            https://gitlab.freedesktop.org/spice/%{name}
 License:        GPLv3
@@ -38,6 +38,7 @@ Connects a running X server as a Spice server.
 %make_install
 
 %files
+%doc README
 %{_bindir}/x11spice*
 %{_mandir}/man1/x11spice.1.*
 %{_datadir}/applications/x11spice.desktop

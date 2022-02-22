@@ -3,7 +3,7 @@
 
 Name:       glusterfs-dracut
 Version:    0.0.1
-Release:    2.git594d192%{?dist}
+Release:    3.git594d192%{?dist}
 Summary:    GlusterFS Client Dracut Module
 URL:        https://github.com/stracy-esu/dracut-glusterfs
 License:    MIT
@@ -28,4 +28,6 @@ Dracut module to mount GlusterFS volumes during early boot
 %__install -Dm755 99glusterfs/module-setup.sh %{?buildroot}%{dracutlibdir}/modules.d/99glusterfs/module-setup.sh
 
 %files
+%license LICENSE
+%doc README.md
 %{dracutlibdir}/modules.d/99glusterfs

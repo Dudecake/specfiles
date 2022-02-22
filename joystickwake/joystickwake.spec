@@ -1,6 +1,6 @@
 Name:           joystickwake
 Version:        0.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A joystick-aware screen waker
 
 License:        GPLv3+
@@ -32,4 +32,6 @@ mkdir -p %{buildroot}/%{_bindir}
 install -m 0755 %{name} %{buildroot}/%{_bindir}
 
 %files
+%license LICENSE
+%doc README.rst
 %{_bindir}/%{name}

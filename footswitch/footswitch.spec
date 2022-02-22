@@ -2,7 +2,7 @@
 
 Name:               footswitch
 Version:            1.0
-Release:            1.gitd2eb3d8%{?dist}
+Release:            2.gitd2eb3d8%{?dist}
 Summary:            Command line utlities for programming PCsensor and Scythe foot switches.
 URL:                https://github.com/rgerganov/%{name}
 License:            GPLv2
@@ -30,6 +30,8 @@ mkdir -p %{buildroot}%{_bindir} %{buildroot}/etc/udev/rules.d
 %{__install} -p 19-footswitch.rules %{buildroot}/etc/udev/rules.d
 
 %files
+%license LICENSE
+%doc README.md
 %{_bindir}/footswitch
 %{_bindir}/scythe
 %config %{_sysconfdir}/udev/rules.d/19-footswitch.rules

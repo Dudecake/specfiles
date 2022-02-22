@@ -1,6 +1,6 @@
 Name:           boringtun
 Version:        0.3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Implementation of the WireGuard® protocol designed for portability and speed
 
 # Upstream license specification: BSD-3-Clause
@@ -28,4 +28,6 @@ BuildRequires:  rust-packaging
 rm -rf %{?buildroot}%{_datadir}
 
 %files
+%license LICENSE.md
+%doc README
 %caps(cap_net_admin+epi) %{_bindir}/boringtun
