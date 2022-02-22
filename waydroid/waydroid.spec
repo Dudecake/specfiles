@@ -6,6 +6,8 @@ Summary:        Waydroid uses a container-based approach to boot a full Android 
 License:        GPLv3
 URL:            https://waydro.id/
 Source0:        https://github.com/waydroid/%{name}/archive/refs/tags/%{version}.tar.gz
+Patch0:         https://github.com/waydroid/%{name}/commit/71f9249c9e08e9abbd08f6ce95d2906c23cfe433.patch
+Patch1:         https://github.com/waydroid/%{name}/commit/9bee074239199570d70630281ff0053253675044.patch
 
 Requires:       lxc
 Requires:       python3-gbinder
