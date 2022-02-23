@@ -9,7 +9,7 @@ Source0:        %{url}/archive/refs/tags/%{version}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  make
-BuildRequires:  libglibutil
+BuildRequires:  libglibutil-devel
 
 %description
 %{summary}
@@ -32,6 +32,7 @@ Requires:       pkgconfig
 %install
 %make_install install-dev
 %{__mv} %{buildroot}%{_prefix}/lib %{buildroot}%{_libdir}
+%{__mkdir} %{buildroot}%{_sysconfdir}
 %{__cat} > %{buildroot}%{_sysconfdir}/gbinder.conf <<-EOF
 [General]
 ApiLevel = 29
