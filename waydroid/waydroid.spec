@@ -32,7 +32,7 @@ mkdir -p %{buildroot}%{_datadir}/applications/
 
 cat > %{buildroot}%{_bindir}/%{name} <<-EOF
 #!/usr/bin/bash
-exec /usr/bin/python %{_datadir}/%{name}/%{name}.py "$@"
+exec /usr/bin/python %{_datadir}/%{name}/%{name}.py "\$@"
 EOF
 
 chmod 0755 %{buildroot}/%{_bindir}/%{name}
