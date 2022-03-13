@@ -1,6 +1,6 @@
 Name:           boringtun
-Version:        0.3.0
-Release:        2%{?dist}
+Version:        0.4.0
+Release:        1%{?dist}
 Summary:        Implementation of the WireGuard® protocol designed for portability and speed
 
 # Upstream license specification: BSD-3-Clause
