@@ -1,10 +1,12 @@
 #!/bin/bash
 
-curl -sSL https://github.com/cloudflare/boringtun/archive/refs/tags/v0.3.0.tar.gz | tar -xzf -
-pushd boringtun-0.3.0 > /dev/null
+VERSION="0.4.0"
+
+curl -sSL https://github.com/cloudflare/boringtun/archive/refs/tags/v${VERSION}.tar.gz | tar -xzf -
+pushd boringtun-${VERSION} > /dev/null
 cargo vendor
 popd > /dev/null
-tar -cf ./boringtun-0.3.0.tar.gz boringtun-0.3.0
+tar -cf ./boringtun-${VERSION}.tar.gz boringtun-${VERSION}
 rpmbuild -bs ./*.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}"
 RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
 if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
