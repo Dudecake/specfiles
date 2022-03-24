@@ -2,7 +2,7 @@
 
 Name:           waydroid
 Version:        1.2.0
-Release:        3.git9bee074%{?dist}
+Release:        4.git9bee074%{?dist}
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 
 License:        GPLv3+
@@ -32,7 +32,7 @@ mkdir -p %{buildroot}%{_datadir}/applications/
 
 cat > %{buildroot}%{_bindir}/%{name} <<-EOF
 #!/usr/bin/bash
-exec /usr/bin/python %{_datadir}/%{name}/%{name}.py "\$@"
+exec /usr/bin/python %{_datadir}/%{name}/%{name}.py "\\$@"
 EOF
 
 chmod 0755 %{buildroot}/%{_bindir}/%{name}
