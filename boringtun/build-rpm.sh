@@ -7,6 +7,7 @@ pushd boringtun-${VERSION} > /dev/null
 cargo vendor
 popd > /dev/null
 tar -cf ./boringtun-${VERSION}.tar.gz boringtun-${VERSION}
+VERSION="${VERSION}" envsubst <./boringtun.spec.in > ./boringtun.spec
 rpmbuild -bs ./*.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}"
 RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
 if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then

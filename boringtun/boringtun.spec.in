@@ -1,5 +1,5 @@
 Name:           boringtun
-Version:        0.4.0
+Version:        ${VERSION}
 Release:        1%{?dist}
 Summary:        Implementation of the WireGuard® protocol designed for portability and speed
 
@@ -29,5 +29,5 @@ rm -rf %{?buildroot}%{_datadir}
 
 %files
 %license LICENSE.md
-%doc README
+%doc README.md
 %caps(cap_net_admin+epi) %{_bindir}/boringtun
