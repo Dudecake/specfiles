@@ -5,7 +5,7 @@ Name:               %{module_name}-dkms
 Version:            0.1.1
 Release:            2.git7d43285%{?dist}
 Summary:            Linux kernel vendor specific hardware reset module
-URL:                https://github.com/gnif/vendor-reset
+URL:                https://github.com/gnif/%{module_name}
 License:            GPLv2
 Requires:           dkms
 Requires(post):     dkms
