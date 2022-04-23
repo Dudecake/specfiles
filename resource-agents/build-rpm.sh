@@ -9,15 +9,14 @@ else
   git pull
   popd > /dev/null
 fi
-HASH=$(spectool -l ./${PKG}/SPECS/${PKG}.spec | grep -Po '(?<=resource-agents-).{8}(?=\.)')
-REPO=resource-agents
-if [[ ! -d ${REPO}/.git ]]; then
-  git clone https://github.com/ClusterLabs/resource-agents.git --branch main  --single-branch
-  pushd ./${REPO} > /dev/null
+HASH=$(spectool -l ./${PKG}/SPECS/${PKG}.spec | grep -Po '[0-9a-f]{8}')
+if [[ ! -d ${PKG}-upstream/.git ]]; then
+  git clone https://github.com/ClusterLabs/resource-agents.git --branch main --single-branch ${PKG}-upstream
+  pushd ./${PKG}-upstream > /dev/null
   git checkout ${HASH}
   popd > /dev/null
 else
-  pushd ./${REPO} > /dev/null
+  pushd ./${PKG}-upstream > /dev/null
   git pull
   git checkout ${HASH}
   popd > /dev/null
