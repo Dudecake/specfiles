@@ -14,19 +14,18 @@ if [[ ! -d ${PKG}-upstream/.git ]]; then
   git clone https://github.com/ClusterLabs/resource-agents.git --branch main --single-branch ${PKG}-upstream
   pushd ./${PKG}-upstream > /dev/null
   git checkout ${HASH}
-  popd > /dev/null
 else
   pushd ./${PKG}-upstream > /dev/null
   git pull
   git checkout ${HASH}
-  popd > /dev/null
 fi
-TARFILE=${PKG}/SOURCES/ClusterLabs-resource-agents-${HASH}.tar.gz
+TARFILE=../${PKG}/SOURCES/ClusterLabs-resource-agents-${HASH}.tar.gz
 TAG=$(git log --pretty="format:%h" -n 1)
 distdir="ClusterLabs-resource-agents-${TAG}"
 TARFILE="${distdir}.tar.gz"
 rm -rf $TARFILE $distdir
 git archive --prefix=$distdir/ HEAD | gzip > $TARFILE
+popd > /dev/null
 spectool -g ./${PKG}/SPECS/${PKG}.spec -C ${PKG}/SOURCES
 rpmbuild -bs ./${PKG}/SPECS/${PKG}.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/${PKG}/SOURCES"
 RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
