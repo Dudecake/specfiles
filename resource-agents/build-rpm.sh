@@ -2,7 +2,7 @@
 
 PKG=resource-agents
 set -e
-dnf download --source resource-agents --repofrompath ha-sourcer,http://vault.centos.org/centos/8-stream/HighAvailability/Source/
+dnf download --source resource-agents --disablerepo '*' --repofrompath ha-sourcer,http://vault.centos.org/centos/8-stream/HighAvailability/Source/
 RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
 if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   dnf builddep -y ./*.src.rpm

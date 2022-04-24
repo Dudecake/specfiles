@@ -247,8 +247,7 @@ Provides:       bundled(golang(sigs.k8s.io/yaml))
 %__install -D %{SOURCE1} %{?buildroot}%{_unitdir}/kubelet.service
 
 %files
-%license LICENSE
-%doc README.md
+%license LICENSES/LICENSE
 %{_bindir}/kubectl
 %{_bindir}/kubectl-convert
 %{_bindir}/kube-scheduler.docker_tag
