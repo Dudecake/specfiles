@@ -1,6 +1,6 @@
 Name:           kubernetes-bin
-Version:        1.23.5
-Release:        2%{?dist}
+Version:        1.24.0
+Release:        1%{?dist}
 Summary:        Production-Grade Container Scheduling and Management
 URL:            https://github.com/kubernetes/kubernetes
 License:        Apache-2.0
