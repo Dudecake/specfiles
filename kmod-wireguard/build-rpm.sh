@@ -9,6 +9,7 @@ else
   git pull
   popd > /dev/null
 fi
+sed -i "s/4.18.0-348.el8/$(rpm -q --qf '%{version}-%{release}\n' kernel)/" ./${PKG}/SPECS/${PKG}.spec 
 spectool -g ./${PKG}/SPECS/${PKG}.spec -C ${PKG}
 rpmbuild -bs ./${PKG}/SPECS/${PKG}.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/${PKG}"
 RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
