@@ -1,13 +1,11 @@
-%define githash 9bee074239199570d70630281ff0053253675044
-
 Name:           waydroid
-Version:        1.2.0
-Release:        4.git9bee074%{?dist}
+Version:        1.2.1
+Release:        1%{?dist}
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 
 License:        GPLv3+
 URL:            https://waydro.id/
-Source0:        https://github.com/waydroid/%{name}/archive/%{githash}.tar.gz
+Source0:        https://github.com/waydroid/%{name}/archive/refs/tags/%{version}.tar.gz
 
 Requires:       lxc
 Requires:       python3-gbinder
@@ -22,7 +20,7 @@ BuildArch:      noarch
 %{summary}
 
 %prep
-%autosetup -n %{name}-%{githash}
+%autosetup
 
 %install
 
