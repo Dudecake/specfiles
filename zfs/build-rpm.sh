@@ -11,7 +11,8 @@ if [[ ! -f "${2}/${MACHINE}/os/kmod-zfs-${KERNEL_VERSION}-${ZFS_VERSION}-1*.${MA
   make -j1 srpm
   popd > /dev/null
   rpmbuild --rebuild ./zfs-${ZFS_VERSION}/*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
-  mv ./zfs-${ZFS_VERSION}/*.src.rpm "${1}"
+  dnf download kernel kernel-core kernel-devel kernel-headers kernel-modules kernel-modules-extra
+  mv ./zfs-${ZFS_VERSION}/*.src.rpm ./kernel*.rpm "${1}"
 else
   rm ./*.src.rpm
   echo "No rebuild neccesary for package $(basename $PWD)" >&2
