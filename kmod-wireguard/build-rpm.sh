@@ -1,9 +1,12 @@
 #!/bin/bash
 
+branch=c8-sig-kmods
+rpm -qi centos-stream-release > /dev/null
+[[ 0 -eq $? ]] && branch=c8s-sig-kmods
 PKG=kmod-wireguard
 set -e
 if [[ ! -d ${PKG}/.git ]]; then
-  git clone https://git.centos.org/rpms/${PKG}.git --branch c8-sig-kmods --single-branch
+  git clone https://git.centos.org/rpms/${PKG}.git --branch ${branch} --single-branch
 else
   pushd ./${PKG} > /dev/null
   git pull
