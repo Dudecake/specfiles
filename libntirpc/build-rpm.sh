@@ -3,7 +3,7 @@
 PKG=libntirpc
 set -e
 if [[ ! -d ${PKG}/.git ]]; then
-  git clone https://git.centos.org/rpms/${PKG}.git --branch c8s-sig-storage-nfs-ganesha-4 --single-branch
+  git clone https://git.centos.org/rpms/${PKG}.git --branch c8s-sig-storage-nfs-ganesha-4 --depth=1
 else
   pushd ./${PKG} > /dev/null
   git pull

@@ -6,7 +6,7 @@ rpm -qi centos-stream-release > /dev/null
 PKG=kmod-wireguard
 set -e
 if [[ ! -d ${PKG}/.git ]]; then
-  git clone https://git.centos.org/rpms/${PKG}.git --branch ${branch} --single-branch
+  git clone https://git.centos.org/rpms/${PKG}.git --branch ${branch} --depth=1
 else
   pushd ./${PKG} > /dev/null
   git pull

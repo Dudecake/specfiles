@@ -2,7 +2,7 @@
 
 set -e
 if [[ ! -d target-isns/.git ]]; then
-  git clone https://src.fedoraproject.org/rpms/target-isns.git --branch rawhide --single-branch
+  git clone https://src.fedoraproject.org/rpms/target-isns.git --branch rawhide --depth=1
 else
   pushd ./target-isns > /dev/null
   git pull
