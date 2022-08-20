@@ -28,6 +28,6 @@ if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   mv ./*.src.rpm "${1}"
 else
   rm ./*.src.rpm
-  find "${2}/$(rpm -E '%_arch')" -mindepth 1 -maxdepth 1 -type f -name mesa\*.noarch.rpm -or -name mesa\*.$(rpm -E '%_arch').rpm -exec dnf install -y +
+  find "${2}/$(rpm -E '%_arch')" -mindepth 1 -maxdepth 1 -type f -name mesa\*.noarch.rpm -or -name mesa\*.$(rpm -E '%_arch').rpm -exec dnf install -y {} +
   echo "No rebuild neccesary for package $(basename $PWD)" >&2
 fi
