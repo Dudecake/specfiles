@@ -1,0 +1,115 @@
+%define githash 4b466e92a2d9f76ce1082cde982c7be0be91e248
+%define module_name vendor-reset
+
+%global kernel_version ${KVER}
+
+%global _use_internal_dependency_generator 0
+%global __find_requires /usr/lib/rpm/redhat/find-requires
+%global __find_provides /usr/lib/rpm/redhat/find-provides
+
+%global debug_package %{nil}
+
+%global __spec_install_post \
+  %{?__debug_package:%{__debug_install_post}} \
+  %{__arch_install_post} \
+  %{__os_install_post} \
+  %{__mod_compress_install_post}
+
+Name:               kmod-%{module_name}
+
+Version:            0.1.1
+Release:            3.git4b466e9%{?dist}.1
+Summary:            Linux kernel vendor specific hardware reset module
+
+Group:              System Environment/Kernel
+
+License:            GPLv2
+URL:                https://github.com/gnif/%{module_name}
+Source0:            %{url}/archive/%{githash}.tar.gz
+
+BuildRequires:      elfutils-libelf-devel
+BuildRequires:      gcc
+BuildRequires:      kernel-rpm-macros
+BuildRequires:      kmod
+BuildRequires:      make
+BuildRequires:      redhat-rpm-config
+BuildRequires:      xz
+
+BuildRequires:      kernel-abi-stablelists = %{kernel_version}
+BuildRequires:      kernel-devel = %{kernel_version}
+BuildRequires:      kernel-devel-uname-r = %{kernel_version}.%{_arch}
+
+Requires:           kernel >= %{kernel_version}
+Requires:           kernel-uname-r >= %{kernel_version}.%{_arch}
+Requires:           kernel-modules >= %{kernel_version}
+Requires:           kernel-modules-uname-r >= %{kernel_version}.%{_arch}
+
+Provides:           installonlypkg(kernel-module)
+Provides:           kernel-modules >= %{kernel_version}.%{_arch}
+
+Requires(post):     %{_sbindir}/depmod
+Requires(postun):   %{_sbindir}/depmod
+
+Requires(post):     %{_sbindir}/weak-modules
+Requires(postun):   %{_sbindir}/weak-modules
+
+%description
+%{summary}
+
+%prep
+%autosetup -n %{module_name}-%{githash}
+
+%build
+%{make_build} -C /usr/src/kernels/%{kernel_version}.%{_arch} M=$PWD modules
+
+%install
+%{__make} DESTDIR=%{buildroot} INSTALL="%{__install} -p" -C /usr/src/kernels/%{kernel_version}.%{_arch} %{?_smp_mflags} M=$PWD modules_install
+
+# Make .ko objects temporarily executable for automatic stripping
+find %{buildroot}/lib/modules -type f -name \*.ko -exec chmod u+x \{\} \+
+
+
+%clean
+%{__rm} -rf %{buildroot}
+
+
+%post
+mkdir -p %{_localstatedir}/lib/rpm-state/sig-kmods
+printf '%s\n' "/lib/modules/%{kernel_version}.%{_arch}/extra/drivers/net/%{pkg}/%{pkg}.ko.xz" >> %{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-add
+
+
+%preun
+mkdir -p %{_localstatedir}/lib/rpm-state/sig-kmods
+rpm -ql kmod-%{pkg}-%{?epoch:%{epoch}:}%{version}-%{release}.%{_arch} | grep '/lib/modules/%{kernel_version}.%{_arch}/.*\.ko\.xz$' >> %{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-remove
+
+
+%postun
+if [ -f %{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-remove ]
+then
+    modules=( $(cat %{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-remove) )
+    rm -f %{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-remove
+    rmdir --ignore-fail-on-non-empty %{_localstatedir}/lib/rpm-state/sig-kmods
+    printf '%s\n' "${modules[@]}" | %{_sbindir}/weak-modules --remove-modules
+fi
+
+
+%pretrans -p <lua>
+posix.unlink("%{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-add")
+posix.unlink("%{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-remove")
+
+
+%posttrans
+if [ -f %{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-add ]
+then
+    modules=( $(cat %{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-add) )
+    rm -f %{_localstatedir}/lib/rpm-state/sig-kmods/weak-modules-add
+    rmdir --ignore-fail-on-non-empty %{_localstatedir}/lib/rpm-state/sig-kmods
+    printf '%s\n' "${modules[@]}" | %{_sbindir}/weak-modules --add-modules
+fi
+
+
+%files
+%defattr(644,root,root,755)
+/lib/modules/%{kernel_version}.%{_arch}
+%license LICENSE
+%doc README.md

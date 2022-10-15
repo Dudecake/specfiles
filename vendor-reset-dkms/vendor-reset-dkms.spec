@@ -1,9 +1,9 @@
-%define githash 7d43285a5054e4b2b18dbba771b57d365943a0f7
+%define githash 4b466e92a2d9f76ce1082cde982c7be0be91e248
 %define module_name vendor-reset
 
 Name:               %{module_name}-dkms
 Version:            0.1.1
-Release:            2.git7d43285%{?dist}
+Release:            3.git4b466e9%{?dist}
 Summary:            Linux kernel vendor specific hardware reset module
 URL:                https://github.com/gnif/%{module_name}
 License:            GPLv2
