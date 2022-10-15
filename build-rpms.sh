@@ -11,6 +11,7 @@ cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}
 ln -s . ${BUILDDIR}/noarch
 ln -s . ${BUILDDIR}/${ARCH}
+dnf config-manager --add-repo "file://${BUILDDIR}/\$basearch/os/" --add-repo "file://${RESULTDIR}"
 pushd . > /dev/null
 for dir in ./*/; do
   popd > /dev/null
@@ -19,10 +20,8 @@ for dir in ./*/; do
   SCRIPT="../build-rpm.sh"
   if [[ -x ./build-rpm.sh ]]; then
     SCRIPT="./build-rpm.sh"
-  else
-    if [[ -f ./*.spec ]]; then
-      continue
-    fi
+  elif [[ -f ./*.spec ]]; then
+    continue
   fi
   ${SCRIPT} "${BUILDDIR}" "${RESULTDIR}" || echo "Could not build ${dir}" >&2
 done

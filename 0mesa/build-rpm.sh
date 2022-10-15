@@ -24,10 +24,8 @@ if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   dnf builddep -y ./*.src.rpm
   #[[ "$(uname -m)" = "x86_64" ]] && linux32 rpmbuild --target i686 --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
-  find "${1}" -mindepth 1 -maxdepth 1 -type f -name mesa\*.noarch.rpm -or -name mesa\*.$(rpm -E '%_arch').rpm -exec dnf install -y +
   mv ./*.src.rpm "${1}"
 else
   rm ./*.src.rpm
-  find "${2}/$(rpm -E '%_arch')" -mindepth 1 -maxdepth 1 -type f -name mesa\*.noarch.rpm -or -name mesa\*.$(rpm -E '%_arch').rpm -exec dnf install -y {} +
   echo "No rebuild neccesary for package $(basename $PWD)" >&2
 fi
