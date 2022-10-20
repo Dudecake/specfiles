@@ -16,15 +16,6 @@ fi
 # git archive --remote=https://git.libcamera.org/libcamera/libcamera.git master --format=tar --prefix=${PKG}-${SHORT_HASH}/ ${SHORT_HASH} | xz > ../${PKG}/${PKG}-${SHORT_HASH}.tar.xz
 # popd > /dev/null
 # sed -i "s/%global commit .*/%global commit ${HASH}/; s/%global commitdate .*/%global commitdate 20211228/" ${PKG}/${PKG}.spec
+ln -s ./${PKG}/${PKG}.spec
 
-spectool -g ./${PKG}/${PKG}.spec -C ${PKG}
-rpmbuild -bs ./${PKG}/${PKG}.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/${PKG}"
-RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
-if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
-  dnf builddep -y ./*.src.rpm
-  rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
-  mv ./*.src.rpm "${1}"
-else
-  rm ./*.src.rpm
-  echo "No rebuild neccesary for package $(basename $PWD)" >&2
-fi
+exec ../build-rpm.sh "$@"
