@@ -10,6 +10,7 @@ else
   popd > /dev/null
 fi
 sed -i 's/\.tar\.gz/\.tar\.xz/g' ./${PKG}/${PKG}.spec
-ln -s ./${PKG}/${PKG}.spec
+set +e
+ln -s ./${PKG}/* ./
 
 exec ../build-rpm.sh "$@"

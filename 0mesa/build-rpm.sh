@@ -15,6 +15,7 @@ fi
 # DATE="$(echo ${COMMIT_DATA[1]:1:10} | sed 's/-//g')"
 # VER="$(grep -oP '(?<=ver )\d+\.\d\.\d' ./${PKG}/${PKG}.spec)"
 # sed -i "s/${VER}/22.2.0/; s/%autorelease/10.${DATE}.git${HASH}%{?dist}/; s/https:\/\/archive.mesa3d.org\/mesa-%{ver}.tar.xz/https:\/\/gitlab.freedesktop.org\/mesa\/mesa\/-\/archive\/${HASH}\/mesa-${HASH}.tar.gz/; s/%{name}-%{ver}/%{name}-${HASH}/" ./${PKG}/${PKG}.spec
-ln -s ./${PKG}/${PKG}.spec
+set +e
+ln -s ./${PKG}/* ./
 
 exec ../build-rpm.sh "$@"

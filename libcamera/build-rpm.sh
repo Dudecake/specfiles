@@ -16,6 +16,7 @@ fi
 # git archive --remote=https://git.libcamera.org/libcamera/libcamera.git master --format=tar --prefix=${PKG}-${SHORT_HASH}/ ${SHORT_HASH} | xz > ../${PKG}/${PKG}-${SHORT_HASH}.tar.xz
 # popd > /dev/null
 # sed -i "s/%global commit .*/%global commit ${HASH}/; s/%global commitdate .*/%global commitdate 20211228/" ${PKG}/${PKG}.spec
-ln -s ./${PKG}/${PKG}.spec
+set +e
+ln -s ./${PKG}/* ./
 
 exec ../build-rpm.sh "$@"

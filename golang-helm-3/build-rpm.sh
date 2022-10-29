@@ -9,6 +9,7 @@ else
   git pull
   popd > /dev/null
 fi
-ln -s ./${PKG}/${PKG}.spec
+set +e
+ln -s ./${PKG}/* ./
 
 exec ../build-rpm.sh "$@"
