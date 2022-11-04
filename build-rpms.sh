@@ -16,7 +16,7 @@ pushd . > /dev/null
 for dir in ./*/; do
   popd > /dev/null
   pushd ${dir} > /dev/null
-  [[ -f ./.skip || -f "./.${ID}-${VERSION_ID}.skip" ]] && continue
+  [[ -f ./.skip || -f "./.${ID}.skip" || -f "./.${ID}-${VERSION_ID}.skip" ]] && continue
   SCRIPT="../build-rpm.sh"
   if [[ -x ./build-rpm.sh ]]; then
     SCRIPT="./build-rpm.sh"
