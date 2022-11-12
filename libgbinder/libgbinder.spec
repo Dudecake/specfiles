@@ -1,5 +1,5 @@
 Name:           libgbinder
-Version:        1.1.20
+Version:        1.1.26
 Release:        1%{?dist}
 Summary:        GLib-style interface to binder
 
