@@ -11,7 +11,7 @@ cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}
 ln -s . ${BUILDDIR}/noarch
 ln -s . ${BUILDDIR}/${ARCH}
-dnf config-manager --add-repo "file://${BUILDDIR}/\$basearch/os/" --add-repo "file://${RESULTDIR}"
+dnf config-manager --add-repo "file://${RESULTDIR}/\$basearch/os/"
 pushd . > /dev/null
 for dir in ./*/; do
   popd > /dev/null
@@ -37,7 +37,7 @@ rm ${BUILDDIR}/*.noarch.rpm
 mv ${BUILDDIR}/*.rpm "${RESULTDIR}/${ARCH}/os"
 set -x
 for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESULTDIR}/${ARCH}/os"; do
-  createrepo "${repo}"
+  createrepo --update "${repo}"
   rm -f $(repomanage --old "${repo}")
 done
 find "${RESULTDIR}" -type d -name repodata.old\* -exec rm -rf {} +
