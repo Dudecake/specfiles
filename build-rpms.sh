@@ -6,6 +6,8 @@ BUILDDIR="${BUILDDIR:-${PWD}/target}"
 RESULTDIR="${RESULTDIR:-${PWD}/repo}"
 . /etc/os-release
 
+[[ ! -z "${REDHAT_BUGZILLA_PRODUCT_VERSION}" ]] && VERSION_ID="${REDHAT_BUGZILLA_PRODUCT_VERSION}"
+
 set -e
 cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}
