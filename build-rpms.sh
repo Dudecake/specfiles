@@ -25,7 +25,7 @@ for dir in ./*/; do
   elif [[ -f ./*.spec ]]; then
     continue
   fi
-  ${SCRIPT} "${BUILDDIR}" "${RESULTDIR}" || echo "Could not build ${dir}" >&2
+  VERSION_ID="${VERSION_ID}" ${SCRIPT} "${BUILDDIR}" "${RESULTDIR}" || echo "Could not build ${dir}" >&2
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 # TODO: sign rpms
