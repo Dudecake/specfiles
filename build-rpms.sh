@@ -6,14 +6,27 @@ BUILDDIR="${BUILDDIR:-${PWD}/target}"
 RESULTDIR="${RESULTDIR:-${PWD}/repo}"
 . /etc/os-release
 
-[[ ! -z "${REDHAT_BUGZILLA_PRODUCT_VERSION}" ]] && VERSION_ID="${REDHAT_BUGZILLA_PRODUCT_VERSION}"
+RELEASEVER="${VERSION_ID}"
+[[ "${REDHAT_BUGZILLA_PRODUCT_VERSION}" = "rawhide" ]] && RELEASEVER="$[${VERSION_ID}-1]"
 
 set -e
 cd ${SCRIPTDIR}
-mkdir -p ${BUILDDIR}
-ln -s . ${BUILDDIR}/noarch
-ln -s . ${BUILDDIR}/${ARCH}
-dnf config-manager --add-repo "file://${RESULTDIR}/\$basearch/os/"
+mkdir -p ${BUILDDIR}/{noarch,${ARCH},source}
+cat << EOF > /etc/yum.repos.d/build.repo
+[build-noarch]
+name=build noarch
+baseurl=file://${BUILDDIR}/noarch
+enabled=1
+priority=10
+
+[build-${ARCH}]
+name=build ${ARCH}
+baseurl=file://${BUILDDIR}/${ARCH}
+enabled=1
+priority=10
+EOF
+dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules kernel-modules-extra --repo fedora,updates --releasever ${RELEASEVER} --downloaddir ${BUILDDIR}/${ARCH}
+createrepo --update "${BUILDDIR}/${ARCH}"
 pushd . > /dev/null
 for dir in ./*/; do
   popd > /dev/null
@@ -25,18 +38,20 @@ for dir in ./*/; do
   elif [[ -f ./*.spec ]]; then
     continue
   fi
-  VERSION_ID="${VERSION_ID}" ${SCRIPT} "${BUILDDIR}" "${RESULTDIR}" || echo "Could not build ${dir}" >&2
+  ${SCRIPT} "${BUILDDIR}" "${RESULTDIR}" || echo "Could not build ${dir}" >&2
+  createrepo --update "${BUILDDIR}/noarch"
+  createrepo --update "${BUILDDIR}/${ARCH}"
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 # TODO: sign rpms
 set +e
-mv ${BUILDDIR}/*.src.rpm "${RESULTDIR}/source/tree/"
-mv ${BUILDDIR}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
-cp ${BUILDDIR}/*.noarch.rpm "${RESULTDIR}/aarch64/os"
-cp ${BUILDDIR}/*.noarch.rpm "${RESULTDIR}/x86_64/os"
-cp ${BUILDDIR}/*.noarch.rpm "${RESULTDIR}/ppc64le/os"
-rm ${BUILDDIR}/*.noarch.rpm
-mv ${BUILDDIR}/*.rpm "${RESULTDIR}/${ARCH}/os"
+mv ${BUILDDIR}/source/*.src.rpm "${RESULTDIR}/source/tree/"
+mv ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
+cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/aarch64/os"
+cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/x86_64/os"
+cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/ppc64le/os"
+rm ${BUILDDIR}/noarch/*.noarch.rpm
+mv ${BUILDDIR}/${ARCH}/*.rpm "${RESULTDIR}/${ARCH}/os"
 set -x
 for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESULTDIR}/${ARCH}/os"; do
   createrepo --update "${repo}"
