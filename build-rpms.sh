@@ -25,7 +25,8 @@ baseurl=file://${BUILDDIR}/${ARCH}
 enabled=1
 priority=10
 EOF
-dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules kernel-modules-extra --repo fedora,updates --releasever ${RELEASEVER} --downloaddir ${BUILDDIR}/${ARCH}
+[[ "${ID}" = "fedora" ]] && REPO="--repo fedora,updates"
+dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir ${BUILDDIR}/${ARCH}
 createrepo --update "${BUILDDIR}/${ARCH}"
 pushd . > /dev/null
 for dir in ./*/; do
