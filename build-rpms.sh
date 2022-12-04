@@ -36,7 +36,10 @@ pushd . > /dev/null
 for dir in ./*/; do
   popd > /dev/null
   pushd ${dir} > /dev/null
-  [[ -f ./.skip || -f "./.${ID}.skip" || -f "./.${ID}-${VERSION_ID}.skip" ]] && continue
+  if [[ -f ./.skip || -f "./.${ID}.skip" || -f "./.${ID}-${VERSION_ID}.skip" ]]; then
+    echo "Skipping package ${dir} as it is excluded" >&2
+    continue
+  fi
   SCRIPT="../build-rpm.sh"
   if [[ -x ./build-rpm.sh ]]; then
     SCRIPT="./build-rpm.sh"
