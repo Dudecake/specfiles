@@ -10,6 +10,7 @@ RELEASEVER="${VERSION_ID}"
 if [[ "${REDHAT_BUGZILLA_PRODUCT_VERSION}" = "rawhide" ]]; then
   RELEASEVER="$[${VERSION_ID}-1]"
   VERSION_ID="${REDHAT_BUGZILLA_PRODUCT_VERSION}"
+  rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-${RELEASEVER}-x86_64
 fi
 
 set -e
