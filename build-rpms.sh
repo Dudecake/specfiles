@@ -7,7 +7,10 @@ RESULTDIR="${RESULTDIR:-${PWD}/repo}"
 . /etc/os-release
 
 RELEASEVER="${VERSION_ID}"
-[[ "${REDHAT_BUGZILLA_PRODUCT_VERSION}" = "rawhide" ]] && RELEASEVER="$[${VERSION_ID}-1]"
+if [[ "${REDHAT_BUGZILLA_PRODUCT_VERSION}" = "rawhide" ]]; then
+  RELEASEVER="$[${VERSION_ID}-1]"
+  VERSION_ID="${REDHAT_BUGZILLA_PRODUCT_VERSION}"
+fi
 
 set -e
 cd ${SCRIPTDIR}
