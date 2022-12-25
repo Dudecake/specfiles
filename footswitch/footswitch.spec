@@ -21,7 +21,7 @@ Source0:            %{url}/archive/%{githash}.tar.gz
 sed -i 's:/etc:\$\(PREFIX\)/etc:g; s:\$\(PREFIX\)/bin:\$\(PREFIX\)/usr/bin:g' ./Makefile
 
 %build
-%make_build
+%make_build CFLAGS="-fPIE -I/usr/include/hidapi"
 
 %install
 mkdir -p %{buildroot}%{_bindir} %{buildroot}/etc/udev/rules.d
