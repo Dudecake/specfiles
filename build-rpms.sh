@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPTDIR="$(dirname "$(readlink -f "$0")")"
-ARCH="$(uname -m)"
+ARCH="$(rpm -E '%_arch')"
 BUILDDIR="${BUILDDIR:-${PWD}/target}"
 RESULTDIR="${RESULTDIR:-${PWD}/repo}"
 . /etc/os-release
@@ -10,7 +10,7 @@ RELEASEVER="${VERSION_ID}"
 if [[ "${REDHAT_BUGZILLA_PRODUCT_VERSION}" = "rawhide" ]]; then
   RELEASEVER="$[${VERSION_ID}-1]"
   VERSION_ID="${REDHAT_BUGZILLA_PRODUCT_VERSION}"
-  rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-${RELEASEVER}-x86_64
+  rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-${RELEASEVER}-${ARCH}
 fi
 
 set -e
