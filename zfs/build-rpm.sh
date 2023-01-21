@@ -2,7 +2,7 @@
 
 MACHINE="$(rpm -E '%_arch')"
 KERNEL_VERSION="$(rpm -q --qf %{version}-%{release}.%{arch} kernel)"
-ZFS_VERSION="2.1.7"
+ZFS_VERSION="2.1.8"
 
 if [[ ! -f "${2}/${MACHINE}/os/kmod-zfs-${KERNEL_VERSION}-${ZFS_VERSION}-1$(rpm -E '%dist').${MACHINE}.rpm" ]]; then
   curl -sSL https://github.com/openzfs/zfs/releases/download/zfs-${ZFS_VERSION}/zfs-${ZFS_VERSION}.tar.gz | tar -xzf -
