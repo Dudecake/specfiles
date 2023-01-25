@@ -58,7 +58,6 @@ for dir in ./*/; do
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 # TODO: sign rpms
-set +e
 mv ${BUILDDIR}/source/*.src.rpm "${RESULTDIR}/source/tree/"
 mv ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
 cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/aarch64/os"
@@ -66,7 +65,6 @@ cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/x86_64/os"
 cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/ppc64le/os"
 rm ${BUILDDIR}/noarch/*.noarch.rpm
 mv ${BUILDDIR}/${ARCH}/*.rpm "${RESULTDIR}/${ARCH}/os"
-set -x
 for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESULTDIR}/${ARCH}/os"; do
   createrepo --update "${repo}"
   rm -f $(repomanage --old "${repo}")
