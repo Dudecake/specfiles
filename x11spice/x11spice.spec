@@ -1,7 +1,9 @@
+%define githash 9d6965c774eb3b83786276e333014ff78d8e2f15
+
 Name:           x11spice
 Version:        1.2
-Release:        2%{?dist}
-Summary:        x11spice
+Release:        3.git9d6965c%{?dist}
+Summary:        x11spice connects a running X server as a Spice server.
 URL:            https://gitlab.freedesktop.org/spice/%{name}
 License:        GPLv3
 BuildRequires:  gcc
@@ -21,13 +23,13 @@ BuildRequires:  pkgconfig(spice-server)
 BuildRequires:  pkgconfig(spice-protocol)
 BuildRequires:  pkgconfig(pixman-1)
 
-Source0: %{url}/-/archive/v%{version}/x11spice-v%{version}.tar.gz
+Source0: %{url}/-/archive/%{githash}/%{name}-%{githash}.tar.gz
 
 %description
 Connects a running X server as a Spice server.
 
 %prep
-%autosetup -n %{name}-v%{version}
+%autosetup -n %{name}-%{githash}
 ./autogen.sh
 %configure
 

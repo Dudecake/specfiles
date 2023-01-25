@@ -1,5 +1,5 @@
 Name:           waydroid
-Version:        1.3.3
+Version:        1.3.4
 Release:        1%{?dist}
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 
