@@ -38,7 +38,7 @@ chmod 0755 %{buildroot}/%{_bindir}/%{name}
 %{__install} -m 0644 %{name}.py %{buildroot}%{_datadir}/%{name}/
 %{__cp} -r tools data %{buildroot}%{_datadir}/%{name}/
 %{__mv} %{buildroot}%{_datadir}/%{name}/data/Waydroid.desktop %{buildroot}%{_datadir}/%{name}/data/waydroid.market.desktop %{buildroot}%{_datadir}/applications/
-%{__install} -m 0644 %{buildroot}%{_datadir}/%{name}/data/id.waydro.waydroid.metainfo.xml %{buildroot}%{_datadir}/metainfo
+%{__install} -Dm 0644 %{buildroot}%{_datadir}/%{name}/data/id.waydro.waydroid.metainfo.xml -t %{buildroot}%{_datadir}/metainfo
 %{__rm} %{buildroot}%{_datadir}/%{name}/data/id.waydro.waydroid.metainfo.xml
 %{__install} -Dm644 systemd/waydroid-container.service -t %{buildroot}%{_unitdir}
 
