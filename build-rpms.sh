@@ -32,6 +32,8 @@ enabled=1
 priority=10
 EOF
 createrepo --update "${BUILDDIR}/${ARCH}"
+set +e
+failed_pkgs=()
 pushd . > /dev/null
 for dir in ./*/; do
   popd > /dev/null
@@ -46,7 +48,11 @@ for dir in ./*/; do
   elif [[ -f ./*.spec ]]; then
     continue
   fi
-  ${SCRIPT} "${BUILDDIR}" "${RESULTDIR}" || echo "Could not build ${dir}" >&2
+  ${SCRIPT} "${BUILDDIR}" "${RESULTDIR}"
+  if [[ $? -ne 0 ]]; then
+    echo "Could not build ${dir}" >&2
+    failed_pkgs+=("${dir}")
+  fi
   createrepo --update "${BUILDDIR}/noarch"
   createrepo --update "${BUILDDIR}/${ARCH}"
 done
@@ -66,3 +72,6 @@ for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESU
   rm -f $(repomanage --old "${repo}")
 done
 find "${RESULTDIR}" -type d -name repodata.old\* -exec rm -rf {} +
+if [[ ${#failed_pkgs[@]} -ne 0 ]]; then
+  echo "Could not build packages '${failed_pkgs[*]}'" >&2
+fi
