@@ -2,7 +2,7 @@
 
 MACHINE="$(rpm -E '%_arch')"
 KERNEL_VERSION="$(rpm -q --qf %{version}-%{release}.%{arch} kernel)"
-ZFS_VERSION="2.1.8"
+ZFS_VERSION="2.1.9"
 REL="1$(rpm -E '%dist')"
 
 if [[ ! -f "${2}/${MACHINE}/os/kmod-zfs-${KERNEL_VERSION}-${ZFS_VERSION}-${REL}.${MACHINE}.rpm" ]]; then
