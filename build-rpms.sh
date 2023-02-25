@@ -17,7 +17,7 @@ set -e
 cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}/{noarch,${ARCH},source}
 [[ "${ID}" = "fedora" ]] && REPO="--repo fedora,updates"
-dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir ${BUILDDIR}/${ARCH}
+dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir "${PWD}/zfs"
 cat << EOF > /etc/yum.repos.d/build.repo
 [build-noarch]
 name=build noarch
