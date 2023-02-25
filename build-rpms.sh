@@ -57,7 +57,9 @@ for dir in ./*/; do
   createrepo --update "${BUILDDIR}/${ARCH}"
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
-# TODO: sign rpms
+if [[ ! -z "${GPG_PATH}" ]]; then
+  find ${BUILDDIR} -type f -name \*.rpm -exec rpm -D "_gpg_path ${GPG_PATH}" -D "_gpg_name ${GPG_NAME}" --addsign --signfiles  {} \;
+fi
 mv ${BUILDDIR}/source/*.src.rpm "${RESULTDIR}/source/tree/"
 mv ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
 cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/aarch64/os"
