@@ -2,7 +2,7 @@
 
 VERSION="0.5.2"
 
-curl -sSL https://github.com/cloudflare/boringtun/archive/refs/tags/v${VERSION}.tar.gz | tar -xzf -
+curl -sSL https://github.com/cloudflare/boringtun/archive/refs/tags/boringtun-cli-${VERSION}.tar.gz | tar -xzf -
 pushd boringtun-${VERSION} > /dev/null
 cargo vendor
 popd > /dev/null

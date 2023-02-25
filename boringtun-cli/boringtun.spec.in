@@ -1,4 +1,4 @@
-Name:           boringtun
+Name:           boringtun-cli
 Version:        ${VERSION}
 Release:        1%{?dist}
 Summary:        Implementation of the WireGuard® protocol designed for portability and speed
