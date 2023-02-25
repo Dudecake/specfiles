@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="0.4.0"
+VERSION="0.5.2"
 
 curl -sSL https://github.com/cloudflare/boringtun/archive/refs/tags/v${VERSION}.tar.gz | tar -xzf -
 pushd boringtun-${VERSION} > /dev/null

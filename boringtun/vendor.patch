@@ -1,15 +1,10 @@
---- a/.cargo/config	2021-11-25 22:36:54.452240512 +0100
-+++ b/.cargo/config	2021-11-25 22:38:38.311058808 +0100
-@@ -11,9 +11,8 @@
- 
- [source]
- 
--[source.local-registry]
--directory = "/usr/share/cargo/registry"
--
- [source.crates-io]
--registry = "https://crates.io"
--replace-with = "local-registry"
+--- a/.cargo/config.toml
++++ b/.cargo/config.toml
+@@ -1,2 +1,8 @@
+ [target.'cfg(unix)']
+ runner = 'sudo -E'
++
++[source.crates-io]
 +replace-with = "vendored-sources"
 +
 +[source.vendored-sources]
