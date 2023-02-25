@@ -1,8 +1,8 @@
 #!/bin/sh
 
 set -e
-spectool -g ./*.spec
-rpmbuild -bs ./*.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}"
+spectool -gR ./*.spec
+rpmbuild -bs ./*.spec -D "_srcrpmdir ${PWD}"
 RPM_FILE=$(ls -1 ./*.src.rpm | head -n1)
 if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   dnf builddep -y ./*.src.rpm
