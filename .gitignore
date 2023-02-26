@@ -1,5 +1,5 @@
 *.tar*
-*.src.rpm
+*.rpm
 *.gem
 target
 repo
