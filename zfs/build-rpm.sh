@@ -8,7 +8,8 @@ REL="1$(rpm -E '%dist')"
 if [[ ! -f "${2}/${MACHINE}/os/kmod-zfs-${KERNEL_VERSION}-${ZFS_VERSION}-${REL}.${MACHINE}.rpm" ]]; then
   curl -sSL https://github.com/openzfs/zfs/releases/download/zfs-${ZFS_VERSION}/zfs-${ZFS_VERSION}.tar.gz | tar -xzf -
   createrepo --update "${PWD}"
-  dnf install kernel-devel --repofrompath local,file://${PWD} --repo local
+  dnf install -y bison elfutils-libelf-devel flex
+  dnf install -y kernel-devel --repofrompath local,file://${PWD} --repo local
   dnf install -y --skip-broken epel-release gcc make autoconf automake libtool rpm-build libtirpc-devel libblkid-devel libuuid-devel libudev-devel openssl-devel zlib-devel libaio-devel libattr-devel elfutils-libelf-devel python3 python3-devel python3-setuptools python3-cffi libffi-devel git ncompress libcurl-devel --enablerepo crb --repofrompath local,file://${PWD}
   dnf install -y --skip-broken --enablerepo=epel --enablerepo=powertools python3-packaging dkms
   pushd zfs-${ZFS_VERSION} > /dev/null
