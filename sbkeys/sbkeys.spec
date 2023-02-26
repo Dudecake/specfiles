@@ -2,19 +2,19 @@
 
 Name:       sbkeys
 Version:    1.1.0
-Release:    1.git64c726e%{?dist}
+Release:    2.git64c726e%{?dist}
 Summary:    Simple script to generate Secure Boot keys
 
 License:    GPLv3
 URL:        https://github.com/electrickite/%{name}
 Source0:    %{url}/archive/%{githash}.tar.gz
 
-Requires:   /usr/bin/openssl
-Requires:   /usr/bin/uuidgen
-Requires:   /usr/bin/cert-to-efi-sig-list
-Requires:   /usr/bin/sign-efi-sig-list
-Recommends: /usr/bin/wget
-Recommends: /usr/bin/sbsiglist
+Requires:   %{_bindir}/openssl
+Requires:   %{_bindir}/uuidgen
+Requires:   %{_bindir}/cert-to-efi-sig-list
+Requires:   %{_bindir}/sign-efi-sig-list
+Recommends: %{_bindir}/wget
+Recommends: %{_bindir}/sbsiglist
 
 BuildArch:  noarch
 
