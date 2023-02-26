@@ -35,7 +35,9 @@ BuildRequires:      make
 BuildRequires:      redhat-rpm-config
 BuildRequires:      xz
 
+%if 0%{?rhel}
 BuildRequires:      kernel-abi-stablelists = %{kernel_version}
+%endif
 BuildRequires:      kernel-devel = %{kernel_version}
 BuildRequires:      kernel-devel-uname-r = %{kernel_version}.%{_arch}
 
@@ -60,10 +62,10 @@ Requires(postun):   %{_sbindir}/weak-modules
 %autosetup -n %{module_name}-%{githash}
 
 %build
-%{make_build} -C /usr/src/kernels/%{kernel_version}.%{_arch} M=$PWD modules
+%{make_build} -C /usr/src/kernels/%{kernel_version}.%{_arch} M=%_builddir/%{module_name}-%{githash} modules
 
 %install
-%{__make} DESTDIR=%{buildroot} INSTALL="%{__install} -p" -C /usr/src/kernels/%{kernel_version}.%{_arch} %{?_smp_mflags} M=$PWD modules_install
+%{__make} DESTDIR=%{buildroot} INSTALL="%{__install} -p" -C /usr/src/kernels/%{kernel_version}.%{_arch} %{?_smp_mflags} M=%_builddir/%{module_name}-%{githash} modules_install
 
 # Make .ko objects temporarily executable for automatic stripping
 find %{buildroot}/lib/modules -type f -name \*.ko -exec chmod u+x \{\} \+
