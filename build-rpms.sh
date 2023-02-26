@@ -52,9 +52,10 @@ for dir in ./*/; do
   if [[ $? -ne 0 ]]; then
     echo "Could not build ${dir}" >&2
     failed_pkgs+=("${dir}")
+  else
+    createrepo --update "${BUILDDIR}/noarch"
+    createrepo --update "${BUILDDIR}/${ARCH}"
   fi
-  createrepo --update "${BUILDDIR}/noarch"
-  createrepo --update "${BUILDDIR}/${ARCH}"
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 if [[ ! -z "${GPG_PATH}" ]]; then
