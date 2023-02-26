@@ -58,7 +58,7 @@ for dir in ./*/; do
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 if [[ ! -z "${GPG_PATH}" ]]; then
-  find ${BUILDDIR} -type f -name \*.rpm -exec rpm -D "_gpg_path ${GPG_PATH}" -D "_gpg_name ${GPG_NAME}" --addsign --signfiles  {} \;
+  find ${BUILDDIR} -type f -name \*.rpm -exec rpm -D "_gpg_path ${GPG_PATH}" -D "_gpg_name ${GPG_NAME}" --addsign  {} \;
 fi
 mv ${BUILDDIR}/source/*.src.rpm "${RESULTDIR}/source/tree/"
 mv ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
