@@ -59,7 +59,12 @@ for dir in ./*/; do
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 if [[ ! -z "${GPG_PATH}" ]]; then
-  gpg --batch --import ${GPG_PATH}
+  if [[ -f  $(dirname "${GPG_PATH}")/passphrase ]]; then
+    PASSPHRASE="--passphrase-file $(dirname "${GPG_PATH}")/passphrase"
+    GPG=$(rpm -E '%__gpg')
+    echo "%__gpg ${GPG} ${PASSPHRASE}" >> ~/.rpmmacros
+  fi
+  gpg --batch ${PASSPHRASE} --import "${GPG_PATH}"
   find ${BUILDDIR} -type f -name \*.rpm -exec rpm -D "_gpg_name ${GPG_NAME}" --addsign  {} \;
 fi
 mv ${BUILDDIR}/source/*.src.rpm "${RESULTDIR}/source/tree/"
