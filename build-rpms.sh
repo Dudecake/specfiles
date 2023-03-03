@@ -15,9 +15,10 @@ fi
 
 set -e
 cd ${SCRIPTDIR}
-mkdir -p ${BUILDDIR}/{noarch,${ARCH},source}
+mkdir -p ${BUILDDIR}/{{noarch,${ARCH}}/os,source/tree}
+find "${RESULTDIR}/${ARCH}/os" -type f -name kernel\* -exec cp -a {} "${BUILDDIR}/${ARCH}" +
 [[ "${ID}" = "fedora" ]] && REPO="--repo fedora,updates"
-dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir "${PWD}/zfs"
+dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
 cat << EOF > /etc/yum.repos.d/build.repo
 [build-noarch]
 name=build noarch
@@ -32,6 +33,7 @@ enabled=1
 priority=10
 EOF
 createrepo --update "${BUILDDIR}/${ARCH}"
+dnf install -y kernel kernel-devel
 set +e
 failed_pkgs=()
 pushd . > /dev/null
@@ -76,7 +78,7 @@ rm ${BUILDDIR}/noarch/*.noarch.rpm
 mv ${BUILDDIR}/${ARCH}/*.rpm "${RESULTDIR}/${ARCH}/os"
 for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESULTDIR}/${ARCH}/os"; do
   createrepo --update "${repo}"
-  rm -f $(repomanage --old "${repo}")
+  rm -f $(repomanage --old "${repo}" | grep -v ^kernel)
 done
 find "${RESULTDIR}" -type d -name repodata.old\* -exec rm -rf {} +
 if [[ ${#failed_pkgs[@]} -ne 0 ]]; then
