@@ -5,7 +5,7 @@ KERNEL_VERSION="$(rpm -q --qf %{version}-%{release}.%{arch} kernel-devel)"
 ZFS_VERSION="2.1.9"
 REL="1$(rpm -E '%dist')"
 
-if [[ ! -f "${2}/${MACHINE}/os/kmod-zfs-${KERNEL_VERSION}-${ZFS_VERSION}-${REL}.${MACHINE}.rpm" ]]; then
+if [[ ! -x "${FORCE_REBUILD}" || ! -f "${2}/${MACHINE}/os/kmod-zfs-${KERNEL_VERSION}-${ZFS_VERSION}-${REL}.${MACHINE}.rpm" ]]; then
   curl -sSL https://github.com/openzfs/zfs/releases/download/zfs-${ZFS_VERSION}/zfs-${ZFS_VERSION}.tar.gz | tar -xzf -
   dnf install -y --skip-broken epel-release gcc make autoconf automake libtool rpm-build libtirpc-devel libblkid-devel libuuid-devel libudev-devel openssl-devel zlib-devel libaio-devel libattr-devel elfutils-libelf-devel python3 python3-devel python3-setuptools python3-cffi libffi-devel git ncompress libcurl-devel --enablerepo crb
   dnf install -y --skip-broken --enablerepo=epel --enablerepo=powertools python3-packaging dkms -x kernel\*
