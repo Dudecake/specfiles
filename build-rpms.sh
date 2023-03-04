@@ -17,8 +17,11 @@ set -e
 cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}/{{noarch,${ARCH}}/os,source/tree}
 find "${RESULTDIR}/${ARCH}/os" -type f -name kernel\* -exec cp -a {} "${BUILDDIR}/${ARCH}" \;
-[[ "${ID}" = "fedora" ]] && REPO="--repo fedora,updates"
-dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
+if [[ "${ID}" = "fedora" ]]; then
+  REPO="--repo fedora,updates"
+  KERNEL_MODULES_CORE="kernel-modules-core"
+fi
+dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules ${KERNEL_MODULES_CORE} kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
 cat << EOF > /etc/yum.repos.d/build.repo
 [build-noarch]
 name=build noarch
