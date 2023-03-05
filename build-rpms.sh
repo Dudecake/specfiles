@@ -66,8 +66,7 @@ done
 if [[ ! -z "${GPG_PATH}" ]]; then
   if [[ -f  $(dirname "${GPG_PATH}")/passphrase ]]; then
     PASSPHRASE="--passphrase-file $(dirname "${GPG_PATH}")/passphrase"
-    GPG_SIGN_CMD="$(rpm -E '%{__gpg_sign_cmd}')"
-    echo "%__gpg_sign_cmd ${GPG_SIGN_CMD} --batch ${PASSPHRASE}" >> ~/.rpmmacros
+    echo "%__gpg_sign_cmd $(rpm -E '%{__gpg_sign_cmd}' | tr -d '\n') --trust-model always --batch --no-tty ${PASSPHRASE}" >> ~/.rpmmacros
   fi
   gpg --batch ${PASSPHRASE} --import "${GPG_PATH}"
   find ${BUILDDIR} -type f -name \*.rpm -exec rpm -D "_gpg_name ${GPG_NAME}" --addsign  {} \;
