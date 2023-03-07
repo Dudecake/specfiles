@@ -66,10 +66,11 @@ done
 if [[ ! -z "${GPG_PATH}" ]]; then
   if [[ -f  $(dirname "${GPG_PATH}")/passphrase ]]; then
     PASSPHRASE="--passphrase-file $(dirname "${GPG_PATH}")/passphrase"
-    echo "_gpg_sign_cmd_extra_args --trust-model always --batch --no-tty ${PASSPHRASE}" >> ~/.rpmmacros
+    echo -e "_gpg_sign_cmd_extra_args --trust-model always --pinentry-mode loopback --batch --no-tty ${PASSPHRASE}" >> ~/.rpmmacros
   fi
+  echo "_gpg_name ${GPG_NAME}" >> ~/.rpmmacros
   gpg --batch ${PASSPHRASE} --import "${GPG_PATH}"
-  find ${BUILDDIR} -type f -name \*.rpm -exec rpm -D "_gpg_name ${GPG_NAME}" --addsign  {} \;
+  find ${BUILDDIR} -type f -name \*.rpm -exec rpm --addsign  {} \;
 fi
 mv ${BUILDDIR}/source/*.src.rpm "${RESULTDIR}/source/tree/"
 mv ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
