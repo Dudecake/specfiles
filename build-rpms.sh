@@ -15,7 +15,7 @@ fi
 
 set -e
 cd ${SCRIPTDIR}
-mkdir -p ${BUILDDIR}/{{noarch,${ARCH}}/os,source/tree}
+mkdir -p ${BUILDDIR}/{noarch,${ARCH}}
 find "${RESULTDIR}/${ARCH}/os" -type f -name kernel\* -exec cp -a {} "${BUILDDIR}/${ARCH}" \;
 if [[ "${ID}" = "fedora" ]]; then
   [[ "${VERSION_ID}" = "rawhide" ]] && REPO="--repo fedora,updates,updates-testing"
@@ -35,6 +35,7 @@ baseurl=file://${BUILDDIR}/${ARCH}
 enabled=1
 priority=10
 EOF
+createrepo --update "${BUILDDIR}/noarch"
 createrepo --update "${BUILDDIR}/${ARCH}"
 dnf install -y kernel kernel-devel
 set +e
