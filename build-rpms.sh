@@ -65,13 +65,23 @@ for dir in ./*/; do
 done
 [[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 if [[ ! -z "${GPG_PATH}" ]]; then
-  if [[ -f  $(dirname "${GPG_PATH}")/passphrase ]]; then
-    PASSPHRASE="--passphrase-file $(dirname "${GPG_PATH}")/passphrase"
-    echo "%_gpg_sign_cmd_extra_args --trust-model always --pinentry-mode loopback --batch --no-tty ${PASSPHRASE}" >> ~/.rpmmacros
+  PASSPHRASE_FILE="$(dirname "${GPG_PATH}")/passphrase"
+  GPG_SIGN_CMD_EXTRA_ARGS="--batch --no-tty"
+  echo "Checking for existence of passphrase file ${PASSPHRASE_FILE}" >&2
+  if [[ -r "${PASSPHRASE_FILE}" ]]; then
+    echo "Found passphrase file" >&2
+    PASSPHRASE="--passphrase-file ${PASSPHRASE_FILE}"
+    GPG_SIGN_CMD_EXTRA_ARGS="--trust-model always --pinentry-mode loopback ${GPG_SIGN_CMD_EXTRA_ARGS} ${PASSPHRASE}"
+  else
+    echo "Passphrase file doesn't exists or isn't readable" >&2
   fi
+  echo "Using GPG_SIGN_CMD_EXTRA_ARGS '${GPG_SIGN_CMD_EXTRA_ARGS}'" >&2
+  echo "%_gpg_sign_cmd_extra_args ${GPG_SIGN_CMD_EXTRA_ARGS}" >> ~/.rpmmacros
   echo "%_gpg_name ${GPG_NAME}" >> ~/.rpmmacros
   gpg --batch ${PASSPHRASE} --import "${GPG_PATH}"
   find ${BUILDDIR} -type f -name \*.rpm -exec rpm --addsign  {} \;
+else
+  echo 'GPG_PATH unset, not signing packages' >&2
 fi
 mv ${BUILDDIR}/source/*.src.rpm "${RESULTDIR}/source/tree/"
 mv ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
