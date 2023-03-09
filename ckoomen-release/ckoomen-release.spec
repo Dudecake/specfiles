@@ -18,12 +18,14 @@ URL:            https://repo.ckoomen.eu
 Source0:        %{url}/%{distro}/ckoomen.repo
 Source1:        %{url}/RPM-GPG-KEY-ckoomen
 
+BuildArch:      noarch
+
 %description
 Installs my custom made repo configuration file and GPG key
 
 %install
-%__install -Dm644 %{Source0} %{buildroot}%{_sysconfdir}/yum.repos.d/ckoomen.repo
-%__install -Dm644 %{Source1} %{buildroot}%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
+%__install -Dm644 %{_sourcedir}/ckoomen.repo %{buildroot}%{_sysconfdir}/yum.repos.d/ckoomen.repo
+%__install -Dm644 %{_sourcedir}/RPM-GPG-KEY-ckoomen %{buildroot}%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-ckoomen
 
 %files
 #%defattr(-,root,root,-)
