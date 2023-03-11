@@ -12,6 +12,7 @@ else
 fi
 set +e
 ln -s ./${PKG}/* ./
+ln -sf sbsigntools-gnuefi-centos.patch sbsigntools-gnuefi.patch
 ./${PKG}-mktarball.sh
 
 exec ../build-rpm.sh "$@"
