@@ -12,5 +12,6 @@ else
 fi
 set +e
 ln -s ./${PKG}/* ./
+./${PKG}-mktarball.sh
 
 exec ../build-rpm.sh "$@"
