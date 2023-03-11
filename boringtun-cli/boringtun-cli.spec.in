@@ -6,7 +6,7 @@ Summary:        Implementation of the WireGuard® protocol designed for portabil
 # Upstream license specification: BSD-3-Clause
 License:        BSD
 URL:            https://github.com/cloudflare/boringtun
-Source:         boringtun-%{version}.tar.gz
+Source:         boringtun-cli-%{version}.tar.gz
 Patch0:         vendor.patch
 
 BuildRequires:  cargo
