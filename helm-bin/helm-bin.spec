@@ -113,7 +113,7 @@ Provides:       bundled(golang(sigs.k8s.io/yaml)
 %global debug_package %{nil}
 
 %prep
-%autosetup -n linux-${BASEARCH}
+%autosetup -n linux-%{basearch}
 
 %build
 
