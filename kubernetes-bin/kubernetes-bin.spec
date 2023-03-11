@@ -7,7 +7,7 @@
 %endif
 
 Name:           kubernetes-bin
-Version:        1.25.6
+Version:        1.25.7
 Release:        1%{?dist}
 Summary:        Production-Grade Container Scheduling and Management
 URL:            https://github.com/kubernetes/kubernetes
