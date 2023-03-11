@@ -65,7 +65,7 @@ Requires(postun):   %{_sbindir}/weak-modules
 %{make_build} -C /usr/src/kernels/%{kernel_version}.%{_arch} M=%_builddir/%{module_name}-%{githash} modules
 
 %install
-%{__make} DESTDIR=%{buildroot} INSTALL="%{__install} -p" -C /usr/src/kernels/%{kernel_version}.%{_arch} %{?_smp_mflags} M=%_builddir/%{module_name}-%{githash} modules_install
+%{__make} INSTALL_MOD_PATH=%{buildroot}/lib/modules/%{kernel_version}.%{_arch} INSTALL="%{__install} -p" -C /usr/src/kernels/%{kernel_version}.%{_arch} %{?_smp_mflags} M=%_builddir/%{module_name}-%{githash} modules_install
 
 # Make .ko objects temporarily executable for automatic stripping
 find %{buildroot}/lib/modules -type f -name \*.ko -exec chmod u+x \{\} \+

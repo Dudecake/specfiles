@@ -1,3 +1,10 @@
+%define basearch %_arch
+%if "%{basearch}" == "x64"
+%define basearch amd64
+%elseif "%{basearch}" == "aarch64"
+%define basearch arm64
+%endif
+
 Name:       chectl-bin
 Version:    7.47.0
 Release:    1%{?dist}
@@ -5,7 +12,7 @@ Summary:    Production-Grade Container Scheduling and Management
 URL:        https://github.com/che-incubator/chectl
 License:    EPL-2.0
 
-Source0:    %{url}/releases/download/%{version}/chectl-linux-${BASEARCH}.tar.gz
+Source0:    %{url}/releases/download/%{version}/chectl-linux-%{basearch}.tar.gz
 
 Provides:   chectl = %{version}
 

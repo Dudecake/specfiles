@@ -1,3 +1,10 @@
+%define basearch %_arch
+%if "%{basearch}" == "x86_64"
+%define basearch amd64
+%elseif "%{basearch}" == "aarch64"
+%define basearch arm64
+%endif
+
 Name:           helm-bin
 Version:        3.9.0
 Release:        1%{?dist}
@@ -5,7 +12,7 @@ Summary:        Production-Grade Container Scheduling and Management
 URL:            https://github.com/helm/helm
 License:        Apache-2.0
 
-Source0:        https://get.helm.sh/helm-v%{version}-linux-${BASEARCH}.tar.gz
+Source0:        https://get.helm.sh/helm-v%{version}-linux-%{basearch}.tar.gz
 
 Provides:       helm = %{version}
 Provides:       bundled(golang(github.com/asaskevich/govalidator)

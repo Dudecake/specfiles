@@ -1,3 +1,10 @@
+%define basearch %_arch
+%if "%{basearch}" == "x86_64"
+%define basearch amd64
+%elseif "%{basearch}" == "aarch64"
+%define basearch arm64
+%endif
+
 Name:           kubernetes-bin
 Version:        1.25.6
 Release:        1%{?dist}
@@ -6,7 +13,7 @@ URL:            https://github.com/kubernetes/kubernetes
 License:        Apache-2.0
 BuildRequires:  systemd-rpm-macros
 
-Source0:        https://storage.googleapis.com/kubernetes-release/release/v%{version}/kubernetes-server-linux-${BASEARCH}.tar.gz
+Source0:        https://storage.googleapis.com/kubernetes-release/release/v%{version}/kubernetes-server-linux-%{basearch}.tar.gz
 Source1:        kubelet.service
 
 Provides:       kubernetes = %{version}
