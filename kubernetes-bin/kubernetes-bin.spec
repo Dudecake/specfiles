@@ -1,7 +1,8 @@
 %define basearch %_arch
 %if "%{basearch}" == "x86_64"
 %define basearch amd64
-%elseif "%{basearch}" == "aarch64"
+%endif
+%if "%{basearch}" == "aarch64"
 %define basearch arm64
 %endif
 
