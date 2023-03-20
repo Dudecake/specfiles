@@ -7,6 +7,6 @@ mv boringtun-boringtun-cli-${VERSION} boringtun-cli-${VERSION}
 pushd boringtun-cli-${VERSION} > /dev/null
 cargo vendor
 popd > /dev/null
-tar -cf /boringtun-cli-${VERSION}.tar.gz boringtun-cli-${VERSION}
+tar -cf $(rpm -E '%{_sourcedir}')/boringtun-cli-${VERSION}.tar.gz boringtun-cli-${VERSION}
 sed "s/\${VERSION}/${VERSION}/" ./boringtun-cli.spec.in > ./boringtun-cli.spec
 exec ../build-rpm.sh "$@"
