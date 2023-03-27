@@ -92,7 +92,7 @@ rm ${BUILDDIR}/noarch/*.noarch.rpm
 mv ${BUILDDIR}/${ARCH}/*.rpm "${RESULTDIR}/${ARCH}/os"
 for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESULTDIR}/${ARCH}/os"; do
   createrepo --update "${repo}"
-  rm -f $(repomanage --old "${repo}" | grep -v ^kernel)
+  rm -f $(repomanage --old "${repo}" | grep -v /kernel)
 done
 find "${RESULTDIR}" -type d -name repodata.old\* -exec rm -rf {} +
 if [[ ${#failed_pkgs[@]} -ne 0 ]]; then
