@@ -92,7 +92,11 @@ rm ${BUILDDIR}/noarch/*.noarch.rpm
 mv ${BUILDDIR}/${ARCH}/*.rpm "${RESULTDIR}/${ARCH}/os"
 for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESULTDIR}/${ARCH}/os"; do
   createrepo --update "${repo}"
-  rm -f $(repomanage --old "${repo}" | grep -v /kernel)
+  pkgs_to_remove=($(repomanage --old "${repo}" | grep -v /kernel))
+  if [[ ${#pkgs_to_remove[@]} -ne 0 ]]; then
+    echo -e "Removing packages:\n$(printf '  %s\n' "${pkgs_to_remove[@]}")"
+    rm -f "${pkgs_to_remove[@]}"
+  fi
 done
 find "${RESULTDIR}" -type d -name repodata.old\* -exec rm -rf {} +
 if [[ ${#failed_pkgs[@]} -ne 0 ]]; then
