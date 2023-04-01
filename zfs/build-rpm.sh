@@ -10,6 +10,8 @@ if [[ ! -x "${FORCE_REBUILD}" || ! -f "${2}/${MACHINE}/os/kmod-zfs-${KERNEL_VERS
   dnf install -y --skip-broken epel-release gcc make autoconf automake libtool rpm-build libtirpc-devel libblkid-devel libuuid-devel libudev-devel openssl-devel zlib-devel libaio-devel libattr-devel elfutils-libelf-devel python3 python3-devel python3-setuptools python3-cffi libffi-devel git ncompress libcurl-devel --enablerepo crb
   dnf install -y --skip-broken --enablerepo=epel --enablerepo=powertools python3-packaging dkms -x kernel\*
   pushd zfs-${ZFS_VERSION} > /dev/null
+  curl -sSLO https://github.com/openzfs/zfs/pull/14668.patch
+  patch -p1 < 14668.patch
   ./configure
   make -j1 srpm
   popd > /dev/null
