@@ -7,7 +7,6 @@ Summary:        Implementation of the WireGuard® protocol designed for portabil
 License:        BSD
 URL:            https://github.com/cloudflare/boringtun
 Source:         boringtun-cli-%{version}.tar.gz
-Patch0:         vendor.patch
 
 BuildRequires:  cargo
 BuildRequires:  rust-packaging
