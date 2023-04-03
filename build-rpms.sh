@@ -19,9 +19,10 @@ mkdir -p ${BUILDDIR}/{noarch,${ARCH}}
 find "${RESULTDIR}/${ARCH}/os" -type f -name kernel\* -exec cp -a {} "${BUILDDIR}/${ARCH}" \;
 if [[ "${ID}" = "fedora" ]]; then
   [[ "${VERSION_ID}" = "rawhide" ]] && REPO="--repo fedora,updates,updates-testing"
+  KERNEL_DEVEL_MATCHED="kernel-devel-matched"
   KERNEL_MODULES_CORE="kernel-modules-core"
 fi
-dnf download kernel kernel-core kernel-devel kernel-headers.${ARCH} kernel-modules ${KERNEL_MODULES_CORE} kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
+dnf download kernel kernel-core kernel-devel ${KERNEL_DEVEL_MATCHED} kernel-headers.${ARCH} kernel-modules ${KERNEL_MODULES_CORE} kernel-modules-extra ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
 cat << EOF > /etc/yum.repos.d/build.repo
 [build-noarch]
 name=build noarch
