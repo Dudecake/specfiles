@@ -17,6 +17,7 @@ set -e
 cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}/{noarch,${ARCH}}
 find "${RESULTDIR}/${ARCH}/os" -type f -name kernel\* -exec cp -a {} "${BUILDDIR}/${ARCH}" \;
+[[ $(command -v rpmdev-spectool) != '' ]] && ln -s $(which rpmdev-spectool) /usr/local/bin/spectool
 case "${ID}" in
   fedora)
     [[ "${VERSION_ID}" = "rawhide" ]] && REPO="--repo fedora,updates,updates-testing"
@@ -29,7 +30,7 @@ case "${ID}" in
     KERNEL_MODULES="kernel-modules kernel-modules-extra ${KERNEL_MODULES}"
     ;;
   opensuse*)
-    KERNEL="kernel-default kernel-default-devel"
+    KERNEL="kernel-default kernel-default-base kernel-default-devel"
     ;;
   esac
 dnf download ${KERNEL} ${KERNEL_HEADERS} ${KERNEL_MODULES} ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
