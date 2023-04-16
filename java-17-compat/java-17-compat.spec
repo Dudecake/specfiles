@@ -3,7 +3,7 @@ Version:    1
 Release:    1%{?dist}
 Summary:    Compatibility package for Java
 License:    GPLv3
-Requires:   java-11
+Requires:   java-17
 BuildArch:  noarch
 
 Provides:   java
@@ -25,7 +25,7 @@ Provides:   libjawt.so(SUNWprivate_1.1)(64bit)
 
 %package headless
 Summary:    Compatibility package for Java
-Requires:   java-11-headless
+Requires:   java-17-headless
 
 Provides:   /usr/bin/jjs
 Provides:   java-1.8.0-headless
