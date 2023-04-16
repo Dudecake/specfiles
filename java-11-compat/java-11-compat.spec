@@ -4,6 +4,8 @@ Release:    1%{?dist}
 Summary:    Compatibility package for Java
 License:    GPLv3
 Requires:   java-11
+Requires:   java-11-compat-headless
+
 BuildArch:  noarch
 
 Provides:   java
@@ -43,6 +45,9 @@ Provides:   libjvm.so()(64bit)
 Provides:   libjvm.so(SUNWprivate_1.1)(64bit)
 Provides:   libverify.so()(64bit)
 Provides:   libverify.so(SUNWprivate_1.1)(64bit)
+
+%description headless
+%{summary}
 
 %prep
 

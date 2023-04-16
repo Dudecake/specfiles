@@ -26,6 +26,7 @@ Provides:   libjawt.so(SUNWprivate_1.1)(64bit)
 %package headless
 Summary:    Compatibility package for Java
 Requires:   java-17-headless
+Requires:   java-17-compat-headless
 
 Provides:   /usr/bin/jjs
 Provides:   java-1.8.0-headless
@@ -43,6 +44,9 @@ Provides:   libjvm.so()(64bit)
 Provides:   libjvm.so(SUNWprivate_1.1)(64bit)
 Provides:   libverify.so()(64bit)
 Provides:   libverify.so(SUNWprivate_1.1)(64bit)
+
+%description headless
+%{summary}
 
 %prep
 
