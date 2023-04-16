@@ -39,18 +39,21 @@ cat << EOF > /etc/yum.repos.d/build.repo
 name=build noarch
 baseurl=file://${BUILDDIR}/noarch
 enabled=1
+gpgcheck=0
 priority=10
 
 [build-${ARCH}]
 name=build ${ARCH}
 baseurl=file://${BUILDDIR}/${ARCH}
 enabled=1
+gpgcheck=0
 priority=10
 
 [previous]
 name=previous
 baseurl=file://${RESULTDIR}/${ARCH}/os
 enabled=1
+gpgcheck=0
 priority=20
 EOF
 createrepo --update "${BUILDDIR}/noarch"
