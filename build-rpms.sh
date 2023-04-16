@@ -46,6 +46,12 @@ name=build ${ARCH}
 baseurl=file://${BUILDDIR}/${ARCH}
 enabled=1
 priority=10
+
+[previous]
+name=previous
+baseurl=file://${RESULTDIR}/${ARCH}/os
+enabled=1
+priority=20
 EOF
 createrepo --update "${BUILDDIR}/noarch"
 createrepo --update "${BUILDDIR}/${ARCH}"
