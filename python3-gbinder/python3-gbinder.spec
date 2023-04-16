@@ -19,10 +19,10 @@ BuildRequires:  libgbinder-devel
 %autosetup -n gbinder-python-%{version}
 
 %build
-%python3 setup.py build --cython
+python3 setup.py build --cython
 
 %install
-%python3 setup.py install --prefix="%{_prefix}" --root="%{buildroot}"
+python3 setup.py install --prefix="%{_prefix}" --root="%{buildroot}"
 
 %files
 %license LICENSE
