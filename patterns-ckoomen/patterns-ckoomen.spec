@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.1
+Version:        0.0.2
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -176,6 +176,7 @@ Requires:       widelands
 Requires:       xonotic
 %ifarch x86_64
 Requires:       heroic
+Requires:       steam-devices
 %endif
 Requires:       pioneer
 Requires:       warsow
