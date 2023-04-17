@@ -7,7 +7,12 @@ Summary:            Command line utlities for programming PCsensor and Scythe fo
 URL:                https://github.com/rgerganov/%{name}
 License:            GPLv2
 BuildRequires:      gcc
+%if 0%{?suse_version}
+BuildRequires:      libhidapi-devel
+%else
 BuildRequires:      hidapi-devel
+%endif
+
 
 Source0:            %{url}/archive/%{githash}.tar.gz
 
