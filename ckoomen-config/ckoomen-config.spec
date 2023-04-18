@@ -14,16 +14,18 @@ Requires:       systemd-udev
 %{summary}
 
 %package network
+Summary:        Network config for CKoomen
 Requires:       NetworkManager
 
 %description network
 Network config for CKoomen
 
 %package network-wifi
+Summary:        Wifi config for CKoomen
 Requires:       ckoomen-config-network
 Requires:       iwd
 
-%description network
+%description network-wifi
 Wifi config for CKoomen
 
 %install
