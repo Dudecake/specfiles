@@ -1,6 +1,6 @@
 Name:           patterns-ckoomen
-Version:        0.0.2
-Release:        2%{?dist}
+Version:        0.0.3
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -51,6 +51,8 @@ Requires:       net-tools
 Requires:       bridge-utils
 Requires:       wireguard-tools
 Requires:       wol
+Requires:       ckoomen-config
+Requires:       ckoomen-config-network
 # Monitoring
 Requires:       btop
 Requires:       iotop
@@ -132,6 +134,7 @@ Requires:       java-17-openjdk-javadoc
 Requires:       java-17-openjdk-src
 Requires:       kdeconnect-kde
 Requires:       yakuake
+Requires:       ckoomen-config-network-wifi
 # Utils
 Requires:       android-tools
 Requires:       libcamera-tools
@@ -152,6 +155,7 @@ Requires:       krita
 Requires:       easyeffects
 Requires:       falkon
 Requires:       chromium
+Requires:       helvum
 Requires:       code
 Requires:       joystickwake
 Requires:       waydroid
