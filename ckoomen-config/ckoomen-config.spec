@@ -1,6 +1,6 @@
 Name:           ckoomen-config
 Version:        0.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Config for CKoomen
 
 License:        EUPL-1.2
@@ -8,7 +8,11 @@ URL:            https://repo.ckoomen.eu/
 
 BuildArch:      noarch
 
+%if 0%{suse_version}
+Requires:       udev
+%else
 Requires:       systemd-udev
+%endif
 
 %description
 %{summary}
