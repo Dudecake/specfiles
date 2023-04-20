@@ -120,6 +120,7 @@ for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESU
   fi
   createrepo --update "${repo}"
   if [[ ! -z "${GPG_SIGN_CMD_EXTRA_ARGS}" ]]; then
+    rm -f "${repo}/repodata/repomd.xml.asc"
     gpg --detach-sign --armor ${GPG_SIGN_CMD_EXTRA_ARGS} "${repo}/repodata/repomd.xml"
   fi
 done
