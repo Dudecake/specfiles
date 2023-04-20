@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.3
+Version:        0.0.4
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -41,7 +41,6 @@ Requires:       freeipa-client
 Requires:       oddjob
 Requires:       oddjob-mkhomedir
 # Kernel
-Requires:       kernel-firmware
 Requires:       kernel-firmware-amdgpu
 Requires:       kernel-firmware-i915
 Requires:       kernel-firmware-intel
@@ -60,7 +59,19 @@ Requires:       mtr
 Requires:       ncdu
 Requires:       nmap
 Requires:       mlocate
-# Virtualization
+
+%description base
+%{summary}
+
+%package virtualization
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_virtualization
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10002
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_base
 %if 0%{suse_version} < 1599
 Requires:       pattern() = microos_kvm_host
 #else
@@ -84,7 +95,7 @@ Requires:       vendor-reset-kmp-default
 Requires:       zfs
 Requires:       zfs-kmp-default
 
-%description base
+%description virtualization
 %{summary}
 
 %package iot
@@ -93,9 +104,9 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_iot
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10002
+Provides:       pattern-order() = 10003
 Provides:       pattern-visible()
-Requires:       pattern() = ckoomen_base
+Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
 # Storage
 Requires:       ceph
@@ -121,13 +132,12 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10003
+Provides:       pattern-order() = 10004
 Provides:       pattern-visible()
-Requires:       pattern() = ckoomen_base
+Requires:       pattern() = ckoomen_virtualization
 #Requires:       gamescope
 Requires:       firejail
 Requires:       firewall-applet
-Requires:       iwd
 Requires:       java-17-openjdk
 Requires:       java-17-openjdk-devel
 Requires:       java-17-openjdk-javadoc
@@ -144,18 +154,15 @@ Requires:       libvulkan_lvp
 Requires:       libvulkan_radeon
 Requires:       Mesa-libRusticlOpenCL
 Requires:       clinfo
-#Requires:       virglrenderer
-#Requires:       virglrenderer-test-server
+Requires:       virglrenderer
+Requires:       virglrenderer-test-server
 Requires:       radeontop
 # Applications
-Requires:       blender
 Requires:       discord
 Requires:       gimp
 Requires:       krita
-Requires:       easyeffects
 Requires:       falkon
 Requires:       chromium
-Requires:       helvum
 Requires:       code
 Requires:       joystickwake
 Requires:       waydroid
@@ -165,10 +172,25 @@ Requires:       nextcloud-client
 Requires:       virt-manager
 Requires:       virt-viewer
 # Media
-Requires:       ffmpeg
+Requires:       blender
 Requires:       celluloid
+Requires:       easyeffects
+Requires:       ffmpeg
+Requires:       helvum
 Requires:       kdenlive
-# Games
+
+%description desktop
+%{summary}
+
+%package games
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_desktop
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10005
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_desktop
 Requires:       cataclysm-dda
 Requires:       desmume
 Requires:       dolphin-emu
@@ -192,7 +214,7 @@ Requires:       steam-devices
 Requires:       pioneer
 Requires:       warsow
 
-%description desktop
+%description games
 %{summary}
 
 %package plasma
@@ -201,7 +223,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_plasma
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10004
+Provides:       pattern-order() = 10006
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       pattern() = microos_kde_desktop
@@ -217,7 +239,7 @@ Requires:       krdc
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base iot desktop plasma
+    base virtualization iot desktop games plasma
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
@@ -228,6 +250,10 @@ done
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/base.txt
 
+%files virtualization
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/virtualization.txt
+
 %files iot
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/iot.txt
@@ -235,6 +261,10 @@ done
 %files desktop
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/desktop.txt
+
+%files games
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/games.txt
 
 %files plasma
 %dir %{_docdir}/patterns-ckoomen
