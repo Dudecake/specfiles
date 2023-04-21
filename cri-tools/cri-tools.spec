@@ -13,7 +13,7 @@
 %endif
 
 %if ! 0%{?gobuild:1} || 0%{?centos}
-%define gobuild(o:) GO111MODULE=off go build -buildmode pie -compiler gc -tags="rpm_crashtraceback ${BUILDTAGS:-}" -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n') -extldflags '-Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld '" -a -v -x %{?**};
+%define gobuild(o:) GO111MODULE=off go build -trimpath -buildmode pie -compiler gc -tags="rpm_crashtraceback ${BUILDTAGS:-}" -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n') -extldflags '-Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld '" -a -v -x %{?**};
 %endif
 
 # Global vars
@@ -23,7 +23,7 @@
 %global repo %{name}
 %global import_path %{provider}.%{provider_tld}/%{project}/%{repo}
 
-%global commit0 a3bbde8a77c323aa6a485da9a9046299155c6016
+%global commit0 a12c2d088df8bea138eaeb5a0217d98b6cf93a44
 %global git0 https://%{import_path}
 
 %define built_tag 1.25.0
@@ -47,8 +47,8 @@ BuildRequires: glib2-devel
 BuildRequires: glibc-static
 %if 0%{?fedora}
 BuildRequires: golang-github-cpuguy83-md2man
-# %else
-# BuildRequires: go-md2man
+%else
+BuildRequires: go-md2man
 %endif
 Provides: crictl = %{version}-%{release}
 
@@ -70,7 +70,7 @@ export GOPATH=$(pwd)/_build:$(pwd):$(pwd):%{gopath}
 export LDFLAGS="-X %{import_path}/pkg/version.Version=%{built_tag}"
 export BUILDTAGS="selinux"
 GOPATH=$GOPATH %gobuild -o bin/crictl %{import_path}/cmd/crictl
-# go-md2man -in docs/crictl.md -out docs/crictl.1
+go-md2man -in docs/crictl.md -out docs/crictl.1
 
 %install
 # install binaries
@@ -79,7 +79,7 @@ install -p -m 755 ./bin/crictl %{buildroot}%{_bindir}
 
 # install manpage
 install -dp %{buildroot}%{_mandir}/man1
-# install -p -m 644 docs/crictl.1 %{buildroot}%{_mandir}/man1
+install -p -m 644 docs/crictl.1 %{buildroot}%{_mandir}/man1
 
 %check
 
@@ -89,6 +89,6 @@ install -dp %{buildroot}%{_mandir}/man1
 %files
 %license LICENSE
 %doc CHANGELOG.md CONTRIBUTING.md OWNERS README.md RELEASE.md code-of-conduct.md
-# %doc docs/{benchmark.md,roadmap.md,validation.md}
+%doc docs/{benchmark.md,roadmap.md,validation.md}
 %{_bindir}/crictl
-# %{_mandir}/man1/crictl*
+%{_mandir}/man1/crictl*
