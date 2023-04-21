@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.4
+Version:        0.0.5
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -110,17 +110,19 @@ Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
 # Storage
 Requires:       ceph
-Requires:       nfs-ganesha-ceph
 Requires:       glusterfs
+%if 0%{suse_version} < 1599
+Requires:       nfs-ganesha-ceph
 Requires:       nfs-ganesha-glusterfs
 Requires:       targetcli-fb
 Requires:       target-isns
 Requires:       tcmu-runner
+%endif
 # Kubernetes
 Requires:       helm
 Requires:       crio-tools
 Requires:       cri-o
-Requires:       cri-o-kubeadm-cricon
+Requires:       cri-o-kubeadm-criconfig
 Requires:       kubernetes-kubeadm
 
 %description iot
@@ -154,7 +156,7 @@ Requires:       libvulkan_lvp
 Requires:       libvulkan_radeon
 Requires:       Mesa-libRusticlOpenCL
 Requires:       clinfo
-Requires:       virglrenderer
+Requires:       libvirglrenderer1
 Requires:       virglrenderer-test-server
 Requires:       radeontop
 # Applications
@@ -185,7 +187,7 @@ Requires:       kdenlive
 %package games
 Summary:        openSUSE base CKoomen pattern
 Group:          Metapackages
-Provides:       pattern() = ckoomen_desktop
+Provides:       pattern() = ckoomen_games
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10005
