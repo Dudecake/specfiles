@@ -1,5 +1,5 @@
 Name:           ckoomen-config
-Version:        0.0.2
+Version:        0.0.3
 Release:        1%{?dist}
 Summary:        Config for CKoomen
 
@@ -8,7 +8,7 @@ URL:            https://repo.ckoomen.eu/
 
 BuildArch:      noarch
 
-%if 0%{suse_version}
+%if 0%{?suse_version}
 Requires:       udev
 %else
 Requires:       systemd-udev
@@ -40,8 +40,19 @@ Requires:       dracut
 %description dracut
 Dracut config for CKoomen
 
+%package zsh
+Summary:        Zsh config for CKoomen
+Requires:       zsh
+
+%description zsh
+Zsh config for CKoomen
+
 %install
-mkdir -p %{buildroot}%{_sysconfdir}/NetworkManager/conf.d %{buildroot}%{_sysconfdir}/modules-load.d %{buildroot}%{_sysconfdir}/dracut.conf.d
+mkdir -p %{buildroot}%{_sysconfdir}/NetworkManager/conf.d \
+        %{buildroot}%{_sysconfdir}/modules-load.d \
+        %{buildroot}%{_sysconfdir}/dracut.conf.d \
+        %{buildroot}%{_sysconfdir}/skel
+
 cat << EOF > %{buildroot}%{_sysconfdir}/NetworkManager/conf.d/wifi_backend.conf
 [device]
 wifi.backend=iwd
@@ -58,6 +69,7 @@ EOF
 cat << EOF > %{buildroot}%{_sysconfdir}/dracut.conf.d/99-ckoomen.conf
 omit_dracutmodules+=" clevis network zfs "
 EOF
+cp zshrc %{buildroot}%{_sysconfdir}/skel/.zshrc
 
 %files
 %config %{_sysconfdir}/modules-load.d/99-ckoomen.conf
@@ -70,3 +82,6 @@ EOF
 
 %files dracut
 %config %{_sysconfdir}/dracut.conf.d/10-ckoomen.conf
+
+%files zsh
+%{_sysconfdir}/skel/.zshrc
