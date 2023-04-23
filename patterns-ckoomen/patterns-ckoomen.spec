@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.5
+Version:        0.0.6
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -25,6 +25,7 @@ Requires:       pattern() = microos_container_runtime
 %endif
 Requires:       bsdtar
 Requires:       zsh
+Requires:       ckoomen-config-zsh
 Requires:       opendoas
 Requires:       sl
 Requires:       units
@@ -92,6 +93,7 @@ Requires:       rust-hypervisor-firmware-bin
 Requires:       ipxe-bootimgs
 Requires:       vendor-reset-kmp-default
 # Storage
+Requires:       ckoomen-config-dracut
 Requires:       zfs
 Requires:       zfs-kmp-default
 
@@ -164,6 +166,7 @@ Requires:       discord
 Requires:       gimp
 Requires:       krita
 Requires:       falkon
+Requires:       firefox
 Requires:       chromium
 Requires:       code
 Requires:       joystickwake
