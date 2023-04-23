@@ -1,10 +1,11 @@
 Name:           ckoomen-config
 Version:        0.0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Config for CKoomen
 
 License:        EUPL-1.2
 URL:            https://repo.ckoomen.eu/
+Source0:        zshrc
 
 BuildArch:      noarch
 
@@ -69,7 +70,7 @@ EOF
 cat << EOF > %{buildroot}%{_sysconfdir}/dracut.conf.d/99-ckoomen.conf
 omit_dracutmodules+=" clevis network zfs "
 EOF
-cp zshrc %{buildroot}%{_sysconfdir}/skel/.zshrc
+cp %{_sourcedir}/zshrc %{buildroot}%{_sysconfdir}/skel/.zshrc
 
 %files
 %config %{_sysconfdir}/modules-load.d/99-ckoomen.conf
@@ -81,7 +82,7 @@ cp zshrc %{buildroot}%{_sysconfdir}/skel/.zshrc
 %config %{_sysconfdir}/NetworkManager/conf.d/wifi_backend.conf
 
 %files dracut
-%config %{_sysconfdir}/dracut.conf.d/10-ckoomen.conf
+%config %{_sysconfdir}/dracut.conf.d/99-ckoomen.conf
 
 %files zsh
 %{_sysconfdir}/skel/.zshrc
