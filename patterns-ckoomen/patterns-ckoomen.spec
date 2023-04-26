@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.6
+Version:        0.0.7
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -41,11 +41,6 @@ Requires:       systemd-zram-service
 Requires:       freeipa-client
 Requires:       oddjob
 Requires:       oddjob-mkhomedir
-# Kernel
-Requires:       kernel-firmware-amdgpu
-Requires:       kernel-firmware-i915
-Requires:       kernel-firmware-intel
-Requires:       kernel-firmware-network
 # Network config
 Requires:       net-tools
 Requires:       bridge-utils
@@ -125,7 +120,7 @@ Requires:       helm
 Requires:       crio-tools
 Requires:       cri-o
 Requires:       cri-o-kubeadm-criconfig
-Requires:       kubernetes-kubeadm
+Requires:       kubernetes1.25-kubeadm
 
 %description iot
 %{summary}
@@ -144,14 +139,12 @@ Requires:       firejail
 Requires:       firewall-applet
 Requires:       java-17-openjdk
 Requires:       java-17-openjdk-devel
-Requires:       java-17-openjdk-javadoc
-Requires:       java-17-openjdk-src
 Requires:       kdeconnect-kde
 Requires:       yakuake
 Requires:       ckoomen-config-network-wifi
-# Utils
-Requires:       android-tools
-Requires:       libcamera-tools
+%ifarch x86_64
+Requires:       steam-devices
+%endif
 # GPU
 Requires:       libvulkan_intel
 Requires:       libvulkan_lvp
@@ -162,29 +155,62 @@ Requires:       libvirglrenderer1
 Requires:       virglrenderer-test-server
 Requires:       radeontop
 # Applications
-Requires:       discord
-Requires:       gimp
-Requires:       krita
 Requires:       falkon
 Requires:       firefox
 Requires:       chromium
-Requires:       code
 Requires:       joystickwake
+Requires:       nextcloud-client
+
+%description desktop
+%{summary}
+
+%package desktop-applications
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_desktop_applications
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10005
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_desktop
+# Coding
+Requires:       code
+Requires:       java-17-openjdk-javadoc
+Requires:       java-17-openjdk-src
+# Utils
+Requires:       android-tools
+Requires:       libcamera-tools
+# Applications
+Requires:       discord
 Requires:       waydroid
 Requires:       keepassxc
 Requires:       meld
-Requires:       nextcloud-client
 Requires:       virt-manager
 Requires:       virt-viewer
 # Media
-Requires:       blender
 Requires:       celluloid
 Requires:       easyeffects
-Requires:       ffmpeg
 Requires:       helvum
-Requires:       kdenlive
 
-%description desktop
+%description desktop-applications
+%{summary}
+
+%package media
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_media
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10006
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_desktop
+Requires:       gimp
+Requires:       krita
+Requires:       blender
+Requires:       kdenlive
+Requires:       ffmpeg
+
+%description media
 %{summary}
 
 %package games
@@ -193,7 +219,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_games
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10005
+Provides:       pattern-order() = 10007
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       cataclysm-dda
@@ -203,7 +229,7 @@ Requires:       dosbox
 Requires:       endless-sky
 Requires:       gamehub
 Requires:       mangohud
-#Requires:       openclonk
+Requires:       openclonk
 Requires:       openttd
 Requires:       ppsspp
 Requires:       ppsspp-qt
@@ -214,7 +240,6 @@ Requires:       widelands
 Requires:       xonotic
 %ifarch x86_64
 Requires:       heroic
-Requires:       steam-devices
 %endif
 Requires:       pioneer
 Requires:       warsow
@@ -228,7 +253,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_plasma
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10006
+Provides:       pattern-order() = 10008
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       pattern() = microos_kde_desktop
@@ -244,7 +269,7 @@ Requires:       krdc
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base virtualization iot desktop games plasma
+    base virtualization iot desktop desktop-applications media games plasma
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
@@ -266,6 +291,14 @@ done
 %files desktop
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/desktop.txt
+
+%files desktop-applications
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/desktop-applications.txt
+
+%files media
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/media.txt
 
 %files games
 %dir %{_docdir}/patterns-ckoomen
