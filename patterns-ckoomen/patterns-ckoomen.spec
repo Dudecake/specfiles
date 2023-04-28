@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.7
+Version:        0.0.8
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -33,7 +33,7 @@ Requires:       arch-install-scripts
 Requires:       iperf
 Requires:       picocom
 Requires:       sbsigntools
-Requires:       clevis-dracut
+#Requires:       clevis-dracut
 Requires:       setroubleshoot
 Requires:       setroubleshoot-server
 Requires:       systemd-zram-service
@@ -72,7 +72,9 @@ Requires:       pattern() = ckoomen_base
 Requires:       pattern() = microos_kvm_host
 #else
 Requires:       pattern() = kvm_server
-Requires:       libvirt
+Requires:       libvirt-client
+Requires:       libvirt-daemon-config-network
+Requires:       libvirt-daemon-config-nwfilter
 Requires:       libvirt-daemon-qemu
 Requires:       qemu-tools
 Requires:       virt-install

@@ -1,6 +1,6 @@
 Name:           ckoomen-config
-Version:        0.0.3
-Release:        2%{?dist}
+Version:        0.0.4
+Release:        1%{?dist}
 Summary:        Config for CKoomen
 
 License:        EUPL-1.2
@@ -68,7 +68,7 @@ vfio_iommu_type1
 vfio_pci
 EOF
 cat << EOF > %{buildroot}%{_sysconfdir}/dracut.conf.d/99-ckoomen.conf
-omit_dracutmodules+=" clevis network zfs "
+omit_dracutmodules+=" network zfs "
 EOF
 cp %{_sourcedir}/zshrc %{buildroot}%{_sysconfdir}/skel/.zshrc
 
