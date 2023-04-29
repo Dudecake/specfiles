@@ -1,15 +1,9 @@
 #!/bin/bash
 
 PKG=libcamera
+BRANCH=rawhide
 set -e
-if [[ ! -d ${PKG}/.git ]]; then
-  git clone https://src.fedoraproject.org/rpms/${PKG}.git --branch rawhide --depth=1
-  # git clone https://git.libcamera.org/libcamera/libcamera.git --branch master --depth=1 ${PKG}-code
-else
-  pushd ./${PKG} > /dev/null
-  git pull
-  popd > /dev/null
-fi
+../fetch-fedora-pkg.sh ${PKG} ${BRANCH}
 # HASH="030e6f389e2d0fa3f10a47634f3609378ccaf70e"
 # SHORT_HASH="${HASH:0:7}"
 # pushd ./${PKG}-code > /dev/null

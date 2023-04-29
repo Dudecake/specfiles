@@ -1,16 +1,9 @@
 #!/bin/sh
 
 PKG=tcmu-runner
+BRANCH=c9s-sig-storage-gluster-9
 set -e
-if [[ ! -d ${PKG}/.git ]]; then
-  git clone --branch c9s-sig-storage-gluster-9 --depth=1 https://git.centos.org/rpms/tcmu-runner.git
-else
-  pushd ./${PKG} > /dev/null
-  git restore SPECS/${PKG}.spec
-  git pull
-  popd > /dev/null
-fi
 
-ln -s ./${PKG}/*/* ./
+../fetch-centos-pkg.sh ${PKG} ${BRANCH}
 
 exec ../build-rpm.sh "$@"
