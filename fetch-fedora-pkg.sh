@@ -18,4 +18,4 @@ else
   popd > /dev/null
 fi
 
-ln -sf ./${PKG}/* ./
+ln -sf ./${pkg}/* ./
