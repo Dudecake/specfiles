@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.9
+Version:        0.0.11
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -31,6 +31,7 @@ Requires:       sl
 Requires:       units
 Requires:       git-core
 Requires:       arch-install-scripts
+Requires:       toolbox
 Requires:       iperf
 Requires:       picocom
 Requires:       sbsigntools
@@ -79,9 +80,21 @@ Requires:       libvirt-daemon-config-network
 Requires:       libvirt-daemon-config-nwfilter
 Requires:       libvirt-daemon
 Requires:       libvirt-daemon-qemu
+Requires:       qemu-arm
+Requires:       qemu-uefi-aarch64
+Requires:       qemu-x86
 Requires:       qemu-tools
+Requires:       qemu-hw-display-qxl
+Requires:       qemu-hw-display-virtio-gpu-pci
+Requires:       qemu-hw-usb-host
+Requires:       qemu-hw-usb-redirect
+Requires:       qemu-ui-spice-app
+Requires:       qemu-vhost-user-gpu
 Requires:       virt-install
 Requires:       libvirt-daemon-driver-storage-gluster
+Requires:       libvirt-daemon-driver-storage-iscsi
+Requires:       qemu-block-gluster
+Requires:       qemu-block-iscsi
 Requires:       butane
 Requires:       driverctl
 Requires:       virtio-win
@@ -153,6 +166,8 @@ Requires:       steam-devices
 Requires:       libvulkan_intel
 Requires:       libvulkan_lvp
 Requires:       libvulkan_radeon
+Requires:       libvdpau_radeonsi
+Requires:       libvdpau_virtio_gpu
 Requires:       Mesa-libRusticlOpenCL
 Requires:       clinfo
 Requires:       libvirglrenderer1
