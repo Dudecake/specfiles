@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.8
+Version:        0.0.9
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -20,7 +20,7 @@ Provides:       pattern-order() = 10001
 Provides:       pattern-visible()
 Requires:       pattern() = microos_base
 # Only on leap
-%if 0%{suse_version} < 1599
+%if 0%{?suse_version} < 1599
 Requires:       pattern() = microos_container_runtime
 %endif
 Requires:       bsdtar
@@ -29,6 +29,7 @@ Requires:       ckoomen-config-zsh
 Requires:       opendoas
 Requires:       sl
 Requires:       units
+Requires:       git-core
 Requires:       arch-install-scripts
 Requires:       iperf
 Requires:       picocom
@@ -68,17 +69,18 @@ Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10002
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_base
-%if 0%{suse_version} < 1599
+%if 0%{?suse_version} < 1599
 Requires:       pattern() = microos_kvm_host
-#else
+%else
 Requires:       pattern() = kvm_server
+%endif
 Requires:       libvirt-client
 Requires:       libvirt-daemon-config-network
 Requires:       libvirt-daemon-config-nwfilter
+Requires:       libvirt-daemon
 Requires:       libvirt-daemon-qemu
 Requires:       qemu-tools
 Requires:       virt-install
-%endif
 Requires:       libvirt-daemon-driver-storage-gluster
 Requires:       butane
 Requires:       driverctl
@@ -211,6 +213,7 @@ Requires:       krita
 Requires:       blender
 Requires:       kdenlive
 Requires:       ffmpeg
+Requires:       kicad
 
 %description media
 %{summary}
