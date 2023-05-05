@@ -173,6 +173,14 @@ yaml2json () {
   fi
 }
 
+urlencode () {
+  python3 -c "from urllib.parse import quote_plus as quote; print(quote('${1}'))"
+}
+
+urldecode () {
+  python3 -c "from urllib.parse import unquote_plus as quote; print(unquote('${1}'))"
+}
+
 XDG_DATA_DIRS=/var/lib/flatpak/exports/share:${XDG_DATA_DIRS}
 
 if [[ -d ~/go/bin ]]; then
