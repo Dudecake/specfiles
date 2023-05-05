@@ -30,7 +30,7 @@ case "${ID}" in
     KERNEL_MODULES="kernel-modules kernel-modules-extra ${KERNEL_MODULES}"
     ;;
   opensuse*)
-    KERNEL="kernel-default kernel-default-base kernel-default-devel"
+    KERNEL="kernel-default kernel-default-base kernel-default-devel kernel-devel"
     ;;
   esac
 dnf download ${KERNEL} ${KERNEL_HEADERS} ${KERNEL_MODULES} ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
