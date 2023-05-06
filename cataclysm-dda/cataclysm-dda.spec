@@ -17,7 +17,7 @@
 
 
 Name:           cataclysm-dda
-Version:        0.G
+Version:        0.F_3
 Release:        0
 Summary:        A roguelike set in a post-apocalyptic world
 License:        CC-BY-SA-3.0
@@ -64,9 +64,9 @@ Struggle to survive in a harsh, persistent, procedurally generated environment.
 This package contains the data files for Cataclysm: Dark Days Ahead.
 
 %prep
-%autosetup -n Cataclysm-DDA-%{version}
+%autosetup -n Cataclysm-DDA-%(echo "%{version}" | sed "s/_/-/")
 
-%define cataopts NATIVE=linux64 RELEASE=1 LTO=1 USE_XDG_DIR=1
+%define cataopts NATIVE=linux64 RELEASE=1 LTO=1 USE_XDG_DIR=1 CFLAGS="${CFLAGS} -Wno-error=dangling-reference" CXXFLAGS="${CXXFLAGS} -Wno-error=dangling-reference"
 #%%define cataopts NATIVE=linux64 RELEASE=1 USE_XDG_DIR=1
 
 %build
