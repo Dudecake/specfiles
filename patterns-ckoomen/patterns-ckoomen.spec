@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.11
+Version:        0.0.12
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -25,6 +25,7 @@ Requires:       pattern() = microos_container_runtime
 %endif
 Requires:       bsdtar
 Requires:       zsh
+Requires:       zsh-syntax-highlighting
 Requires:       ckoomen-config-zsh
 Requires:       opendoas
 Requires:       sl

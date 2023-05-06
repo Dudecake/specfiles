@@ -1,0 +1,16 @@
+-------------------------------------------------------------------
+Sat  6 May 06:58:15 UTC 2023 - Dudecake <ckoomen@ckoomen.eu>
+
+- Updated version to 0.G “Gaiman”
+
+-------------------------------------------------------------------
+Sat Jan  9 12:35:25 UTC 2021 - Liu Sen <liusen@disroot.org>
+
+- Repair package dependency problem
+- Enable GCC LTO
+
+-------------------------------------------------------------------
+Sat Jan  9 09:04:58 UTC 2021 - Liu Sen <liusen@disroot.org>
+
+- First build on openSUSE Leap 15.2
+- Fix a problem occured about ncursesw when compiling
