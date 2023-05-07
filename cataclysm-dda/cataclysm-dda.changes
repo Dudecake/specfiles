@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun May  7 09:08:13 UTC 2023 - Dudecake <ckoomen@ckoomen.eu>
+
+- Removed switch from `escape_property` and `escape_data`
+
+-------------------------------------------------------------------
 Sat  6 May 09:13:02 UTC 2023 - Dudecake <ckoomen@ckoomen.eu>
 
 - Reverted version to 0.F_3 "Frank"

@@ -24,6 +24,7 @@ License:        CC-BY-SA-3.0
 Group:          Amusements/Games/RPG
 Url:            https://cataclysmdda.org/
 Source0:        https://github.com/CleverRaven/Cataclysm-DDA/archive/refs/tags/%(echo "%{version}" | sed "s/_/-/").tar.gz#Cataclysm-DDA-%{version}.tar.gz
+Patch0:         remove-github-action-escape.patch
 ExclusiveArch:  x86_64 aarch64
 BuildRequires:  astyle
 BuildRequires:  gcc-c++ >= 5
@@ -64,7 +65,7 @@ Struggle to survive in a harsh, persistent, procedurally generated environment.
 This package contains the data files for Cataclysm: Dark Days Ahead.
 
 %prep
-%autosetup -n Cataclysm-DDA-%(echo "%{version}" | sed "s/_/-/")
+%autosetup -p0 -n Cataclysm-DDA-%(echo "%{version}" | sed "s/_/-/")
 
 %define cataopts NATIVE=linux64 RELEASE=1 LTO=1 USE_XDG_DIR=1 CFLAGS="${CFLAGS} -Wno-error=dangling-reference" CXXFLAGS="${CXXFLAGS} -Wno-error=dangling-reference"
 #%%define cataopts NATIVE=linux64 RELEASE=1 USE_XDG_DIR=1

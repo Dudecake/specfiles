@@ -1,0 +1,35 @@
+--- src/json.cpp  2021-11-27 15:34:10.000000000 +0000
++++ src/json.cpp  2023-05-07 08:47:22.338784028 +0000
+@@ -1707,17 +1707,6 @@
+  */
+ static std::string escape_property( std::string str )
+ {
+-    switch( error_log_format ) {
+-        case error_log_format_t::human_readable:
+-            break;
+-        case error_log_format_t::github_action:
+-            replace_substring( str, "%", "%25", true );
+-            replace_substring( str, "\r", "%0D", true ); // NOLINT(cata-text-style)
+-            replace_substring( str, "\n", "%0A", true );
+-            replace_substring( str, ":", "%3A", true );
+-            replace_substring( str, ",", "%2C", true );
+-            break;
+-    }
+     return str;
+ }
+
+@@ -1727,15 +1716,6 @@
+  */
+ static std::string escape_data( std::string str )
+ {
+-    switch( error_log_format ) {
+-        case error_log_format_t::human_readable:
+-            break;
+-        case error_log_format_t::github_action:
+-            replace_substring( str, "%", "%25", true );
+-            replace_substring( str, "\r", "%0D", true ); // NOLINT(cata-text-style)
+-            replace_substring( str, "\n", "%0A", true );
+-            break;
+-    }
+     return str;
+ }
