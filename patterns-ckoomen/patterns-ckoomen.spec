@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.12
+Version:        0.0.13
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -36,7 +36,6 @@ Requires:       toolbox
 Requires:       iperf
 Requires:       picocom
 Requires:       sbsigntools
-#Requires:       clevis-dracut
 Requires:       setroubleshoot
 Requires:       setroubleshoot-server
 Requires:       systemd-zram-service
@@ -109,6 +108,8 @@ Requires:       vendor-reset-kmp-default
 Requires:       ckoomen-config-dracut
 Requires:       zfs
 Requires:       zfs-kmp-default
+# Temporarily add glusterfs until everything is in ceph
+Requires:       glusterfs
 
 %description virtualization
 %{summary}
@@ -283,6 +284,7 @@ Requires:       kamoso
 Requires:       krecorder
 Requires:       krfb
 Requires:       krdc
+Requires:       ksshaskpass5
 
 %description plasma
 %{summary}
