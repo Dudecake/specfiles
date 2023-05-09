@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.13
+Version:        0.0.14
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -136,7 +136,7 @@ Requires:       tcmu-runner
 %endif
 # Kubernetes
 Requires:       helm
-Requires:       crio-tools
+Requires:       cri-tools
 Requires:       cri-o
 Requires:       cri-o-kubeadm-criconfig
 Requires:       kubernetes1.25-kubeadm
