@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.14
+Version:        0.0.15
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -44,6 +44,7 @@ Requires:       freeipa-client
 Requires:       oddjob
 Requires:       oddjob-mkhomedir
 # Network config
+Requires:       firewalld
 Requires:       net-tools
 Requires:       bridge-utils
 Requires:       wireguard-tools
