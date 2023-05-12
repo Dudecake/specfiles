@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.15
+Version:        0.0.16
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -18,7 +18,7 @@ Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10001
 Provides:       pattern-visible()
-Requires:       pattern() = microos_base
+Requires:       (pattern() = base or pattern() = microos_base)
 # Only on leap
 %if 0%{?suse_version} < 1599
 Requires:       pattern() = microos_container_runtime
@@ -279,7 +279,7 @@ Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10008
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
-Requires:       pattern() = microos_kde_desktop
+Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
 Requires:       akregator
 Requires:       kamoso
 Requires:       krecorder
