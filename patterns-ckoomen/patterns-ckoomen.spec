@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.17
+Version:        0.0.18
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -134,7 +134,9 @@ Requires:       ceph-mgr-dashboard
 Requires:       ceph-radosgw
 Requires:       cephfs-top
 Requires:       nfs-ganesha-ceph
+%if 0%{suse_version} < 1599
 Requires:       nfs-ganesha-glusterfs
+%endif
 Requires:       targetcli-fb
 Requires:       target-isns
 Requires:       tcmu-runner
