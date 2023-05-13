@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.16
+Version:        0.0.17
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -26,6 +26,7 @@ Requires:       pattern() = microos_container_runtime
 Requires:       bsdtar
 Requires:       zsh
 Requires:       zsh-syntax-highlighting
+Requires:       flatpak-zsh-completion
 Requires:       ckoomen-config-zsh
 Requires:       opendoas
 Requires:       sl
@@ -45,6 +46,7 @@ Requires:       oddjob
 Requires:       oddjob-mkhomedir
 # Network config
 Requires:       firewalld
+Requires:       firewalld-zsh-completion
 Requires:       net-tools
 Requires:       bridge-utils
 Requires:       wireguard-tools
@@ -127,16 +129,20 @@ Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
 # Storage
 Requires:       ceph
-Requires:       glusterfs
-%if 0%{suse_version} < 1599
+Requires:       ceph-iscsi
+Requires:       ceph-mgr-dashboard
+Requires:       ceph-radosgw
+Requires:       cephfs-top
 Requires:       nfs-ganesha-ceph
 Requires:       nfs-ganesha-glusterfs
 Requires:       targetcli-fb
 Requires:       target-isns
 Requires:       tcmu-runner
-%endif
 # Kubernetes
 Requires:       helm
+Requires:       helm-zsh-completion
+Requires:       ceph-csi
+Requires:       ceph-csi-helm-charts
 Requires:       cri-tools
 Requires:       cri-o
 Requires:       cri-o-kubeadm-criconfig
@@ -156,6 +162,7 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_virtualization
 #Requires:       gamescope
 Requires:       firejail
+Requires:       firejail-zsh-completion
 Requires:       firewall-applet
 Requires:       java-17-openjdk
 Requires:       java-17-openjdk-devel
@@ -169,7 +176,9 @@ Requires:       steam-devices
 Requires:       libvulkan_intel
 Requires:       libvulkan_lvp
 Requires:       libvulkan_radeon
+Requires:       intel-vaapi-driver
 Requires:       libvdpau_radeonsi
+Requires:       libvdpau_va_gl1
 Requires:       libvdpau_virtio_gpu
 Requires:       Mesa-libRusticlOpenCL
 Requires:       clinfo
