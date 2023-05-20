@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.18
+Version:        0.0.19
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -104,9 +104,13 @@ Requires:       virtio-win
 Requires:       virt-top
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
+%ifarch x86_64
 Requires:       rust-hypervisor-firmware-bin
+%endif
 Requires:       ipxe-bootimgs
+%ifarch x86_64
 Requires:       vendor-reset-kmp-default
+%endif
 # Storage
 Requires:       ckoomen-config-dracut
 Requires:       zfs
@@ -166,6 +170,7 @@ Requires:       pattern() = ckoomen_virtualization
 Requires:       firejail
 Requires:       firejail-zsh-completion
 Requires:       firewall-applet
+Requires:       maven-wrapper
 Requires:       java-17-openjdk
 Requires:       java-17-openjdk-devel
 Requires:       kdeconnect-kde
@@ -175,16 +180,17 @@ Requires:       ckoomen-config-network-wifi
 Requires:       steam-devices
 %endif
 # GPU
+%ifarch x86_64
 Requires:       libvulkan_intel
+Requires:       intel-vaapi-driver
+Requires:       libvdpau_va_gl1
+%endif
 Requires:       libvulkan_lvp
 Requires:       libvulkan_radeon
-Requires:       intel-vaapi-driver
 Requires:       libvdpau_radeonsi
-Requires:       libvdpau_va_gl1
 Requires:       libvdpau_virtio_gpu
 Requires:       Mesa-libRusticlOpenCL
 Requires:       clinfo
-Requires:       libvirglrenderer1
 Requires:       virglrenderer-test-server
 Requires:       radeontop
 # Applications
@@ -214,7 +220,9 @@ Requires:       java-17-openjdk-src
 Requires:       android-tools
 Requires:       libcamera-tools
 # Applications
+%ifarch x86_64
 Requires:       discord
+%endif
 Requires:       waydroid
 Requires:       keepassxc
 Requires:       meld
@@ -256,17 +264,23 @@ Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10007
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
+%ifarch x86_64
 Requires:       cataclysm-dda
+%endif
 Requires:       desmume
 Requires:       dolphin-emu
 Requires:       dosbox
 Requires:       endless-sky
 Requires:       gamehub
 Requires:       mangohud
+%ifarch x86_64
 Requires:       openclonk
+%endif
 Requires:       openttd
+%ifarch x86_64
 Requires:       ppsspp
 Requires:       ppsspp-qt
+%endif
 #Requires:       scorched3d
 #Requires:       visualboyadvance-m
 Requires:       wesnoth
