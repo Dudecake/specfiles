@@ -1,6 +1,6 @@
 Name:           libglibutil
 Version:        1.0.67
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Library of glib utilities
 
 License:        BSD
@@ -10,6 +10,9 @@ Source0:        %{url}/archive/refs/tags/%{version}.tar.gz
 BuildRequires:  gcc
 BuildRequires:  make
 BuildRequires:  glib2-devel
+%if 0%{?suse_version}
+BuildRequires:  linux-glibc-devel
+%endif
 Requires:       glib2
 
 %description
