@@ -17,7 +17,7 @@ set -e
 cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}/{noarch,${ARCH}}
 find "${RESULTDIR}/${ARCH}/os" -type f -name kernel\* -exec cp -a {} "${BUILDDIR}/${ARCH}" \;
-[[ $(command -v rpmdev-spectool) != '' ]] && ln -s $(which rpmdev-spectool) /usr/local/bin/spectool
+[[ $(command -v rpmdev-spectool) != '' ]] && ln -sf $(which rpmdev-spectool) /usr/local/bin/spectool
 case "${ID}" in
   fedora)
     [[ "${VERSION_ID}" = "rawhide" ]] && REPO="--repo fedora,updates,updates-testing"
@@ -33,6 +33,7 @@ case "${ID}" in
     KERNEL="kernel-default kernel-default-base kernel-default-devel kernel-devel"
     ;;
   esac
+rm -f /etc/yum.repos.d/build.repo
 dnf download ${KERNEL} ${KERNEL_HEADERS} ${KERNEL_MODULES} ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
 cat << EOF > /etc/yum.repos.d/build.repo
 [build-noarch]
@@ -59,6 +60,7 @@ EOF
 createrepo --update "${BUILDDIR}/noarch"
 createrepo --update "${BUILDDIR}/${ARCH}"
 dnf install -y kernel kernel-devel
+rpmdev-setuptree
 set +e
 failed_pkgs=()
 pushd . > /dev/null
@@ -84,7 +86,7 @@ for dir in ./*/; do
     createrepo --update "${BUILDDIR}/${ARCH}"
   fi
 done
-[[ -d "${RESULTDIR}/${ARCH}" ]] || mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
+mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 if [[ ! -z "${GPG_PATH}" ]]; then
   PASSPHRASE_FILE="$(dirname "${GPG_PATH}")/passphrase"
   GPG_SIGN_CMD_EXTRA_ARGS="--batch --no-tty"
