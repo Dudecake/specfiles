@@ -13,7 +13,7 @@ BuildArch:      noarch
 %{summary}
 
 %install
-install -Dm755 maven-wrapper.sh %{buildroot}%{_bindir}/maven-wrapper
+install -Dm755 %{_sourcedir}/maven-wrapper.sh %{buildroot}%{_bindir}/maven-wrapper
 
 %files
 %{_bindir}/maven-wrapper
