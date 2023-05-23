@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.19
+Version:        0.0.20
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -157,6 +157,31 @@ Requires:       kubernetes1.25-kubeadm
 %description iot
 %{summary}
 
+%package hw-accel
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_hw_accel
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10004
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_base
+%ifarch x86_64
+Requires:       libvulkan_intel
+Requires:       intel-vaapi-driver
+Requires:       libvdpau_va_gl1
+%endif
+Requires:       libvulkan_lvp
+Requires:       libvulkan_radeon
+Requires:       libvdpau_radeonsi
+Requires:       libvdpau_virtio_gpu
+Requires:       Mesa-libRusticlOpenCL
+Requires:       clinfo
+Requires:       virglrenderer
+
+%description hw-accel
+%{summary}
+
 %package desktop
 Summary:        openSUSE base CKoomen pattern
 Group:          Metapackages
@@ -165,6 +190,7 @@ Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10004
 Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_hw_accel
 Requires:       pattern() = ckoomen_virtualization
 #Requires:       gamescope
 Requires:       firejail
@@ -180,17 +206,6 @@ Requires:       ckoomen-config-network-wifi
 Requires:       steam-devices
 %endif
 # GPU
-%ifarch x86_64
-Requires:       libvulkan_intel
-Requires:       intel-vaapi-driver
-Requires:       libvdpau_va_gl1
-%endif
-Requires:       libvulkan_lvp
-Requires:       libvulkan_radeon
-Requires:       libvdpau_radeonsi
-Requires:       libvdpau_virtio_gpu
-Requires:       Mesa-libRusticlOpenCL
-Requires:       clinfo
 Requires:       virglrenderer-test-server
 Requires:       radeontop
 # Applications
@@ -216,6 +231,7 @@ Requires:       pattern() = ckoomen_desktop
 Requires:       code
 Requires:       java-17-openjdk-javadoc
 Requires:       java-17-openjdk-src
+Requires:       kubernetes-client
 # Utils
 Requires:       android-tools
 Requires:       libcamera-tools
@@ -318,7 +334,7 @@ Requires:       ksshaskpass5
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base virtualization iot desktop desktop-applications media games plasma
+    base virtualization iot hw-accel desktop desktop-applications media games plasma
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
@@ -336,6 +352,10 @@ done
 %files iot
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/iot.txt
+
+%files hw-accel
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/hw-accel.txt
 
 %files desktop
 %dir %{_docdir}/patterns-ckoomen
