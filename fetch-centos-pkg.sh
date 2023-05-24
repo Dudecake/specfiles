@@ -12,10 +12,8 @@ set -e
 if [[ ! -d ${pkg}/.git ]]; then
   git clone https://git.centos.org/rpms/${pkg}.git --branch ${branch} --depth=1
 else
-  pushd ./${pkg} > /dev/null
-  git restore SPECS/${pkg}.spec
-  git pull
-  popd > /dev/null
+  git -C ${PWD}/${pkg} restore SPECS/${pkg}.spec
+  git -C ${PWD}/${pkg} pull
 fi
 
 ln -sf ./${pkg}/*/* ./

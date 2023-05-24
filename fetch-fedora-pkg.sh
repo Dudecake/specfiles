@@ -12,10 +12,8 @@ set -e
 if [[ ! -d ${pkg}/.git ]]; then
   git clone https://src.fedoraproject.org/rpms/${pkg}.git --branch ${branch} --depth=1
 else
-  pushd ./${pkg} > /dev/null
-  git restore ${pkg}.spec
-  git pull
-  popd > /dev/null
+  git -C ${PWD}/${pkg} restore ${pkg}.spec
+  git -C ${PWD}/${pkg} pull
 fi
 
 ln -sf ./${pkg}/* ./
