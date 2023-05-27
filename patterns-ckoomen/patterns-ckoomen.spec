@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.20
+Version:        0.0.21
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -24,6 +24,7 @@ Requires:       (pattern() = base or pattern() = microos_base)
 Requires:       pattern() = microos_container_runtime
 %endif
 Requires:       bsdtar
+Requires:       attr
 Requires:       zsh
 Requires:       zsh-syntax-highlighting
 Requires:       flatpak-zsh-completion
@@ -177,7 +178,7 @@ Requires:       libvdpau_radeonsi
 Requires:       libvdpau_virtio_gpu
 Requires:       Mesa-libRusticlOpenCL
 Requires:       clinfo
-Requires:       virglrenderer
+Requires:       libvirglrenderer1
 
 %description hw-accel
 %{summary}
