@@ -25,9 +25,10 @@ case "${ID}" in
     KERNEL_MODULES="kernel-modules-core"
     ;&
   centos)
-    KERNEL="kernel kernel-core kernel-devel ${KERNEL}"
-    KERNEL_HEADERS="kernel-headers.${ARCH}"
-    KERNEL_MODULES="kernel-modules kernel-modules-extra ${KERNEL_MODULES}"
+    KERNEL_VERSION="-$(dnf provides 'kernel(__skb_flow_dissect) = 0x73874cd8' | grep -Po '(?<=kernel-core-)\d\.\d+\.\d+-\d+' | sort | tail -n1)$(rpm -E '%{?dist}')"
+    KERNEL="kernel${KERNEL_VERSION} kernel-core${KERNEL_VERSION} kernel-devel${KERNEL_VERSION}"
+    KERNEL_HEADERS="kernel-headers${KERNEL_VERSION}.${ARCH}"
+    KERNEL_MODULES="kernel-modules${KERNEL_VERSION} kernel-modules-extra${KERNEL_VERSION}"
     ;;
   opensuse*)
     KERNEL="kernel-default kernel-default-base kernel-default-devel kernel-devel"
@@ -59,7 +60,7 @@ priority=20
 EOF
 createrepo --update "${BUILDDIR}/noarch"
 createrepo --update "${BUILDDIR}/${ARCH}"
-dnf install -y kernel kernel-devel
+dnf install -y kernel${KERNEL_VERSION} kernel-devel${KERNEL_VERSION}
 rpmdev-setuptree
 set +e
 failed_pkgs=()
