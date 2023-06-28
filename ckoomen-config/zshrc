@@ -21,8 +21,16 @@ elif [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; th
   . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+if [[ ! -z "${USERPROFILE}" ]]; then
+  HISTFILE="${USERPROFILE}/.${USER}.histfile"
+fi
+
 if [[ -d ~/.local/bin ]]; then
   PATH=~/.local/bin:${PATH}
+fi
+
+if [[ -d ~/go/bin ]]; then
+    PATH=~/go/bin:${PATH}
 fi
 
 alias cp="cp -i"                          # confirm before overwriting something
@@ -182,7 +190,3 @@ urldecode () {
 }
 
 XDG_DATA_DIRS=/var/lib/flatpak/exports/share:${XDG_DATA_DIRS}
-
-if [[ -d ~/go/bin ]]; then
-    PATH=~/go/bin:${PATH}
-fi
