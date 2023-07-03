@@ -31,7 +31,8 @@ case "${ID}" in
     KERNEL_MODULES="kernel-modules${KERNEL_VERSION} kernel-modules-extra${KERNEL_VERSION}"
     ;;
   opensuse*)
-    KERNEL="kernel-default kernel-default-base kernel-default-devel kernel-devel"
+    KERNEL_VERSION="-$(dnf list zfs-kmp-default.$(rpm -E %_arch) --repofrompath filesystems,https://download.opensuse.org/repositories/filesystems/openSUSE_Tumbleweed --repo filesystems | grep -Po '(?<=_k)\d+\.\d+\.\d+')"
+    KERNEL="kernel-default${KERNEL_VERSION} kernel-default-base${KERNEL_VERSION} kernel-default-devel${KERNEL_VERSION} kernel-devel${KERNEL_VERSION}"
     ;;
   esac
 rm -f /etc/yum.repos.d/build.repo
