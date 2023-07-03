@@ -18,6 +18,7 @@ cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}/{noarch,${ARCH}}
 find "${RESULTDIR}/${ARCH}/os" -type f -name kernel\* -exec cp -a {} "${BUILDDIR}/${ARCH}" \;
 [[ $(command -v rpmdev-spectool) != '' ]] && ln -sf $(which rpmdev-spectool) /usr/local/bin/spectool
+KERNEL_BASE=kernel
 case "${ID}" in
   fedora)
     [[ "${VERSION_ID}" = "rawhide" ]] && REPO="--repo fedora,updates,updates-testing"
@@ -26,13 +27,14 @@ case "${ID}" in
     ;&
   centos)
     KERNEL_VERSION="-$(dnf provides 'kernel(__skb_flow_dissect) = 0x73874cd8' | grep -Po '(?<=kernel-core-)\d\.\d+\.\d+-\d+' | sort | tail -n1)$(rpm -E '%{?dist}')"
-    KERNEL="kernel${KERNEL_VERSION} kernel-core${KERNEL_VERSION} kernel-devel${KERNEL_VERSION}"
-    KERNEL_HEADERS="kernel-headers${KERNEL_VERSION}.${ARCH}"
-    KERNEL_MODULES="kernel-modules${KERNEL_VERSION} kernel-modules-extra${KERNEL_VERSION}"
+    KERNEL="${KERNEL_BASE}${KERNEL_VERSION} ${KERNEL_BASE}-core${KERNEL_VERSION} ${KERNEL_BASE}-devel${KERNEL_VERSION}"
+    KERNEL_HEADERS="${KERNEL_BASE}-headers${KERNEL_VERSION}.${ARCH}"
+    KERNEL_MODULES="${KERNEL_BASE}-modules${KERNEL_VERSION} ${KERNEL_BASE}-modules-extra${KERNEL_VERSION}"
     ;;
   opensuse*)
+    KERNEL_BASE=kernel-default
     KERNEL_VERSION="-$(dnf list zfs-kmp-default.$(rpm -E %_arch) --repofrompath filesystems,https://download.opensuse.org/repositories/filesystems/openSUSE_Tumbleweed --repo filesystems | grep -Po '(?<=_k)\d+\.\d+\.\d+')"
-    KERNEL="kernel-default${KERNEL_VERSION} kernel-default-base${KERNEL_VERSION} kernel-default-devel${KERNEL_VERSION} kernel-devel${KERNEL_VERSION}"
+    KERNEL="${KERNEL_BASE}${KERNEL_VERSION} ${KERNEL_BASE}-base${KERNEL_VERSION} ${KERNEL_BASE}-devel${KERNEL_VERSION} ${KERNEL_BASE}-devel${KERNEL_VERSION}"
     ;;
   esac
 rm -f /etc/yum.repos.d/build.repo
@@ -61,7 +63,7 @@ priority=20
 EOF
 createrepo --update "${BUILDDIR}/noarch"
 createrepo --update "${BUILDDIR}/${ARCH}"
-dnf install -y kernel${KERNEL_VERSION} kernel-devel${KERNEL_VERSION}
+dnf install -y ${KERNEL_BASE}${KERNEL_VERSION} kernel-devel${KERNEL_VERSION}
 rpmdev-setuptree
 set +e
 failed_pkgs=()
