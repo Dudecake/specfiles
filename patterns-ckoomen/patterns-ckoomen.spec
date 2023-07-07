@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.22
+Version:        0.0.23
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -31,6 +31,7 @@ Requires:       zsh
 Requires:       zsh-syntax-highlighting
 Requires:       flatpak-zsh-completion
 Requires:       ckoomen-config-zsh
+Requires:       ckoomen-utils
 Requires:       opendoas
 Requires:       sl
 Requires:       units
