@@ -1,0 +1,56 @@
+--- ./ipxe.spec	2023-07-08 11:29:50.356225423 +0200
++++ ./ipxe.spec	2023-07-08 11:45:25.711658469 +0200
+@@ -24,12 +24,15 @@
+
+ Name:           ipxe
+ Version:        1.21.1+git20230120.a99e435c
+-Release:        2.3
++Release:        3.0
+ Summary:        A Network Boot Firmware
+ License:        GPL-2.0-only
+ Group:          System/Boot
+ URL:            https://ipxe.org/
+ Source:         %{name}-%{version}.tar.xz
++Patch0001:      https://src.fedoraproject.org/rpms/ipxe/raw/rawhide/f/0001-build-customize-configuration.patch
++Patch0002:      https://src.fedoraproject.org/rpms/ipxe/raw/rawhide/f/0002-Use-spec-compliant-timeouts.patch
++Patch0003:      0003-build-customize-configuration.patch
+ BuildRequires:  binutils-devel
+ # Do not build i586 for Leap/SLE: no such port available
+ %ifarch i586
+@@ -38,19 +41,27 @@ BuildRequires:  binutils-devel
+ %endif
+ %endif
+ %ifnarch %{ix86} x86_64
++%if 0%{?suse_version}
+ %if 0%{?sle_version} >= 150000 && 0%{?sle_version} < 159999
+ BuildRequires:  cross-x86_64-gcc7
+ %else
+ BuildRequires:  cross-x86_64-gcc%{gcc_version}
+ %endif
++%else
++BuildRequires:  gcc-x86_64-linux-gnu
++%endif
+ %endif
+ %if !0%{?no_aarch64_cc}
+ %ifnarch aarch64
++%if 0%{?suse_version}
+ %if 0%{?sle_version} >= 150000 && 0%{?sle_version} < 159999
+ BuildRequires:  cross-aarch64-gcc7
+ %else
+ BuildRequires:  cross-aarch64-gcc%{gcc_version}
+ %endif
++%else
++BuildRequires:  gcc-aarch64-linux-gnu
++%endif
+ %endif
+ %endif
+ BuildRequires:  perl
+@@ -83,7 +94,7 @@ This package contains the iPXE boot imag
+ UNDI formats. EFI is supported, too.
+
+ %prep
+-%setup -q
++%autosetup
+
+ %build
+ cd src
