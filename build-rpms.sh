@@ -22,14 +22,15 @@ KERNEL_BASE=kernel
 case "${ID}" in
   fedora)
     [[ "${VERSION_ID}" = "rawhide" ]] && REPO="--repo fedora,updates,updates-testing"
-    KERNEL="kernel-devel-matched"
-    KERNEL_MODULES="kernel-modules-core"
+    KERNEL="${KERNEL_BASE}-devel-matched"
+    KERNEL_MODULES="${KERNEL_BASE}-modules-core"
     ;&
   centos)
     KERNEL_VERSION="-$(dnf provides 'kernel(__skb_flow_dissect) = 0x73874cd8' | grep -Po '(?<=kernel-core-)\d\.\d+\.\d+-\d+' | sort | tail -n1)$(rpm -E '%{?dist}')"
-    KERNEL="${KERNEL_BASE}${KERNEL_VERSION} ${KERNEL_BASE}-core${KERNEL_VERSION} ${KERNEL_BASE}-devel${KERNEL_VERSION}"
+    [[ "${KERNEL_VERSION}" = "-$(rpm -E '%{?dist}')" ]] && KERNEL_VERSION=""
+    KERNEL="${KERNEL} ${KERNEL_BASE}${KERNEL_VERSION} ${KERNEL_BASE}-core${KERNEL_VERSION} ${KERNEL_BASE}-devel${KERNEL_VERSION}"
     KERNEL_HEADERS="${KERNEL_BASE}-headers${KERNEL_VERSION}.${ARCH}"
-    KERNEL_MODULES="${KERNEL_BASE}-modules${KERNEL_VERSION} ${KERNEL_BASE}-modules-extra${KERNEL_VERSION}"
+    KERNEL_MODULES="${KERNEL_MODULES} ${KERNEL_BASE}-modules${KERNEL_VERSION} ${KERNEL_BASE}-modules-extra${KERNEL_VERSION}"
     ;;
   opensuse*)
     KERNEL_BASE=kernel-default
