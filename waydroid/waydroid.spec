@@ -1,6 +1,6 @@
 Name:           waydroid
 Version:        1.4.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 
 License:        GPLv3+
@@ -12,6 +12,7 @@ Requires:       python3-gbinder
 Requires:       python3-gobject
 Requires:       nftables
 Requires:       dnsmasq
+Requires:       kmod(binder.ko)
 BuildRequires:  systemd-rpm-macros
 
 BuildArch:      noarch
@@ -55,6 +56,8 @@ chmod 0755 %{buildroot}/%{_bindir}/%{name}
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/Waydroid.desktop
+%{_datadir}/applications/waydroid.app.install.desktop
 %{_datadir}/applications/waydroid.market.desktop
 %{_datadir}/metainfo/id.waydro.waydroid.metainfo.xml
+%{_datadir}/icons/hicolor/512x512/apps
 %{_unitdir}/waydroid-container.service

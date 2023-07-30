@@ -1,5 +1,5 @@
 Name:           ckoomen-config
-Version:        0.0.6
+Version:        0.0.7
 Release:        1%{?dist}
 Summary:        Config for CKoomen
 
@@ -68,7 +68,7 @@ vfio_iommu_type1
 vfio_pci
 EOF
 cat << EOF > %{buildroot}%{_sysconfdir}/dracut.conf.d/99-ckoomen.conf
-omit_dracutmodules+=" network zfs "
+omit_dracutmodules+=" zfs "
 EOF
 cp %{_sourcedir}/zshrc %{buildroot}%{_sysconfdir}/skel/.zshrc
 

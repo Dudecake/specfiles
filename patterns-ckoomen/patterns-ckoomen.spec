@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.23
+Version:        0.0.24
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -25,7 +25,6 @@ Requires:       pattern() = microos_container_runtime
 %endif
 Requires:       bsdtar
 Requires:       attr
-Requires:       pciutils
 Requires:       man
 Requires:       zsh
 Requires:       zsh-syntax-highlighting
@@ -38,12 +37,16 @@ Requires:       units
 Requires:       git-core
 Requires:       arch-install-scripts
 Requires:       toolbox
+Requires:       podman-compose
+Requires:       podman-remote
+Requires:       podmansh
 Requires:       iperf
 Requires:       picocom
 Requires:       sbsigntools
 Requires:       setroubleshoot
 Requires:       setroubleshoot-server
 Requires:       systemd-zram-service
+Requires:       libiscsi-utils
 # IDM
 Requires:       freeipa-client
 Requires:       oddjob
@@ -243,7 +246,6 @@ Requires:       libcamera-tools
 %ifarch x86_64
 Requires:       discord
 %endif
-Requires:       waydroid
 Requires:       keepassxc
 Requires:       meld
 Requires:       virt-manager
@@ -326,6 +328,7 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
 Requires:       akregator
+Requires:       gwenview
 Requires:       kamoso
 Requires:       krecorder
 Requires:       krfb
