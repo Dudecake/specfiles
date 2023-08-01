@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.24
+Version:        0.0.25
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -29,6 +29,7 @@ Requires:       man
 Requires:       zsh
 Requires:       zsh-syntax-highlighting
 Requires:       flatpak-zsh-completion
+Requires:       /usr/bin/fusermount
 Requires:       ckoomen-config-zsh
 Requires:       ckoomen-utils
 Requires:       opendoas
@@ -41,6 +42,7 @@ Requires:       podman-compose
 Requires:       podman-remote
 Requires:       podmansh
 Requires:       iperf
+Requires:       bind-utils
 Requires:       picocom
 Requires:       sbsigntools
 Requires:       setroubleshoot
