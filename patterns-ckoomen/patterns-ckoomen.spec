@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.25
+Version:        0.0.26
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -124,8 +124,6 @@ Requires:       vendor-reset-kmp-default
 Requires:       ckoomen-config-dracut
 Requires:       zfs
 Requires:       zfs-kmp-default
-# Temporarily add glusterfs until everything is in ceph
-Requires:       glusterfs
 
 %description virtualization
 %{summary}
@@ -162,6 +160,8 @@ Requires:       cri-tools
 Requires:       cri-o
 Requires:       cri-o-kubeadm-criconfig
 Requires:       kubernetes1.25-kubeadm
+Requires:       katacontainers
+Requires:       kernel-cloud-hypervisor-guest
 
 %description iot
 %{summary}
