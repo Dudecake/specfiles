@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.26
+Version:        0.0.27
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -37,6 +37,8 @@ Requires:       sl
 Requires:       units
 Requires:       git-core
 Requires:       arch-install-scripts
+Requires:       qemu-linux-user
+Requires:       qemu-guest-agent
 Requires:       toolbox
 Requires:       podman-compose
 Requires:       podman-remote
@@ -96,6 +98,7 @@ Requires:       qemu-arm
 Requires:       qemu-uefi-aarch64
 Requires:       qemu-x86
 Requires:       qemu-tools
+Requires:       qemu-ivshmem-tools
 Requires:       qemu-hw-display-qxl
 Requires:       qemu-hw-display-virtio-gpu-pci
 Requires:       qemu-hw-usb-host
@@ -114,6 +117,7 @@ Requires:       virt-top
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
 %ifarch x86_64
+Requires:       qemu-kvm
 Requires:       rust-hypervisor-firmware-bin
 %endif
 Requires:       ipxe-bootimgs
