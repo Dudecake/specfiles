@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.27
+Version:        0.0.28
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -106,9 +106,7 @@ Requires:       qemu-hw-usb-redirect
 Requires:       qemu-ui-spice-app
 Requires:       qemu-vhost-user-gpu
 Requires:       virt-install
-Requires:       libvirt-daemon-driver-storage-gluster
 Requires:       libvirt-daemon-driver-storage-iscsi
-Requires:       qemu-block-gluster
 Requires:       qemu-block-iscsi
 Requires:       butane
 Requires:       driverctl
@@ -126,8 +124,10 @@ Requires:       vendor-reset-kmp-default
 %endif
 # Storage
 Requires:       ckoomen-config-dracut
+%ifarch x86_64
 Requires:       zfs
 Requires:       zfs-kmp-default
+%endif
 
 %description virtualization
 %{summary}

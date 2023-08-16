@@ -34,7 +34,7 @@ case "${ID}" in
     ;;
   opensuse*)
     KERNEL_BASE=kernel-default
-    KERNEL_VERSION="-$(dnf list zfs-kmp-default.$(rpm -E %_arch) --repofrompath filesystems,https://download.opensuse.org/repositories/filesystems/openSUSE_Tumbleweed --repo filesystems | grep -Po '(?<=_k)\d+\.\d+\.\d+')"
+    [[ "$(rpm -E %_arch)" = "aarch64" ]] || KERNEL_VERSION="-$(dnf list zfs-kmp-default.$(rpm -E %_arch) --repofrompath filesystems,https://download.opensuse.org/repositories/filesystems/openSUSE_Tumbleweed --repo filesystems | grep -Po '(?<=_k)\d+\.\d+\.\d+')"
     KERNEL="${KERNEL_BASE}${KERNEL_VERSION} ${KERNEL_BASE}-base${KERNEL_VERSION} ${KERNEL_BASE}-devel${KERNEL_VERSION} ${KERNEL_BASE}-devel${KERNEL_VERSION}"
     ;;
   esac
