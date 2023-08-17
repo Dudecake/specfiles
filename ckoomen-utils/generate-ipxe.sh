@@ -57,12 +57,14 @@ if [[ ! -z ${nfs_server} ]]; then
     mount ${nfs_server}:${nfs_share} ${tmp_dir}
     if [[ -d ${tmp_dir}/boot/loader/entries ]]; then
       entries=(${tmp_dir}/boot/loader/entries/*.conf)
-      for entry in ${entries[@]}; do
+      for (( i=${#entries[@]}-1; i>=0; i-- )); do
+        entry=${entries[${i}]}
+        version="$(grep -Po '(?<=version ).*' ${entry})"
         cmdline="$(grep -Po '(?<=options ).*' ${entry}) ip=:::::eth0:dhcp elevator=noop net.ifnames=0 root=${nfs_server}:${nfs_share} nfsroot=${nfs_server}:${nfs_share}"
         kernel="$(grep -Po '(?<=linux ).*' ${entry})"
         initrd="$(grep -Po '(?<=initrd ).*' ${entry})"
         [[ -z ${kernel} ]] && continue
-        label=nfs-${nfs_share:1}
+        label=nfs-${nfs_share:1}-${version}
         labels+=(${label})
         cmdlines[${label}]="${cmdline}"
         initrds[${label}]="${nfs_prefix}${nfs_share}/boot${initrd}"

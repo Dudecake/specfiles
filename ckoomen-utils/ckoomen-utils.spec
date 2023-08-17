@@ -1,6 +1,6 @@
 Name:           ckoomen-utils
-Version:        0.0.2
-Release:        2%{?dist}
+Version:        0.0.3
+Release:        1%{?dist}
 Summary:        Utils for CKoomen
 
 License:        EUPL-1.2
