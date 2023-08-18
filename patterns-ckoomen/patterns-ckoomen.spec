@@ -1,5 +1,5 @@
 Name:           patterns-ckoomen
-Version:        0.0.28
+Version:        0.0.29
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -119,6 +119,7 @@ Requires:       qemu-kvm
 Requires:       rust-hypervisor-firmware-bin
 %endif
 Requires:       ipxe-bootimgs
+Requires:       kernel-default-devel
 %ifarch x86_64
 Requires:       vendor-reset-kmp-default
 %endif
@@ -205,7 +206,7 @@ Provides:       pattern-order() = 10004
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_hw_accel
 Requires:       pattern() = ckoomen_virtualization
-#Requires:       gamescope
+Requires:       gamescope
 Requires:       firejail
 Requires:       firejail-zsh-completion
 Requires:       firewall-applet
@@ -308,8 +309,8 @@ Requires:       openttd
 %ifarch x86_64
 Requires:       ppsspp
 Requires:       ppsspp-qt
+Requires:       scorched3d
 %endif
-#Requires:       scorched3d
 #Requires:       visualboyadvance-m
 Requires:       wesnoth
 Requires:       widelands
