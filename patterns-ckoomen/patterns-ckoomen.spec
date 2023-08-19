@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.29
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -120,6 +120,7 @@ Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
 Requires:       ipxe-bootimgs
 Requires:       kernel-%{kernel_flavour}-devel
+Requires:       /usr/bin/readelf
 %ifarch x86_64
 Requires:       qemu-kvm
 Requires:       rust-hypervisor-firmware-bin
@@ -225,9 +226,6 @@ Requires:       steam-devices
 Requires:       virglrenderer-test-server
 Requires:       radeontop
 # Applications
-Requires:       falkon
-Requires:       firefox
-Requires:       chromium
 Requires:       joystickwake
 Requires:       nextcloud-client
 
@@ -252,6 +250,9 @@ Requires:       kubernetes-client
 Requires:       android-tools
 Requires:       libcamera-tools
 # Applications
+Requires:       falkon
+Requires:       firefox
+Requires:       chromium
 %ifarch x86_64
 Requires:       discord
 %endif
