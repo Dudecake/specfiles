@@ -1,6 +1,6 @@
 Name:           patterns-ckoomen
 Version:        0.0.29
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -309,7 +309,7 @@ Requires:       openttd
 %ifarch x86_64
 Requires:       ppsspp
 Requires:       ppsspp-qt
-Requires:       scorched3d
+#Requires:       scorched3d
 %endif
 #Requires:       visualboyadvance-m
 Requires:       wesnoth
