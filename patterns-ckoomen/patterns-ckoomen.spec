@@ -314,7 +314,7 @@ Requires:       cataclysm-dda
 Requires:       openclonk
 Requires:       ppsspp
 Requires:       ppsspp-qt
-Requires:       scorched3d
+#Requires:       scorched3d
 Requires:       heroic
 %endif
 
