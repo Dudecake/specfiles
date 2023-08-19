@@ -1,6 +1,8 @@
+%define kernel_flavour default
+
 Name:           patterns-ckoomen
 Version:        0.0.29
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -26,31 +28,31 @@ Requires:       pattern() = microos_container_runtime
 Requires:       bsdtar
 Requires:       attr
 Requires:       man
-Requires:       zsh
-Requires:       zsh-syntax-highlighting
-Requires:       flatpak-zsh-completion
-Requires:       /usr/bin/fusermount
-Requires:       ckoomen-config-zsh
 Requires:       ckoomen-utils
 Requires:       opendoas
 Requires:       sl
 Requires:       units
 Requires:       git-core
+Requires:       qemu-guest-agent
+Requires:       picocom
+Requires:       sbsigntools
+Requires:       systemd-zram-service
+Requires:       libiscsi-utils
+# Shell
+Requires:       zsh
+Requires:       zsh-syntax-highlighting
+Requires:       flatpak-zsh-completion
+Requires:       ckoomen-config-zsh
+# Container support
 Requires:       arch-install-scripts
 Requires:       qemu-linux-user
-Requires:       qemu-guest-agent
 Requires:       toolbox
 Requires:       podman-compose
 Requires:       podman-remote
 Requires:       podmansh
-Requires:       iperf
-Requires:       bind-utils
-Requires:       picocom
-Requires:       sbsigntools
+# Selinux
 Requires:       setroubleshoot
 Requires:       setroubleshoot-server
-Requires:       systemd-zram-service
-Requires:       libiscsi-utils
 # IDM
 Requires:       freeipa-client
 Requires:       oddjob
@@ -61,6 +63,8 @@ Requires:       firewalld-zsh-completion
 Requires:       net-tools
 Requires:       bridge-utils
 Requires:       wireguard-tools
+Requires:       iperf
+Requires:       bind-utils
 Requires:       wol
 Requires:       ckoomen-config
 Requires:       ckoomen-config-network
@@ -114,20 +118,18 @@ Requires:       virtio-win
 Requires:       virt-top
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
+Requires:       ipxe-bootimgs
+Requires:       kernel-%{kernel_flavour}-devel
 %ifarch x86_64
 Requires:       qemu-kvm
 Requires:       rust-hypervisor-firmware-bin
-%endif
-Requires:       ipxe-bootimgs
-Requires:       kernel-default-devel
-%ifarch x86_64
-Requires:       vendor-reset-kmp-default
+Requires:       vendor-reset-kmp-%{kernel_flavour}
 %endif
 # Storage
 Requires:       ckoomen-config-dracut
 %ifarch x86_64
 Requires:       zfs
-Requires:       zfs-kmp-default
+Requires:       zfs-kmp-%{kernel_flavour}
 %endif
 
 %description virtualization
@@ -293,33 +295,27 @@ Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10007
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
-%ifarch x86_64
-Requires:       cataclysm-dda
-%endif
 Requires:       desmume
 Requires:       dolphin-emu
 Requires:       dosbox
 Requires:       endless-sky
 Requires:       gamehub
 Requires:       mangohud
-%ifarch x86_64
-Requires:       openclonk
-%endif
 Requires:       openttd
-%ifarch x86_64
-Requires:       ppsspp
-Requires:       ppsspp-qt
-#Requires:       scorched3d
-%endif
 #Requires:       visualboyadvance-m
 Requires:       wesnoth
 Requires:       widelands
 Requires:       xonotic
-%ifarch x86_64
-Requires:       heroic
-%endif
 Requires:       pioneer
 Requires:       warsow
+%ifarch x86_64
+Requires:       cataclysm-dda
+Requires:       openclonk
+Requires:       ppsspp
+Requires:       ppsspp-qt
+Requires:       scorched3d
+Requires:       heroic
+%endif
 
 %description games
 %{summary}
