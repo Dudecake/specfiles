@@ -1,7 +1,8 @@
 #!/bin/sh
 
 set -e
-curl -L https://download.opensuse.org/repositories/openSUSE:/Factory/standard/src/ipxe-1.21.1+git20230120.a99e435c-2.3.src.rpm | bsdtar -xf -
+dnf download --repofrompath ipxe,https://download.opensuse.org/tumbleweed/repo/src-oss/ --repo ipxe --source ipxe
+bsdtar -xf ipxe-*.src.rpm
 patch < ./ipxe.spec.patch
 sed -i 's/%{gcc_version}/12/g' ./ipxe.spec
 if [[ -z "$(rpm -E '%{?suse_version}')" ]]; then
