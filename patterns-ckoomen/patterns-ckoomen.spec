@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.29
-Release:        4%{?dist}
+Version:        0.0.30
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -334,6 +334,7 @@ Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
 Requires:       akregator
 Requires:       gwenview
 Requires:       kamoso
+Requires:       kalk
 Requires:       krecorder
 Requires:       krfb
 Requires:       krdc
