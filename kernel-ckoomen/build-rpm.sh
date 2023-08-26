@@ -20,6 +20,7 @@ fi
 suffix=$(sed -rn 's/^Source0:.*\.(tar\.[a-z0-9]*)$/\1/p' rpm/kernel-source.spec.in)
 [[ -f "linux-${SRCVERSION}.${suffix}" ]] || curl -L --remote-name-all https://cdn.kernel.org/pub/linux/kernel/v${SRCVERSION:0:1}.x/linux-${SRCVERSION}.{${suffix},${suffix:0:3}.sign}
 ./scripts/tar-up.sh -a ${ARCH} -f ckoomen
+touch ./kernel-source/TOLERATE-UNKNOWN-NEW-CONFIG-OPTIONS
 popd > /dev/null
 rpmbuild -bs ./kernel-source/kernel-source/kernel-ckoomen.spec -D "_srcrpmdir ${PWD}" -D "_sourcedir ${PWD}/kernel-source/kernel-source"
 RPM_FILE="$(ls -1 kernel-ckoomen-*.nosrc.rpm)"
