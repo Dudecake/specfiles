@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.30
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -168,7 +168,9 @@ Requires:       cri-tools
 Requires:       cri-o
 Requires:       cri-o-kubeadm-criconfig
 Requires:       kubernetes1.25-kubeadm
+%ifarch x86_64
 Requires:       katacontainers
+%endif
 Requires:       kernel-cloud-hypervisor-guest
 
 %description iot
