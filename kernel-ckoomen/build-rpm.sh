@@ -30,6 +30,7 @@ rpmbuild -bs "${specfile}" -D "_srcrpmdir ${PWD}" -D "_sourcedir ${srcdir}"
 RPM_FILE="$(ls -1 kernel-ckoomen-*.nosrc.rpm)"
 if [[ ! -z "${FORCE_REBUILD}" || ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   dnf builddep -y ./*.nosrc.rpm
+  dnf install -y /usr/bin/openssl
   rpmbuild -bb "${specfile}" -D "_rpmdir ${1}" -D "_srcrpmdir ${1}" -D "_sourcedir ${srcdir}"
 else
   echo "No rebuild neccesary for package $(basename $PWD)" >&2
