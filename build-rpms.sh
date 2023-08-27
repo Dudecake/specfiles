@@ -70,6 +70,7 @@ for dir in ./*/; do
 done
 mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
 if [[ ! -z "${GPG_PATH}" ]]; then
+  dnf -y install rpm-sign
   PASSPHRASE_FILE="$(dirname "${GPG_PATH}")/passphrase"
   GPG_SIGN_CMD_EXTRA_ARGS="--batch --no-tty"
   echo "Checking for existence of passphrase file ${PASSPHRASE_FILE}" >&2
@@ -88,7 +89,7 @@ if [[ ! -z "${GPG_PATH}" ]]; then
 else
   echo 'GPG_PATH unset, not signing packages' >&2
 fi
-mv ${BUILDDIR}/source/*.src.rpm "${RESULTDIR}/source/tree/"
+mv ${BUILDDIR}/source/*src.rpm "${RESULTDIR}/source/tree/"
 mv ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
 cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/aarch64/os"
 cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/x86_64/os"
