@@ -5,7 +5,7 @@
  Name:           ipxe
  Version:        1.21.1+git20230120.a99e435c
 -Release:        __release__
-+Release:        3.0
++Release:        __new_release__
  Summary:        A Network Boot Firmware
  License:        GPL-2.0-only
  Group:          System/Boot
