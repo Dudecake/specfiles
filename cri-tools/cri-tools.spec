@@ -30,7 +30,7 @@
 %define download_url %{git0}/archive/v%{built_tag}.tar.gz
 
 Name: cri-tools
-Version: 1.25.0
+Version: 1.26.3
 Release: 1%{?dist}
 Summary: CLI and validation tools for Container Runtime Interface
 License: ASL 2.0

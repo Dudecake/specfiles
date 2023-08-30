@@ -7,7 +7,7 @@
 %endif
 
 Name:           kubernetes-bin
-Version:        1.25.7
+Version:        1.26.8
 Release:        1%{?dist}
 Summary:        Production-Grade Container Scheduling and Management
 URL:            https://github.com/kubernetes/kubernetes
@@ -256,24 +256,24 @@ Provides:       bundled(golang(sigs.k8s.io/yaml))
 
 %files
 %license LICENSES/LICENSE
+%{_bindir}/apiextensions-apiserver
+%{_bindir}/kubeadm
+%{_bindir}/kube-aggregator
+%{_bindir}/kube-apiserver
+%{_bindir}/kube-apiserver.docker_tag
+%{_bindir}/kube-apiserver.tar
+%{_bindir}/kube-controller-manager
+%{_bindir}/kube-controller-manager.docker_tag
+%{_bindir}/kube-controller-manager.tar
 %{_bindir}/kubectl
 %{_bindir}/kubectl-convert
-%{_bindir}/kube-scheduler.docker_tag
-%{_bindir}/kube-scheduler
-%{_bindir}/kube-proxy.tar
-%{_bindir}/kube-controller-manager.docker_tag
-%{_bindir}/apiextensions-apiserver
-%{_bindir}/kube-apiserver.tar
-%{_bindir}/kube-proxy.docker_tag
-%{_bindir}/kube-proxy
 %{_bindir}/kubelet
 %{_bindir}/kube-log-runner
-%{_bindir}/kube-aggregator
-%{_bindir}/kube-apiserver.docker_tag
-%{_bindir}/kube-controller-manager
+%{_bindir}/kube-proxy
+%{_bindir}/kube-proxy.docker_tag
+%{_bindir}/kube-proxy.tar
+%{_bindir}/kube-scheduler
+%{_bindir}/kube-scheduler.docker_tag
 %{_bindir}/kube-scheduler.tar
-%{_bindir}/kube-controller-manager.tar
-%{_bindir}/kube-apiserver
 %{_bindir}/mounter
-%{_bindir}/kubeadm
 %{_unitdir}/kubelet.service
