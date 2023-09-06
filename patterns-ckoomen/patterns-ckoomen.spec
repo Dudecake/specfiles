@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.30
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -254,6 +254,7 @@ Requires:       libcamera-tools
 # Applications
 Requires:       falkon
 Requires:       firefox
+Requires:       mozilla-openh264
 Requires:       chromium
 %ifarch x86_64
 Requires:       discord
