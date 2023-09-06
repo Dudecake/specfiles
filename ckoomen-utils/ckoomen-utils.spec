@@ -1,5 +1,5 @@
 Name:           ckoomen-utils
-Version:        0.0.3
+Version:        0.0.4
 Release:        1%{?dist}
 Summary:        Utils for CKoomen
 
@@ -22,8 +22,10 @@ BuildArch:      noarch
 %{__install} -Dm755 -t %{buildroot}%{_bindir} %{_sourcedir}/{generate-{extlinuxconf,ganesha,ipxe},ls-{iommu,reset}}.sh
 
 %files
+%{_bindir}/generate-cephconf.sh
 %{_bindir}/generate-extlinuxconf.sh
 %{_bindir}/generate-ganesha.sh
 %{_bindir}/generate-ipxe.sh
+%{_bindir}/init-ceph.sh
 %{_bindir}/ls-iommu.sh
 %{_bindir}/ls-reset.sh
