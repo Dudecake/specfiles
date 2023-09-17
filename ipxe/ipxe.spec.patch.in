@@ -1,6 +1,6 @@
---- ./ipxe.spec	2023-07-08 11:29:50.356225423 +0200
-+++ ./ipxe.spec	2023-07-08 11:45:25.711658469 +0200
-@@ -24,12 +24,15 @@
+--- ./ipxe.spec	2023-08-30 12:50:21.000000000 +0200
++++ ./ipxe.spec	2023-09-17 10:09:51.204579306 +0200
+@@ -24,12 +24,16 @@
 
  Name:           ipxe
  Version:        1.21.1+git20230120.a99e435c
@@ -14,10 +14,11 @@
 +Patch0001:      https://src.fedoraproject.org/rpms/ipxe/raw/rawhide/f/0001-build-customize-configuration.patch
 +Patch0002:      https://src.fedoraproject.org/rpms/ipxe/raw/rawhide/f/0002-Use-spec-compliant-timeouts.patch
 +Patch0003:      0003-build-customize-configuration.patch
++Patch0004:      https://patch-diff.githubusercontent.com/raw/ipxe/ipxe/pull/612.patch
  BuildRequires:  binutils-devel
  # Do not build i586 for Leap/SLE: no such port available
  %ifarch i586
-@@ -38,19 +41,27 @@ BuildRequires:  binutils-devel
+@@ -38,18 +42,26 @@ BuildRequires:  binutils-devel
  %endif
  %endif
  %ifnarch %{ix86} x86_64

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-params=$(getopt -o '' -l fsid -l hostnames: -l addresses: -l public-network -n generate-cephconf -- "$@")
+params=$(getopt -o '' -l fsid: -l hostnames: -l addresses: -l public-network: -n generate-cephconf -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1
 fi
@@ -25,6 +25,7 @@ do
     --public-network)
       public_network="${2}"
       shift 2
+      ;;
     --)
       shift
       break
@@ -43,8 +44,10 @@ auth service required = cephx
 auth client required = cephx
 osd pool default size = 3
 osd pool default min size = 2
+
 [mds.${HOSTNAME}]
 host = ${HOSTNAME}
+
 [mon]
 mgr_initial_modules = dashboard
 EOF

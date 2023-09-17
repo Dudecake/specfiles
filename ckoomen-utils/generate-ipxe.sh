@@ -60,7 +60,7 @@ if [[ ! -z ${nfs_server} ]]; then
       for (( i=${#entries[@]}-1; i>=0; i-- )); do
         entry=${entries[${i}]}
         version="$(grep -Po '(?<=version ).*' ${entry})"
-        cmdline="$(grep -Po '(?<=options ).*' ${entry}) ip=:::::eth0:dhcp elevator=noop net.ifnames=0 root=${nfs_server}:${nfs_share} nfsroot=${nfs_server}:${nfs_share}"
+        cmdline="$(grep -Po '(?<=options ).*' ${entry}) ip=::::::dhcp elevator=noop panic=15 rd.timeout=15 root=${nfs_server}:${nfs_share}"
         kernel="$(grep -Po '(?<=linux ).*' ${entry})"
         initrd="$(grep -Po '(?<=initrd ).*' ${entry})"
         [[ -z ${kernel} ]] && continue
@@ -170,7 +170,7 @@ EOF
 done
 
 for (( i=0; i<${#iscsi_disks[@]}; i++ )); do
-  iscsi_share=${iscsi_disks[${i}]}
+  iscsi_share="\${base-iscsi}${iscsi_disks[${i}]}"
   cat << EOF
 
 :iscsi-${i}

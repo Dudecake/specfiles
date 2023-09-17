@@ -1,5 +1,5 @@
 Name:           ckoomen-config
-Version:        0.0.7
+Version:        0.0.8
 Release:        1%{?dist}
 Summary:        Config for CKoomen
 
@@ -51,6 +51,7 @@ Zsh config for CKoomen
 %install
 mkdir -p %{buildroot}%{_sysconfdir}/NetworkManager/conf.d \
         %{buildroot}%{_sysconfdir}/modules-load.d \
+        %{buildroot}%{_sysconfdir}/ld.so.conf.d \
         %{buildroot}%{_sysconfdir}/dracut.conf.d \
         %{buildroot}%{_sysconfdir}/skel
 
@@ -67,6 +68,9 @@ vfio
 vfio_iommu_type1
 vfio_pci
 EOF
+cat << EOF > %{buildroot}%{_sysconfdir}/ld.so.conf.d/jack.conf
+%{_libdir}/pipewire-0.3/jack
+EOF
 cat << EOF > %{buildroot}%{_sysconfdir}/dracut.conf.d/99-ckoomen.conf
 omit_dracutmodules+=" zfs "
 EOF
@@ -74,6 +78,7 @@ cp %{_sourcedir}/zshrc %{buildroot}%{_sysconfdir}/skel/.zshrc
 
 %files
 %config %{_sysconfdir}/modules-load.d/99-ckoomen.conf
+%config %{_sysconfdir}/ld.so.conf.d/jack.conf
 
 %files network
 %config %{_sysconfdir}/NetworkManager/conf.d/wake_on_lan.conf
