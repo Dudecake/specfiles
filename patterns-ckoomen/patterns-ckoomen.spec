@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.30
-Release:        3%{?dist}
+Version:        0.0.31
+Release:        0%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -218,6 +218,7 @@ Requires:       firewall-applet
 Requires:       maven-wrapper
 Requires:       java-17-openjdk
 Requires:       java-17-openjdk-devel
+Requires:       filelight
 Requires:       kdeconnect-kde
 Requires:       yakuake
 Requires:       ckoomen-config-network-wifi
