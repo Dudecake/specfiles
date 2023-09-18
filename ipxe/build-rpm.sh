@@ -5,7 +5,7 @@ dnf download --repofrompath ipxe,https://download.opensuse.org/tumbleweed/repo/s
 srcrpm=ipxe-*.src.rpm
 bsdtar -xf ${srcrpm}
 release="$(rpm -q ${srcrpm} --qf '%{release}')"
-new_release=$(perl -e "print ${release} + 3")
+new_release=$(perl -e "print ${release} + 1")
 sed "s/__release__/${release}/; s/__new_release__/${new_release}/" ./ipxe.spec.patch.in > ./ipxe.spec.patch
 patch < ./ipxe.spec.patch
 sed -i "s/%{gcc_version}/$(rpm -q gcc --qf '%{version}')/g" ./ipxe.spec

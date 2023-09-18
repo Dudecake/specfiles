@@ -1,5 +1,5 @@
 --- ./ipxe.spec	2023-08-30 12:50:21.000000000 +0200
-+++ ./ipxe.spec	2023-09-17 10:09:51.204579306 +0200
++++ ./ipxe.spec	2023-09-18 21:02:40.425868121 +0200
 @@ -24,12 +24,16 @@
 
  Name:           ipxe
@@ -18,7 +18,7 @@
  BuildRequires:  binutils-devel
  # Do not build i586 for Leap/SLE: no such port available
  %ifarch i586
-@@ -38,18 +42,26 @@ BuildRequires:  binutils-devel
+@@ -38,19 +42,27 @@ BuildRequires:  binutils-devel
  %endif
  %endif
  %ifnarch %{ix86} x86_64
@@ -46,7 +46,7 @@
  %endif
  %endif
  BuildRequires:  perl
-@@ -83,7 +94,7 @@ This package contains the iPXE boot imag
+@@ -83,7 +95,7 @@ This package contains the iPXE boot imag
  UNDI formats. EFI is supported, too.
 
  %prep
