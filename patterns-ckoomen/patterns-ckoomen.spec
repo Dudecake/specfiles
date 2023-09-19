@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.31
-Release:        0%{?dist}
+Version:        0.0.32
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -128,10 +128,6 @@ Requires:       vendor-reset-kmp-%{kernel_flavour}
 %endif
 # Storage
 Requires:       ckoomen-config-dracut
-%ifarch x86_64
-Requires:       zfs
-Requires:       zfs-kmp-%{kernel_flavour}
-%endif
 
 %description virtualization
 %{summary}
@@ -153,9 +149,6 @@ Requires:       ceph-mgr-dashboard
 Requires:       ceph-radosgw
 Requires:       cephfs-top
 Requires:       nfs-ganesha-ceph
-%if 0%{suse_version} < 1599
-Requires:       nfs-ganesha-glusterfs
-%endif
 Requires:       targetcli-fb
 Requires:       target-isns
 Requires:       tcmu-runner
@@ -246,6 +239,7 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 # Coding
 Requires:       code
+Requires:       lapce
 Requires:       java-17-openjdk-javadoc
 Requires:       java-17-openjdk-src
 Requires:       kubernetes-client
@@ -335,8 +329,9 @@ Provides:       pattern-order() = 10008
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
-Requires:       akregator
+Requires:       ark
 Requires:       gwenview
+Requires:       okular
 Requires:       kamoso
 Requires:       kalk
 Requires:       krecorder
