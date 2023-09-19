@@ -46,12 +46,11 @@
  %endif
  %endif
  BuildRequires:  perl
-@@ -83,7 +95,7 @@ This package contains the iPXE boot imag
- UNDI formats. EFI is supported, too.
+@@ -84,6 +96,7 @@ UNDI formats. EFI is supported, too.
 
  %prep
--%setup -q
-+%autosetup
+ %setup -q
++%autopatch -p1
 
  %build
  cd src
