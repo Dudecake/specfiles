@@ -1,7 +1,7 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.32
+Version:        0.0.33
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -209,8 +209,8 @@ Requires:       firejail
 Requires:       firejail-zsh-completion
 Requires:       firewall-applet
 Requires:       maven-wrapper
-Requires:       java-17-openjdk
-Requires:       java-17-openjdk-devel
+Requires:       java-21-openjdk
+Requires:       java-21-openjdk-devel
 Requires:       filelight
 Requires:       kdeconnect-kde
 Requires:       yakuake
@@ -240,8 +240,8 @@ Requires:       pattern() = ckoomen_desktop
 # Coding
 Requires:       code
 Requires:       lapce
-Requires:       java-17-openjdk-javadoc
-Requires:       java-17-openjdk-src
+Requires:       java-21-openjdk-javadoc
+Requires:       java-21-openjdk-src
 Requires:       kubernetes-client
 # Utils
 Requires:       android-tools
