@@ -9,7 +9,7 @@
 Name:       chectl-bin
 Version:    7.74.0
 Release:    1%{?dist}
-Summary:    Production-Grade Container Scheduling and Management
+Summary:    CLI to manage Eclipse Che server and workspaces
 URL:        https://github.com/che-incubator/chectl
 License:    EPL-2.0
 
@@ -28,9 +28,14 @@ Provides:   chectl = %{version}
 %build
 
 %install
-%__mkdir -p %{?buildroot}/opt %{?buildroot}/usr/bin
+%__mkdir -p %{?buildroot}/opt %{?buildroot}%{_bindir}
 %__cp -a . %{?buildroot}/opt/chectl
-cat << EOF >%{?buildroot}/usr/bin/chectl
+cat << EOF > %{?buildroot}%{_bindir}/chectl
+#!/bin/sh
+exec /opt/chectl/chectl "\$@"
+EOF
+chmod +x %{?buildroot}%{_bindir}/chectl
 
 %files
+%{_bindir}/chectl
 /opt/chectl
