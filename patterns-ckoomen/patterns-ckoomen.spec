@@ -1,7 +1,7 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.33
+Version:        0.0.34
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -12,37 +12,48 @@ URL:            https://repo.ckoomen.eu/opensuse/
 %description
 %{summary}
 
-%package base
+%package base-minimal
 Summary:        openSUSE base CKoomen pattern
 Group:          Metapackages
-Provides:       pattern() = ckoomen_base
+Provides:       pattern() = ckoomen_base_minimal
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10001
 Provides:       pattern-visible()
 Requires:       (pattern() = base or pattern() = microos_base)
-# Only on leap
 %if 0%{?suse_version} < 1599
 Requires:       pattern() = microos_container_runtime
 %endif
 Requires:       bsdtar
 Requires:       attr
 Requires:       man
-Requires:       ckoomen-utils
 Requires:       opendoas
-Requires:       sl
-Requires:       units
 Requires:       git-core
-Requires:       qemu-guest-agent
-Requires:       picocom
-Requires:       sbsigntools
-Requires:       systemd-zram-service
-Requires:       libiscsi-utils
 # Shell
 Requires:       zsh
 Requires:       zsh-syntax-highlighting
 Requires:       flatpak-zsh-completion
 Requires:       ckoomen-config-zsh
+
+%description base-minimal
+%{summary}
+
+%package base
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_base
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10002
+Provides:       pattern-visible()
+Requires:       ckoomen-utils
+Requires:       sl
+Requires:       units
+Requires:       qemu-guest-agent
+Requires:       picocom
+Requires:       sbsigntools
+Requires:       systemd-zram-service
+Requires:       libiscsi-utils
 # Container support
 Requires:       arch-install-scripts
 Requires:       qemu-linux-user
@@ -85,7 +96,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_virtualization
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10002
+Provides:       pattern-order() = 10003
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_base
 %if 0%{?suse_version} < 1599
@@ -120,8 +131,8 @@ Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
 Requires:       ipxe-bootimgs
 Requires:       kernel-%{kernel_flavour}-devel
-Requires:       /usr/bin/readelf
 %ifarch x86_64
+Requires:       /usr/bin/readelf
 Requires:       qemu-kvm
 Requires:       rust-hypervisor-firmware-bin
 Requires:       vendor-reset-kmp-%{kernel_flavour}
@@ -138,7 +149,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_iot
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10003
+Provides:       pattern-order() = 10004
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
@@ -175,7 +186,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_hw_accel
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10004
+Provides:       pattern-order() = 10005
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_base
 %ifarch x86_64
@@ -200,7 +211,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10004
+Provides:       pattern-order() = 10006
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_hw_accel
 Requires:       pattern() = ckoomen_virtualization
@@ -234,7 +245,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop_applications
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10005
+Provides:       pattern-order() = 10007
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 # Coding
@@ -254,11 +265,10 @@ Requires:       chromium
 %ifarch x86_64
 Requires:       discord
 %endif
-Requires:       keepassxc
 Requires:       meld
 Requires:       virt-manager
 Requires:       virt-viewer
-# Media
+# Media players
 Requires:       celluloid
 Requires:       easyeffects
 Requires:       helvum
@@ -272,7 +282,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_media
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10006
+Provides:       pattern-order() = 10008
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       gimp
@@ -291,7 +301,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_games
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10007
+Provides:       pattern-order() = 10009
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       desmume
@@ -325,7 +335,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_plasma
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10008
+Provides:       pattern-order() = 10010
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
@@ -345,12 +355,16 @@ Requires:       ksshaskpass5
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base virtualization iot hw-accel desktop desktop-applications media games plasma
+    base-minimal base virtualization iot hw-accel desktop desktop-applications media games plasma
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
         > %{buildroot}%{_docdir}/%{name}/${i}.txt
 done
+
+%files base-minimal
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/base-minimal.txt
 
 %files base
 %dir %{_docdir}/patterns-ckoomen
