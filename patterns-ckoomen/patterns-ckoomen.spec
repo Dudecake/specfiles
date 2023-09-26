@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.34
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -46,6 +46,7 @@ Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10002
 Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_base_minimal
 Requires:       ckoomen-utils
 Requires:       sl
 Requires:       units
