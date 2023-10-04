@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.34
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -215,14 +215,10 @@ Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10006
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_hw_accel
-Requires:       pattern() = ckoomen_virtualization
 Requires:       gamescope
 Requires:       firejail
 Requires:       firejail-zsh-completion
 Requires:       firewall-applet
-Requires:       maven-wrapper
-Requires:       java-21-openjdk
-Requires:       java-21-openjdk-devel
 Requires:       filelight
 Requires:       kdeconnect-kde
 Requires:       yakuake
@@ -252,6 +248,9 @@ Requires:       pattern() = ckoomen_desktop
 # Coding
 Requires:       code
 Requires:       lapce
+Requires:       maven-wrapper
+Requires:       java-21-openjdk
+Requires:       java-21-openjdk-devel
 Requires:       java-21-openjdk-javadoc
 Requires:       java-21-openjdk-src
 Requires:       kubernetes-client
