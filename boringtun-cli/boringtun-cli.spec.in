@@ -1,32 +1,48 @@
 Name:           boringtun-cli
 Version:        ${VERSION}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Implementation of the WireGuard® protocol designed for portability and speed
 
 # Upstream license specification: BSD-3-Clause
 License:        BSD
 URL:            https://github.com/cloudflare/boringtun
-Source:         boringtun-cli-%{version}.tar.gz
+Source0:        %{url}/archive/refs/tags/%{name}-%{version}.tar.gz
+Source1:        vendor.tar.zst
 
-BuildRequires:  cargo
+%if 0%{?suse_version}
+BuildRequires:  cargo-packaging
+%else
 BuildRequires:  rust-packaging
+%endif
+ExclusiveArch: x86_64 aarch64 ppc64le
 
 %description
 %{summary}
 
 %prep
-%setup -q
-%cargo_prep
-%autopatch -p1
+%autosetup -a1 -n boringtun-boringtun-cli-%{version}
+%{?cargo_prep}
+# %autopatch -p1
+cat << EOF >> .cargo/config.toml
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "vendor"
+EOF
+cd %{name}
 
 %build
+%if 0%{?suse_version}
+%{cargo_build}
+%else
 /usr/bin/env CARGO_HOME=.cargo RUSTC_BOOTSTRAP=1 /usr/bin/cargo build -j8 --release --all-features
+%endif
 
 %install
-%cargo_install -a
-rm -rf %{?buildroot}%{_datadir}
+%{__install} -Dm 755 target/release/%{name} %{?buildroot}%{_bindir}/%{name}
 
 %files
 %license LICENSE.md
 %doc README.md
-%caps(cap_net_admin+epi) %{_bindir}/boringtun-cli
+%caps(cap_net_admin+epi) %{_bindir}/%{name}
