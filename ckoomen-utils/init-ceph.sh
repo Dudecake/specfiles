@@ -69,7 +69,7 @@ fi
 
 if [[ ! -d /var/lib/ceph/mon/${cluster_name}-${hostname} ]]; then
   sudo -u ceph mkdir /var/lib/ceph/mon/${cluster_name}-${hostname}
-  sudo -u ceph ceph-mon --mkfs
+  sudo -u ceph ceph-mon --mkfs \
                         -i ${hostname} \
                         --monmap ${monmap} \
                         --keyring ${mon_keyring}
@@ -84,6 +84,11 @@ if [[ ! -d /var/lib/ceph/mgr/${cluster_name}-${hostname} ]]; then
   sudo -u ceph mkdir /var/lib/ceph/mgr/${cluster_name}-${hostname}
   ceph auth get-or-create mgr.${hostname} mon 'allow profile mgr' osd 'allow *' mds 'allow *' > /var/lib/ceph/mgr/${cluster_name}-${hostname}/keyring
   chown -R ceph:ceph /var/lib/ceph/mgr/${cluster_name}-${hostname}
+  if [[ $(command -v firewall-cmd) != '' ]]; then
+    firewall-cmd --zone=public --add-service=ceph-mgr
+    firewall-cmd --zone=public --add-service=ceph-mgr --permanent
+  fi
+  systemctl enable --now ceph-mgr@${hostname}
 fi
 
 echo 'The cluster should be ready for the creation of OSD\'s following <https://docs.ceph.com/en/quincy/install/manual-deployment/#bluestore>' > &2
