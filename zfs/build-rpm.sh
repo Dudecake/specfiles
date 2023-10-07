@@ -3,7 +3,7 @@
 ../ensure-kernel-installed.sh
 MACHINE="$(rpm -E '%_arch')"
 KERNEL_VERSION="$(rpm -q --qf %{version}-%{release}.%{arch} kernel-devel)"
-ZFS_VERSION="2.1.12"
+ZFS_VERSION="2.1.13"
 REL="1$(rpm -E '%dist')"
 
 if [[ ! -x "${FORCE_REBUILD}" || ! -f "${2}/${MACHINE}/os/kmod-zfs-${KERNEL_VERSION}-${ZFS_VERSION}-${REL}.${MACHINE}.rpm" ]]; then
