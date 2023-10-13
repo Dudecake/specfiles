@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 name=$(basename $PWD)
 
 if [[ -z "${version}" || -z "${release}" || -z "${summary}" || -z "${url}" || -z "${license}" ]]; then
