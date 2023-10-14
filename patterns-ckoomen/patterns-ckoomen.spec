@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.34
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -161,6 +161,7 @@ Requires:       ceph-mgr-dashboard
 Requires:       ceph-radosgw
 Requires:       cephfs-top
 Requires:       nfs-ganesha-ceph
+Requires:       ckoomen-utils-ceph
 Requires:       targetcli-fb
 Requires:       target-isns
 Requires:       tcmu-runner
@@ -173,6 +174,7 @@ Requires:       cri-tools
 Requires:       cri-o
 Requires:       cri-o-kubeadm-criconfig
 Requires:       kubernetes1.25-kubeadm
+Requires:       kompose
 %ifarch x86_64
 Requires:       katacontainers
 %endif
