@@ -7,7 +7,7 @@
 Name:           nwg-shell-config
 Version:        0.5.22
 Summary:        Allows to set the common sway preferences
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 License:        MIT
 URL:            %{forgeurl}
@@ -18,9 +18,9 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
-Requires:       python-gobject
-Requires:       python-i3ipc
-Requires:       python-geopy
+Requires:       python3-gobject
+Requires:       python3-i3ipc
+Requires:       python3-geopy
 
 Recommends:     gtklock
 Recommends:     playerctl

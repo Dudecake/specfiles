@@ -7,7 +7,7 @@
 Name:           nwg-icon-picker
 Version:        0.1.0
 Summary:        Nwg-icon-picker is a tool to search GTK icons by name
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 License:        MIT
 URL:            %{forgeurl}
@@ -18,7 +18,7 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
-Requires:       python-gobject
+Requires:       python3-gobject
 Requires:       gtk3
 
 %description

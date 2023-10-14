@@ -5,7 +5,7 @@
 Name:           nwg-shell
 Version:        0.5.14
 Summary:        Meta-package, installer and updater
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 License:        MIT
 URL:            %{forgeurl}
@@ -16,8 +16,8 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
-Requires:       python-gobject
-Requires:       python-dasbus
+Requires:       python3-gobject
+Requires:       python3-dasbus
 Requires:       gtk3
 Requires:       foot
 Requires:       gnome-themes-extra
@@ -34,8 +34,8 @@ Requires:       papirus-icon-theme
 Requires:       playerctl
 Requires:       pulseaudio-utils
 Requires:       PolicyKit-authentication-agent
-Requires:       python-geopy
-Requires:       python-yaml
+Requires:       python3-geopy
+Requires:       python3-yaml
 Requires:       slurp
 Requires:       swappy
 Requires:       sway
