@@ -51,6 +51,22 @@ done
 
 echo
 
+for recommend in ${recommends[@]}; do
+  echo "Recommends: ${recommend}"
+done
+
+echo
+
+for suggest in ${suggests[@]}; do
+  echo "Suggests: ${suggest}"
+done
+
+echo
+
+for supplement in ${supplements[@]}; do
+  echo "Supplements: ${supplement}"
+done
+
 cat << EOF
 %description
 %{summary}
