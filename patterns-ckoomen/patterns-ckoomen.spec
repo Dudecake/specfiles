@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.34
-Release:        4%{?dist}
+Version:        0.0.35
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -354,10 +354,27 @@ Requires:       ksshaskpass5
 %description plasma
 %{summary}
 
+%package hyprland
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_hyprland
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10011
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_desktop
+Requires:       hyprland
+Requires:       nwg-shell
+Requires:       polkit-kde-agent-5
+Requires:       wayvnc
+
+%description hyprland
+%{summary}
+
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base-minimal base virtualization iot hw-accel desktop desktop-applications media games plasma
+    base-minimal base virtualization iot hw-accel desktop desktop-applications media games plasma hyprland
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
@@ -403,3 +420,7 @@ done
 %files plasma
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/plasma.txt
+
+%files hyprland
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/hyprland.txt
