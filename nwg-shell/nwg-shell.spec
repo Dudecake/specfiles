@@ -5,7 +5,7 @@
 Name:           nwg-shell
 Version:        0.5.14
 Summary:        Meta-package, installer and updater
-Release:        3%{?dist}
+Release:        4%{?dist}
 
 License:        MIT
 URL:            %{forgeurl}
@@ -18,9 +18,8 @@ BuildRequires:  python3-setuptools
 
 Requires:       python3-gobject
 Requires:       python3-dasbus
-Requires:       gtk3
+Requires:       gtk3-tools
 Requires:       foot
-Requires:       gnome-themes-extra
 Requires:       grim
 Requires:       ImageMagick
 Requires:       jq
@@ -35,7 +34,7 @@ Requires:       playerctl
 Requires:       pulseaudio-utils
 Requires:       (mate-polkit or polkit-gnome or polkit-kde-agent-5)
 Requires:       python3-geopy
-Requires:       python3-yaml
+Requires:       python3-pyaml
 Requires:       slurp
 Requires:       swappy
 Requires:       sway
@@ -57,9 +56,9 @@ Requires:       nwg-shell-config
 Requires:       nwg-displays
 Requires:       SwayNotificationCenter
 Requires:       gtklock
-Requires:       gtklock-userinfo-module
-Requires:       gtklock-powerbar-module
-Requires:       gtklock-playerctl-module
+# Requires:       gtklock-userinfo-module
+# Requires:       gtklock-powerbar-module
+# Requires:       gtklock-playerctl-module
 
 Recommends:     thunar
 

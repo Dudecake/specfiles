@@ -4,7 +4,7 @@
 
 Name:       nwg-panel
 Version:    0.9.14
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    GTK3-based panel for sway window manager
 BuildArch:  noarch
 
@@ -17,8 +17,8 @@ BuildRequires: python3-devel >= 3.4
 BuildRequires: python3-setuptools
 BuildRequires: systemd-rpm-macros
 
-Requires:   gtk-layer-shell
-Requires:   gtk3
+Requires:   libgtk-layer-shell0
+Requires:   gtk3-tools
 Requires:   python3-gobject
 Requires:   python3-i3ipc
 Requires:   python3-dasbus
