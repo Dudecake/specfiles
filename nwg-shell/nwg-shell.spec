@@ -5,7 +5,7 @@
 Name:           nwg-shell
 Version:        0.5.14
 Summary:        Meta-package, installer and updater
-Release:        4%{?dist}
+Release:        5%{?dist}
 
 License:        MIT
 URL:            %{forgeurl}
@@ -28,7 +28,7 @@ Requires:       light
 Requires:       font(dejavusans)
 Requires:       font(dejavusansmono)
 Requires:       font(dejavuserif)
-Requires:       network-manager-applet
+Requires:       NetworkManager-applet
 Requires:       papirus-icon-theme
 Requires:       playerctl
 Requires:       pulseaudio-utils
@@ -42,7 +42,7 @@ Requires:       swayidle
 Requires:       swaylock
 Requires:       swaybg
 Requires:       wl-clipboard
-Requires:       xorg-x11-server-Xwayland
+Requires:       xwayland
 Requires:       wlsunset
 Requires:       azote
 Requires:       gopsuinfo
