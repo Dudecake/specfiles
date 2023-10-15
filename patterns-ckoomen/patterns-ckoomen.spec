@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.35
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -366,6 +366,8 @@ Requires:       pattern() = ckoomen_desktop
 Requires:       hyprland
 Requires:       nwg-shell
 Requires:       polkit-kde-agent-5
+Requires:       python3-psutil
+Requires:       python3-pybluez
 Requires:       wayvnc
 
 %description hyprland
