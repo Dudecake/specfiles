@@ -5,7 +5,7 @@ set -e
 VERSION="0.5.2"
 
 sed "s/\${VERSION}/${VERSION}/" ./boringtun-cli.spec.in > ./boringtun-cli.spec
-rpm_file=$(python3 -c "import specfile; print(specfile.Specfile(\"boringtun-cli.spec\").expand(\"%name-%version-%release.src.rpm\"))")
+RPM_FILE=$(python3 -c "import specfile; print(specfile.Specfile(\"boringtun-cli.spec\").expand(\"%name-%version-%release.src.rpm\"))")
 if [[ ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   tarball="$(rpm -E %{_sourcedir}/boringtun-cli-${VERSION}.tar.gz)"
   curl -L https://github.com/cloudflare/boringtun/archive/refs/tags/boringtun-cli-${VERSION}.tar.gz -o "${tarball}"
