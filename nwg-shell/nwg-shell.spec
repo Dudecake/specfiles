@@ -5,7 +5,7 @@
 Name:           nwg-shell
 Version:        0.5.14
 Summary:        Meta-package, installer and updater
-Release:        5%{?dist}
+Release:        6%{?dist}
 
 License:        MIT
 URL:            %{forgeurl}
@@ -32,7 +32,6 @@ Requires:       NetworkManager-applet
 Requires:       papirus-icon-theme
 Requires:       playerctl
 Requires:       pulseaudio-utils
-Requires:       (mate-polkit or polkit-gnome or polkit-kde-agent-5)
 Requires:       python3-geopy
 Requires:       python3-pyaml
 Requires:       slurp
@@ -61,6 +60,9 @@ Requires:       gtklock
 # Requires:       gtklock-playerctl-module
 
 Recommends:     thunar
+Recommends:     mate-polkit
+Recommends:     polkit-gnome
+Recommends:     polkit-kde-agent-5
 
 Suggests:       chromium
 Suggests:       mousepad

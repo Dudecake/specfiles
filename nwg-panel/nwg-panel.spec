@@ -4,7 +4,7 @@
 
 Name:       nwg-panel
 Version:    0.9.14
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    GTK3-based panel for sway window manager
 BuildArch:  noarch
 
@@ -31,6 +31,7 @@ Recommends: python3-psutil
 Recommends: python3-pybluez
 
 Recommends: pulseaudio-utils
+Recommends: typelib-1_0-Playerctl-2_0
 
 %description
 I have been using sway since 2019 and find it the most comfortable working

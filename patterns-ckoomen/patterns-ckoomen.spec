@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.35
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -218,6 +218,7 @@ Provides:       pattern-order() = 10006
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_hw_accel
 Requires:       gamescope
+Requires:       waycheck
 Requires:       firejail
 Requires:       firejail-zsh-completion
 Requires:       firewall-applet
@@ -368,6 +369,7 @@ Requires:       nwg-shell
 Requires:       polkit-kde-agent-5
 Requires:       python3-psutil
 Requires:       python3-pybluez
+Requires:       typelib-1_0-Playerctl-2_0
 Requires:       wayvnc
 
 %description hyprland
