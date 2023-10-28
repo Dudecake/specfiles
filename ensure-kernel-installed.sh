@@ -15,11 +15,9 @@ case "${ID}" in
     KERNEL_MODULES="${KERNEL_BASE}-modules-core"
     ;&
   centos)
-    KERNEL_VERSION="-$(dnf provides 'kernel(__skb_flow_dissect) = 0x73874cd8' | grep -Po '(?<=kernel-core-)\d\.\d+\.\d+-\d+' | sort | tail -n1)$(rpm -E '%{?dist}')"
-    [[ "${KERNEL_VERSION}" = "-$(rpm -E '%{?dist}')" ]] && KERNEL_VERSION=""
-    KERNEL="${KERNEL} ${KERNEL_BASE}${KERNEL_VERSION} ${KERNEL_BASE}-core${KERNEL_VERSION} ${KERNEL_BASE}-devel${KERNEL_VERSION}"
-    KERNEL_HEADERS="${KERNEL_BASE}-headers${KERNEL_VERSION}.${ARCH}"
-    KERNEL_MODULES="${KERNEL_MODULES} ${KERNEL_BASE}-modules${KERNEL_VERSION} ${KERNEL_BASE}-modules-extra${KERNEL_VERSION}"
+    KERNEL="${KERNEL} ${KERNEL_BASE} ${KERNEL_BASE}-core ${KERNEL_BASE}-devel"
+    KERNEL_HEADERS="${KERNEL_BASE}-headers"
+    KERNEL_MODULES="${KERNEL_MODULES} ${KERNEL_BASE}-modules ${KERNEL_BASE}-modules-extra"
     ;;
   opensuse*)
     KERNEL_BASE=kernel-default
@@ -29,4 +27,4 @@ case "${ID}" in
 esac
 dnf download ${KERNEL} ${KERNEL_HEADERS} ${KERNEL_MODULES} ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
 createrepo --update "${BUILDDIR}/${ARCH}"
-dnf install -y ${KERNEL_BASE}${KERNEL_VERSION} kernel-devel${KERNEL_VERSION}
+dnf install -y ${KERNEL_BASE} kernel-devel
