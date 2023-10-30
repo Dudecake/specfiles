@@ -7,7 +7,7 @@
 %endif
 
 Name:       chectl-bin
-Version:    7.74.0
+Version:    7.76.0
 Release:    1%{?dist}
 Summary:    CLI to manage Eclipse Che server and workspaces
 URL:        https://github.com/che-incubator/chectl
