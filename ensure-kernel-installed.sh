@@ -10,7 +10,10 @@ REPO="--disablerepo build-noarch,build-${ARCH} --setopt=previous.priority=100"
 KERNEL_BASE=kernel
 case "${ID}" in
   fedora)
-    [[ "${VERSION_ID}" = "rawhide" ]] && REPO="${REPO} --repo fedora,updates"
+    if [[ "${VERSION_ID}" = "rawhide" ]]; then
+      REPO="${REPO} --repo fedora,updates"
+      RELEASEVER="--releasever $((${VERSION_ID} - 1))"
+    fi
     KERNEL="${KERNEL_BASE}-devel-matched"
     KERNEL_MODULES="${KERNEL_BASE}-modules-core"
     ;&
@@ -25,6 +28,6 @@ case "${ID}" in
     KERNEL="${KERNEL_BASE} ${KERNEL_BASE}-base ${KERNEL_BASE}-devel ${KERNEL_BASE}-devel"
     ;;
 esac
-dnf download ${KERNEL} ${KERNEL_HEADERS} ${KERNEL_MODULES} ${REPO} --releasever ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
+dnf download ${KERNEL} ${KERNEL_HEADERS} ${KERNEL_MODULES} ${REPO} ${RELEASEVER} --downloaddir "${BUILDDIR}/${ARCH}"
 createrepo --update "${BUILDDIR}/${ARCH}"
 dnf install -y ${KERNEL_BASE} kernel-devel
