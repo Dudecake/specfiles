@@ -1,21 +1,22 @@
-%define basearch %_arch
-%if "%{basearch}" == "x86_64"
+%define basearch ppc64le
+%ifarch x86_64
 %define basearch amd64
 %endif
-%if "%{basearch}" == "aarch64"
+%ifarch aarch64
 %define basearch arm64
 %endif
 
 Name:           kubernetes-bin
-Version:        1.26.8
+Version:        1.26.10
 Release:        1%{?dist}
 Summary:        Production-Grade Container Scheduling and Management
 URL:            https://github.com/kubernetes/kubernetes
 License:        Apache-2.0
 BuildRequires:  systemd-rpm-macros
 
-Source0:        https://storage.googleapis.com/kubernetes-release/release/v%{version}/kubernetes-server-linux-%{basearch}.tar.gz
+Source0:        https://dl.k8s.io/v%{version}/kubernetes-server-linux-%{basearch}.tar.gz
 Source1:        kubelet.service
+ExclusiveArch:  x86_64 aarch64 ppc64le
 
 Provides:       kubernetes = %{version}
 Provides:       bundled(golang(bitbucket.org/bertimus9/systemstat))
