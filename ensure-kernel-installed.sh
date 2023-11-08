@@ -15,12 +15,12 @@ case "${ID}" in
       RELEASEVER="--releasever $((${VERSION_ID} - 1))"
     fi
     KERNEL="${KERNEL_BASE}-devel-matched"
-    KERNEL_MODULES="${KERNEL_BASE}-modules-core"
     ;&
   centos)
     KERNEL="${KERNEL} ${KERNEL_BASE} ${KERNEL_BASE}-core ${KERNEL_BASE}-devel"
     KERNEL_HEADERS="${KERNEL_BASE}-headers"
-    KERNEL_MODULES="${KERNEL_MODULES} ${KERNEL_BASE}-modules ${KERNEL_BASE}-modules-extra"
+    KERNEL_MODULES="${KERNEL_BASE}-modules ${KERNEL_BASE}-modules-extra"
+    [[ ${VERSION_ID:-0} -gt 8 ]] && KERNEL_MODULES="${KERNEL_MODULES} ${KERNEL_BASE}-modules-core"
     ;;
   opensuse*)
     KERNEL_BASE=kernel-default
