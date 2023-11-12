@@ -2,11 +2,12 @@
 
 Name:       libuuid-compat
 Version:    %{libuuid_version}
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Compatibility package for libuuid
 License:    MIT
 Requires:   libuuid1%{?_isa} >= %{libuuid_version}
 
+Provides:   libuuid >= %{libuuid_version}
 Provides:   libuuid%{?_isa} >= %{libuuid_version}
 
 %description
