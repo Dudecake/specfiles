@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.35
-Release:        3%{?dist}
+Version:        0.0.36
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -350,7 +350,8 @@ Requires:       kalk
 Requires:       krecorder
 Requires:       krfb
 Requires:       krdc
-Requires:       ksshaskpass5
+Requires:       (ksshaskpass5 or ksshaskpass6)
+Requires:       xwaylandvideobridge
 
 %description plasma
 %{summary}
@@ -371,6 +372,7 @@ Requires:       python3-psutil
 Requires:       python3-pybluez
 Requires:       typelib-1_0-Playerctl-2_0
 Requires:       wayvnc
+Requires:       xwaylandvideobridge
 
 %description hyprland
 %{summary}
