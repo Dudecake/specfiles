@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 if [[ ! -f pom.xml ]]; then
   echo "No 'pom.xml' file present" >&2
   exit 1

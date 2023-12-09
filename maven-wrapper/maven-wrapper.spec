@@ -1,6 +1,6 @@
 Name:           maven-wrapper
 Version:        0.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Maven wrapper installer script
 
 License:        EUPL-1.2

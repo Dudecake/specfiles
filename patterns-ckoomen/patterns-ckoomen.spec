@@ -1,7 +1,7 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.36
+Version:        0.0.37
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -219,6 +219,7 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_hw_accel
 Requires:       gamescope
 Requires:       waycheck
+Requires:       xwayland-run
 Requires:       firejail
 Requires:       firejail-zsh-completion
 Requires:       firewall-applet
@@ -367,7 +368,7 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       hyprland
 Requires:       nwg-shell
-Requires:       polkit-kde-agent-5
+Requires:       (polkit-kde-agent-5 or polkit-kde-agent-6)
 Requires:       python3-psutil
 Requires:       python3-pybluez
 Requires:       typelib-1_0-Playerctl-2_0
