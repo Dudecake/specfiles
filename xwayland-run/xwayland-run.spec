@@ -1,6 +1,6 @@
 Name:           xwayland-run
 Version:        0.0.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        xwayland-run contains a set of small utilities revolving around running Xwayland and various Wayland compositor headless.
 URL:            https://gitlab.freedesktop.org/ofourdan/%{name}
 License:        GPLv2+
@@ -8,6 +8,8 @@ License:        GPLv2+
 BuildRequires:  meson
 BuildRequires:  gcc
 BuildRequires:  cage
+
+Requires:  cage
 
 Source0:        %{url}/-/archive/%{version}/%{name}-%{version}.tar.gz
 
