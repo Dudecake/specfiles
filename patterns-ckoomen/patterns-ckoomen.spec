@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.37
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -342,7 +342,7 @@ Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10010
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
-Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
+Requires:       (pattern() = kde_plasma or pattern() = kde_plasma6 or pattern() = microos_kde_desktop)
 Requires:       ark
 Requires:       gwenview
 Requires:       okular
