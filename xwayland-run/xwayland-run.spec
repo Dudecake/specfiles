@@ -1,6 +1,8 @@
+%define githash c5846bed1d01497c75f8347e4d5dd1077cf171e9
+
 Name:           xwayland-run
 Version:        0.0.2
-Release:        2%{?dist}
+Release:        3gitc5846be%{?dist}
 Summary:        xwayland-run contains a set of small utilities revolving around running Xwayland and various Wayland compositor headless.
 URL:            https://gitlab.freedesktop.org/ofourdan/%{name}
 License:        GPLv2+
@@ -11,13 +13,13 @@ BuildRequires:  cage
 
 Requires:  cage
 
-Source0:        %{url}/-/archive/%{version}/%{name}-%{version}.tar.gz
+Source:         %{url}/-/archive/%{githash}/xwayland-run-%{githash}.tar.gz
 
 %description
 %{summary}
 
 %prep
-%autosetup
+%autosetup -n %{name}-%{githash}
 
 %build
 %meson -Dcompositor=cage
