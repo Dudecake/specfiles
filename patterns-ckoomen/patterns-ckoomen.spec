@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.37
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -83,7 +83,7 @@ Requires:       ckoomen-config
 Requires:       ckoomen-config-network
 # Monitoring
 Requires:       btop
-Requires:       iotop
+Requires:       iotop-c
 Requires:       mtr
 Requires:       ncdu
 Requires:       nmap
