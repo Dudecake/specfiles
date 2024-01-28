@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.37
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -277,6 +277,7 @@ Requires:       virt-viewer
 Requires:       celluloid
 Requires:       easyeffects
 Requires:       helvum
+Requires:       qpwgraph
 
 %description desktop-applications
 %{summary}
