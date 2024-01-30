@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.37
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -123,6 +123,8 @@ Requires:       qemu-hw-usb-redirect
 Requires:       qemu-ui-spice-app
 Requires:       qemu-vhost-user-gpu
 Requires:       virt-install
+Requires:       glusterfs
+Requires:       libvirt-daemon-driver-storage-gluster
 Requires:       libvirt-daemon-driver-storage-iscsi
 Requires:       qemu-block-iscsi
 Requires:       butane
