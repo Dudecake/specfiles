@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.37
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -332,6 +332,7 @@ Requires:       ppsspp
 Requires:       ppsspp-qt
 #Requires:       scorched3d
 Requires:       heroic
+Requires:       steam
 %endif
 
 %description games
