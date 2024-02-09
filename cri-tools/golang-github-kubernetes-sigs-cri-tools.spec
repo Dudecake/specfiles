@@ -3,7 +3,7 @@
 
 # https://github.com/kubernetes-sigs/cri-tools
 %global goipath         github.com/kubernetes-sigs/cri-tools
-Version:                1.25.0
+Version:                1.27.1
 
 %gometa
 
