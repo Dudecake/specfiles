@@ -2,15 +2,19 @@
 
 Name:           xwayland-run
 Version:        0.0.2
-Release:        5gitc5846be%{?dist}
+Release:        6gitc5846be%{?dist}
 Summary:        xwayland-run contains a set of small utilities revolving around running Xwayland and various Wayland compositor headless.
 URL:            https://gitlab.freedesktop.org/ofourdan/%{name}
 License:        GPLv2+
 
-BuildRequires:  meson
-BuildRequires:  gcc
+BuildRequires:  git-core
+BuildRequires:  python3-devel
+Requires:       (weston or cage or kwin6 or kwin5 or mutter or gnome-kiosk)
+Requires:       xorg-x11-server-wayland
 
-Requires:  cage
+# Provide names of the other utilities included
+Provides:       wlheadless-run = %{version}-%{release}
+Provides:       xwfb-run = %{version}-%{release}
 
 BuildArch:      noarch
 
@@ -23,7 +27,7 @@ Source:         %{url}/-/archive/%{githash}/xwayland-run-%{githash}.tar.gz
 %autosetup -n %{name}-%{githash}
 
 %build
-%meson -Dcompositor=cage
+%meson -Dcompositor=kwin
 %meson_build
 
 %install
