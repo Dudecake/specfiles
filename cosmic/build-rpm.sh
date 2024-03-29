@@ -2,9 +2,12 @@
 
 set -ex
 
-mkdir basedir
-git clone --recurse-submodules https://pagure.io/fedora-cosmic/cosmic-packaging.git basedir/cosmic-packaging
-cd basedir/cosmic-packaging
+script_dir="${PWD}"
+
+[[ -d ${1}/cosmic-basedir ]] && rm -rf ${1}/cosmic-basedir
+mkdir ${1}/cosmic-basedir
+git clone --recurse-submodules https://pagure.io/fedora-cosmic/cosmic-packaging.git ${1}/cosmic-basedir/cosmic-packaging
+cd ${1}/cosmic-basedir/cosmic-packaging
 
 dnf install -y cargo
 
@@ -26,6 +29,6 @@ for dir in ./*/; do
       mv ./${_package}.tar.gz ../${_package}
     fi
     cd ../${_package}
-    ../../build-rpm.sh "$@"
+    ${script_dir}/../build-rpm.sh "$@"
   fi
 done
