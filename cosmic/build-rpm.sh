@@ -17,8 +17,8 @@ for dir in ./*/; do
   pushd ${dir} > /dev/null
   if [[ -f ./srpm.sh ]]; then
     _package="$(basename $PWD)"
-    mkdir -p ../../cosmic-rpms/${_package}
-    cp ./*.spec ../../cosmic-rpms/${_package}
+    [[ -d ../../cosmic-rpms/${_package} ]] || mkdir -p ../../cosmic-rpms/${_package}
+    sed 's/%autorelease/1/g' ./${_package}.spec > ../../cosmic-rpms/${_package}/${_package}.spec
     . ./srpm.sh
     mkdir ../${_package}
     sed 's/dbus-devel/dbus-1-devel/g; s/libappstream-glib/libappstream-glib8/g; s/libseat-devel/seatd-devel/g; s/mesa-libgbm-devel/libgbm-devel/g; /rust-rav1e+nasm-rs-devel/d; s/rustc/rust/g' ./${_package}.spec > ../${_package}/${_package}.spec
