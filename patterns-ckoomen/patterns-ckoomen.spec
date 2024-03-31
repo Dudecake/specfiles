@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.37
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -139,7 +139,7 @@ Requires:       kernel-%{kernel_flavour}-devel
 Requires:       /usr/bin/readelf
 Requires:       qemu-kvm
 Requires:       rust-hypervisor-firmware-bin
-Requires:       vendor-reset-kmp-%{kernel_flavour}
+Recommends:     vendor-reset-kmp-%{kernel_flavour}
 %endif
 # Storage
 Requires:       ckoomen-config-dracut
@@ -278,7 +278,6 @@ Requires:       virt-viewer
 # Media players
 Requires:       celluloid
 Requires:       easyeffects
-Requires:       helvum
 Requires:       qpwgraph
 
 %description desktop-applications
