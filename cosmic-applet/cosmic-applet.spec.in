@@ -1,0 +1,334 @@
+%define githash ${githash}
+%define shorthash ${shorthash}
+
+Name:           cosmic-applet
+Version:        0.1.0
+Release:        1.git%{shorthash}%{?dist}
+Summary:        WIP applets for cosmic-panel
+
+License:        GPL-3.0
+Group:          Metapackages
+URL:            https://github.com/pop-os/cosmic-applets
+
+Source0:         cosmic-applets.tar.gz
+Source1:         vendor.tar
+
+# For now, we require all deps for all of cosmic-epoch
+BuildRequires:  make
+BuildRequires:  which
+BuildRequires:  git-core
+BuildRequires:  just
+BuildRequires:  rust
+BuildRequires:  lld
+BuildRequires:  cargo
+BuildRequires:  glib2-devel
+BuildRequires:  gtk3-devel
+BuildRequires:  dbus-1-devel
+BuildRequires:  wayland-devel
+BuildRequires:  clang-devel
+BuildRequires:  libxkbcommon-devel
+BuildRequires:  libgbm-devel
+BuildRequires:  libappstream-glib8
+BuildRequires:  pipewire-devel
+BuildRequires:  libglvnd-devel
+BuildRequires:  seatd-devel
+BuildRequires:  libinput-devel
+BuildRequires:  pam-devel
+BuildRequires:  flatpak-devel
+
+# For now, we require all deps for all of cosmic-epoch
+Requires:       libseat1
+Requires:       pop-icon-theme
+Requires:       greetd
+Requires:       cage
+# Requires:       mozilla-fira-mono-fonts
+# Requires:       mozilla-fira-sans-fonts
+
+%description
+%{summary}
+
+%prep
+
+%autosetup -n cosmic-applets-%{githash} -p1
+mv %{_sourcedir}/vendor.tar vendor.tar
+mkdir -p .cargo
+cp .vendor/config.toml .cargo/config.toml
+sed -i 's/{{cosmic-applets-bin}}/cosmic-applets/g' justfile
+
+%build
+just build-vendored
+
+%install
+just rootdir=%{buildroot} prefix=%{_prefix} install
+
+%package meta
+Summary:        WIP applets for the COSMIC Desktop Environment
+Group:          Metapackages
+
+URL:            https://github.com/pop-os/cosmic-epoch
+
+Provides:       cosmic-applets
+
+Requires:       cosmic-applet-app-list
+Requires:       cosmic-applet-audio
+Requires:       cosmic-applet-battery
+Requires:       cosmic-applet-bluetooth
+Requires:       cosmic-applet-minimize
+Requires:       cosmic-applet-network
+Requires:       cosmic-applet-notifications
+Requires:       cosmic-applet-panel-button
+Requires:       cosmic-applet-power
+Requires:       cosmic-applet-status-area
+Requires:       cosmic-applet-tiling
+Requires:       cosmic-applet-time
+Requires:       cosmic-applet-workspaces
+
+%description meta
+%{summary}
+
+%package common
+Summary:        Common files for WIP applets for the COSMIC Desktop Environment
+
+%description common
+%{summary}
+
+%files common
+
+%{_bindir}/cosmic-applets
+
+%package app-list
+Summary:        WIP app list applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description app-list
+%{summary}
+
+%files app-list
+
+%{_bindir}/cosmic-app-list
+%{_datadir}/applications/com.system76.CosmicAppList.desktop
+%{_datadir}/cosmic/com.system76.CosmicAppList/v1/favorites
+%{_datadir}/cosmic/com.system76.CosmicAppList/v1/filter_top_levels
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppList.svg
+
+%package audio
+Summary:        WIP audio applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description audio
+%{summary}
+
+%files audio
+
+%{_bindir}/cosmic-applet-audio
+%{_datadir}/applications/com.system76.CosmicAppletAudio.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletAudio.svg
+
+%package battery
+Summary:        WIP battery applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description battery
+%{summary}
+
+%files battery
+
+%{_bindir}/cosmic-applet-battery
+%{_datadir}/applications/com.system76.CosmicAppletBattery.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletBattery.svg
+
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-display-brightness-high-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-display-brightness-low-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-display-brightness-medium-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-display-brightness-off-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-0-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-0-limited-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-0-limited-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-0-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-10-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-10-limited-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-10-limited-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-10-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-100-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-100-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-20-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-20-limited-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-20-limited-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-20-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-35-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-35-limited-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-35-limited-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-35-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-5-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-5-limited-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-5-limited-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-5-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-50-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-50-limited-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-50-limited-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-50-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-65-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-65-limited-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-65-limited-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-65-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-80-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-80-limited-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-80-limited-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-80-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-90-charging-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-battery-level-90-symbolic.svg
+
+%package bluetooth
+Summary:        WIP bluetooth applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description bluetooth
+%{summary}
+
+%files bluetooth
+
+%{_bindir}/cosmic-applet-bluetooth
+%{_datadir}/applications/com.system76.CosmicAppletBluetooth.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletBluetooth.svg
+
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-bluetooth-active-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-bluetooth-disabled-symbolic.svg
+
+%package minimize
+Summary:        WIP minimize applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description minimize
+%{summary}
+
+%files minimize
+
+%{_bindir}/cosmic-applet-minimize
+%{_datadir}/applications/com.system76.CosmicAppletMinimize.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletMinimize.svg
+
+%package network
+Summary:        WIP network applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description network
+%{summary}
+
+%files network
+
+%{_bindir}/cosmic-applet-network
+%{_datadir}/applications/com.system76.CosmicAppletNetwork.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletNetwork.svg
+
+%package notification
+Summary:        WIP notifications applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description notification
+%{summary}
+
+%files notification
+
+%{_bindir}/cosmic-applet-notifications
+%{_datadir}/applications/com.system76.CosmicAppletNotifications.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletNotifications.svg
+
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-notification-disabled-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-notification-new-symbolic.svg
+%{_datadir}/icons/hicolor/scalable/status/cosmic-applet-notification-symbolic.svg
+
+%package panel-button
+Summary:        WIP panel button applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description panel-button
+%{summary}
+
+%files panel-button
+
+%{_bindir}/cosmic-panel-button
+%{_datadir}/applications/com.system76.CosmicPanelAppButton.desktop
+%{_datadir}/applications/com.system76.CosmicPanelLauncherButton.desktop
+%{_datadir}/applications/com.system76.CosmicPanelWorkspacesButton.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicPanelAppButton.svg
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicPanelLauncherButton.svg
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicPanelWorkspacesButton.svg
+
+%package power
+Summary:        WIP power applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description power
+%{summary}
+
+%files power
+
+%{_bindir}/cosmic-applet-power
+%{_datadir}/applications/com.system76.CosmicAppletPower.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletPower.svg
+
+%package status-area
+Summary:        WIP status area applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description status-area
+%{summary}
+
+%files status-area
+
+%{_bindir}/cosmic-applet-status-area
+%{_datadir}/applications/com.system76.CosmicAppletStatusArea.desktop
+%{_datadir}/icons/hicolor/scalable/app/com.system76.CosmicAppletStatusArea.svg
+
+%package tiling
+Summary:        WIP tiling applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description tiling
+%{summary}
+
+%files tiling
+
+%{_bindir}/cosmic-applet-tiling
+%{_datadir}/applications/com.system76.CosmicAppletTiling.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletTiling.Off.svg
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletTiling.On.svg
+
+%package time
+Summary:        WIP time applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description time
+%{summary}
+
+%files time
+
+%{_bindir}/cosmic-applet-time
+%{_datadir}/applications/com.system76.CosmicAppletTime.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletTime.svg
+
+%package workspaces
+Summary:        WIP workspaces applet for cosmic-panel
+
+Requires:       cosmic-applet-common
+
+%description workspaces
+%{summary}
+
+%files workspaces
+
+%{_bindir}/cosmic-applet-workspaces
+%{_datadir}/applications/com.system76.CosmicAppletWorkspaces.desktop
+%{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletWorkspaces.svg
