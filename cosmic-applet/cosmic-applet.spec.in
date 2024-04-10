@@ -1,16 +1,18 @@
 %define githash ${githash}
 %define shorthash ${shorthash}
+%define reponame cosmic-applets
+%define pkgname cosmic-applet
 
-Name:           cosmic-applet
+Name:           %{pkgname}
 Version:        0.1.0
 Release:        1.git%{shorthash}%{?dist}
 Summary:        WIP applets for cosmic-panel
 
 License:        GPL-3.0
 Group:          Metapackages
-URL:            https://github.com/pop-os/cosmic-applets
+URL:            https://github.com/pop-os/%{reponame}
 
-Source0:         cosmic-applets.tar.gz
+Source0:         %{reponame}.tar.gz
 Source1:         vendor.tar
 
 # For now, we require all deps for all of cosmic-epoch
@@ -49,7 +51,7 @@ Requires:       cage
 
 %prep
 
-%autosetup -n cosmic-applets-%{githash} -p1
+%autosetup -n %{reponame}-%{githash} -p1
 mv %{_sourcedir}/vendor.tar vendor.tar
 mkdir -p .cargo
 cp .vendor/config.toml .cargo/config.toml
