@@ -55,7 +55,7 @@ mkdir -p .cargo
 cp .vendor/config.toml .cargo/config.toml
 
 %build
-just build-vendored
+VERGEN_GIT_SHA="%{githash}" VERGEN_GIT_COMMIT_DATE="${date}" just build-vendored
 
 %install
 just rootdir=%{buildroot} prefix=%{_prefix} install
