@@ -37,6 +37,8 @@ BuildRequires:  libinput-devel
 BuildRequires:  pam-devel
 BuildRequires:  flatpak-devel
 
+BuildRequires:  libopenssl-devel
+
 # For now, we require all deps for all of cosmic-epoch
 Requires:       libseat1
 Requires:       pop-icon-theme
