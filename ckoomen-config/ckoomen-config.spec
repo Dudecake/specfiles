@@ -1,6 +1,6 @@
 Name:           ckoomen-config
 Version:        0.0.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Config for CKoomen
 
 License:        EUPL-1.2

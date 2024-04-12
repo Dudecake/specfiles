@@ -181,6 +181,14 @@ yaml2json () {
   fi
 }
 
+toml2json() {
+  if [ "${1:--}" = "-" ]; then
+    python3 -c 'import sys, tomllib, json; print(json.dumps(tomllib.load(sys.stdin.read())))'
+  else
+    python3 -c "import sys, tomllib, json; f = open('${1}', "rb"); print(json.dumps(tomllib.load(f))); f.close()"
+  fi
+}
+
 urlencode () {
   python3 -c "from urllib.parse import quote_plus as quote; print(quote('${1}'))"
 }
