@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.37
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -86,6 +86,7 @@ Requires:       btop
 Requires:       iotop-c
 Requires:       mtr
 Requires:       ncdu
+Requires:       dysk
 Requires:       nmap
 Requires:       mlocate
 
