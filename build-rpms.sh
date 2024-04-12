@@ -16,7 +16,7 @@ fi
 set -e
 cd ${SCRIPTDIR}
 mkdir -p ${BUILDDIR}/{noarch,${ARCH}}
-[[ $(command -v rpmdev-spectool) != '' ]] && ln -sf $(which rpmdev-spectool) /usr/local/bin/spectool
+[[ $(command -v rpmdev-spectool) != '' ]] && ln -sf $(command -v rpmdev-spectool) /usr/local/bin/spectool
 rm -f /etc/yum.repos.d/build.repo
 cat << EOF > /etc/yum.repos.d/build.repo
 [build-noarch]
