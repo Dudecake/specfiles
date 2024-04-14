@@ -1,0 +1,32 @@
+%define githash ${githash}
+%define shorthash ${shorthash}
+%define reponame ${reponame}
+%define pkgname ${pkgname}
+
+Name:           %{pkgname}
+Version:        0.1.0
+Release:        1.git%{shorthash}%{?dist}
+Summary:        ${summary}
+
+License:        GPL-3.0
+URL:            https://github.com/pop-os/%{reponame}
+
+Source0:         %{reponame}.tar.gz
+
+BuildRequires:  just
+
+# provides
+
+%description
+%{summary}
+
+%prep
+%autosetup -n %{reponame}-%{githash} -p1
+
+%install
+just rootdir=%{buildroot} install
+
+%files
+
+%{_datadir}/icons/Cosmic/scalable/*
+%{_datadir}/icons/Cosmic/index.theme
