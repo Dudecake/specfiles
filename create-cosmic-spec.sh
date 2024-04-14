@@ -13,12 +13,19 @@ hash_and_date=($(curl -sSL https://api.github.com/repos/pop-os/${reponame}/commi
 githash="${hash_and_date[0]}"
 date="${hash_and_date[1]}"
 
+[[ -d ${reponame}-${githash} ]] || curl -L https://github.com/pop-os/${reponame}/archive/${githash}.tar.gz | bsdtar -xf -
+
+build='VERGEN_GIT_SHA="%{githash}" VERGEN_GIT_COMMIT_DATE="${date}" just build-vendored'
+install='just rootdir=%{buildroot} prefix=%{_prefix} install'
+if [[ -f ${reponame}-${githash}/Makefile ]]; then
+  build='%make_build all VENDOR=1'
+  install='%make_install'
+fi
+
 spec="../cosmic.spec.in"
 [[ -f ${pkgname}.spec.in ]] && spec="${pkgname}.spec.in"
 
-sed "s:\${githash}:${githash}:g; s:\${shorthash}:${githash:0:7}:g; s:\${reponame}:${reponame}:g; s:\${pkgname}:${pkgname}:g; s:\${summary}:${summary}:g; s/\${date}/${date}/g; s:\${files}:${files//$'\n'/\\n}:g" ${spec} > ${pkgname}.spec
-
-[[ -d ${reponame}-${githash} ]] || curl -L https://github.com/pop-os/${reponame}/archive/${githash}.tar.gz | bsdtar -xf -
+sed "s:\${githash}:${githash}:g; s:\${shorthash}:${githash:0:7}:g; s:\${reponame}:${reponame}:g; s:\${pkgname}:${pkgname}:g; s:\${summary}:${summary}:g; s/\${date}/${date}/g; s:\${build}:${build//$'\n'/\\n}:; s:\${install}:${install//$'\n'/\\n}:; s:\${files}:${files//$'\n'/\\n}:g" ${spec} > ${pkgname}.spec
 
 pushd ${reponame}-${githash} > /dev/null
 file=$(mktemp)
