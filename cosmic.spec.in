@@ -47,6 +47,8 @@ Requires:       cage
 # Requires:       mozilla-fira-mono-fonts
 # Requires:       mozilla-fira-sans-fonts
 
+# provides
+
 %description
 %{summary}
 

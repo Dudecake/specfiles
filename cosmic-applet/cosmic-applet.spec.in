@@ -91,6 +91,8 @@ Requires:       cosmic-applet-workspaces
 %package common
 Summary:        Common files for WIP applets for the COSMIC Desktop Environment
 
+# provides
+
 %description common
 %{summary}
 
