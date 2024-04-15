@@ -63,13 +63,11 @@ just build-vendored
 %install
 just rootdir=%{buildroot} prefix=%{_prefix} install
 
-%package meta
+%package -n cosmic-applets
 Summary:        WIP applets for the COSMIC Desktop Environment
 Group:          Metapackages
 
 URL:            https://github.com/pop-os/cosmic-epoch
-
-Provides:       cosmic-applets
 
 Requires:       cosmic-applet-app-list
 Requires:       cosmic-applet-audio
@@ -85,8 +83,10 @@ Requires:       cosmic-applet-tiling
 Requires:       cosmic-applet-time
 Requires:       cosmic-applet-workspaces
 
-%description meta
+%description -n cosmic-applets
 %{summary}
+
+%files -n cosmic-applets
 
 %package common
 Summary:        Common files for WIP applets for the COSMIC Desktop Environment
@@ -230,15 +230,15 @@ Requires:       cosmic-applet-common
 %{_datadir}/applications/com.system76.CosmicAppletNetwork.desktop
 %{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicAppletNetwork.svg
 
-%package notification
+%package notifications
 Summary:        WIP notifications applet for cosmic-panel
 
 Requires:       cosmic-applet-common
 
-%description notification
+%description notifications
 %{summary}
 
-%files notification
+%files notifications
 
 %{_bindir}/cosmic-applet-notifications
 %{_datadir}/applications/com.system76.CosmicAppletNotifications.desktop
