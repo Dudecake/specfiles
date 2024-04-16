@@ -1,8 +1,8 @@
 # COSMIC Desktop meta package
 Name:           cosmic-epoch
-Version:        0.1.0~20240226
+Version:        0.1.0
 
-Release:        %autorelease
+Release:        1%{?dist}
 Summary:        The next generation COSMIC Desktop Environment
 
 License:        GPL-3.0
@@ -32,5 +32,13 @@ Requires:       cosmic-term
 Requires:       cosmic-workspaces
 Requires:       xdg-desktop-portal-cosmic
 
+Provides:       cosmic-desktop
+
+BuildArch:      noarch
+
+%global debug_package %{nil}
+
 %description
 %{summary}
+
+%files
