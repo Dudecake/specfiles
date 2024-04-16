@@ -32,10 +32,7 @@ BuildRequires:   systemd-rpm-macros
 %{?sysusers_requires_compat}
 "
 
-custom="%pre
-%sysusers_create_compat debian\/cosmic-greeter.sysusers
-
-%post
+custom="%post
 %systemd_post cosmic-greeter.service
 %systemd_post cosmic-greeter-daemon.service
 
