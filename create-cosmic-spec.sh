@@ -34,7 +34,7 @@ sed "s:\${githash}:${githash}:g; s:\${shorthash}:${githash:0:7}:g; s:\${reponame
 if [[ -f ${reponame}-${githash}/Cargo.lock ]]; then
   pushd ${reponame}-${githash} > /dev/null
   file=$(mktemp)
-  python3 -c 'import sys, tomllib, json; f = open("./Cargo.lock", "rb"); print(json.dumps(tomllib.load(f))); f.close()' | jq -r '.package[] | "Provides:  bundled(crate(\(.name))) = \(.version)"' > ${file}
+  python3 -c 'import sys, tomllib, json; f = open("./Cargo.lock", "rb"); print(json.dumps(tomllib.load(f))); f.close()' | jq -r '.package[] | "Provides:  bundled(crate(\(.name))) = \(.version)"' | sed 's/-/_/g' > ${file}
   [[ -d .vendor ]] || mkdir .vendor
   cargo vendor > .vendor/config.toml
   tar -cf ../vendor.tar vendor
