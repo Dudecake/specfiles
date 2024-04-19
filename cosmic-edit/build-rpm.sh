@@ -15,6 +15,11 @@ files="
 %{_datadir}/metainfo/com.system76.CosmicEdit.metainfo.xml
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-edit 'Text editor built using libcosmic for the COSMIC Desktop Environment'
+pkgname="cosmic-edit"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'Text editor built using libcosmic for the COSMIC Desktop Environment'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

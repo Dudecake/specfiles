@@ -9,6 +9,11 @@ files="
 %{_datadir}/metainfo/com.system76.CosmicNotifications.metainfo.xml
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-notifications 'Layer Shell notifications daemon which integrates with COSMIC'
+pkgname="cosmic-notifications"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'Layer Shell notifications daemon which integrates with COSMIC'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

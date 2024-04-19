@@ -8,6 +8,11 @@ files="
 %{_datadir}/icons/hicolor/scalable/apps/com.system76.CosmicWorkspaces.svg
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-workspaces-epoch 'The settings application for the COSMIC desktop environment' cosmic-workspaces
+pkgname="cosmic-workspaces"
+files="${files}" ../create-cosmic-spec.sh "${2}" cosmic-workspaces-epoch 'The settings application for the COSMIC desktop environment' ${pkgname}
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

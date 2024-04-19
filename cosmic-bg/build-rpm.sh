@@ -11,6 +11,11 @@ files="
 %{_datadir}/cosmic/com.system76.CosmicBackground/*
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-bg 'COSMIC session service which applies backgrounds to displays'
+pkgname="cosmic-bg"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'COSMIC session service which applies backgrounds to displays'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

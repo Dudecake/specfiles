@@ -24,7 +24,8 @@ files="
 %{_unitdir}/cosmic-greeter-daemon.service
 "
 
-install="${install}" files="${files}" ../create-cosmic-spec.sh cosmic-greeter 'libcosmic greeter for greetd, which can be run inside cosmic-comp'
+pkgname="cosmic-greeter"
+install="${install}" files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'libcosmic greeter for greetd, which can be run inside cosmic-comp'
 
 patches="Patch1: service.patch
 
@@ -45,7 +46,11 @@ custom="%post
 %systemd_postun cosmic-greeter-daemon.service
 "
 
-sed -i "/# patches/a ${patches//$'\n'/\\n}" cosmic-greeter.spec
-sed -i "/# custom/a ${custom//$'\n'/\\n}" cosmic-greeter.spec
+if [[ -f ${pkgname}.spec ]]; then
+  sed -i "/# patches/a ${patches//$'\n'/\\n}" cosmic-greeter.spec
+  sed -i "/# custom/a ${custom//$'\n'/\\n}" cosmic-greeter.spec
 
-exec ../build-rpm.sh "$@"
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

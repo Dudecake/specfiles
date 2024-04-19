@@ -6,6 +6,11 @@ files="
 %{_bindir}/cosmic-randr
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-randr 'Library and utility for displaying and configuring Wayland outputs'
+pkgname="cosmic-randr"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'Library and utility for displaying and configuring Wayland outputs'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

@@ -12,6 +12,11 @@ files="
 %{_datadir}/icons/hicolor/scalable/actions/screenshot-window-symbolic.svg
 "
 
-files="${files}" ../create-cosmic-spec.sh xdg-desktop-portal-cosmic 'XDG Desktop Portals for the COSMIC Desktop Environment'
+pkgname="xdg-desktop-portal-cosmic"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'XDG Desktop Portals for the COSMIC Desktop Environment'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

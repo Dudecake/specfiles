@@ -4,9 +4,10 @@ set -e
 
 dnf install -y cargo jq
 
-reponame="${1}"
-summary="${2}"
-pkgname="${3:-${reponame}}"
+repo="${1}"
+reponame="${2}"
+summary="${3}"
+pkgname="${4:-${reponame}}"
 
 hash_and_date=($(curl -sSL https://api.github.com/repos/pop-os/${reponame}/commits/master | jq -r '.sha,.commit.committer.date'))
 
@@ -30,6 +31,12 @@ spec="../cosmic.spec.in"
 [[ -f ${pkgname}.spec.in ]] && spec="${pkgname}.spec.in"
 
 sed "s:\${githash}:${githash}:g; s:\${shorthash}:${githash:0:7}:g; s:\${reponame}:${reponame}:g; s:\${pkgname}:${pkgname}:g; s:\${summary}:${summary}:g; s/\${date}/${date}/g; s:\${build}:${build//$'\n'/\\n}:; s:\${install}:${install//$'\n'/\\n}:; s:\${files}:${files//$'\n'/\\n}:g" ${spec} > ${pkgname}.spec
+
+RPM_FILE=$(python3 -c "import specfile; print(specfile.Specfile(\"${pkgname}.spec\").expand(\"%name-%version-%release.src.rpm\"))")
+if [[ -z "${FORCE_REBUILD}" || -f "${repo}/source/tree/${RPM_FILE}" ]]; then
+  rm ${pkgname}.spec
+  exit
+fi
 
 if [[ -f ${reponame}-${githash}/Cargo.lock ]]; then
   pushd ${reponame}-${githash} > /dev/null

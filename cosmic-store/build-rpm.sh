@@ -15,6 +15,11 @@ files="
 %{_datadir}/metainfo/com.system76.CosmicStore.metainfo.xml
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-store 'COSMIC App Store'
+pkgname="cosmic-store"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'COSMIC App Store'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

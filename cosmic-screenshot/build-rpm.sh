@@ -7,6 +7,11 @@ files="
 %{_datadir}/applications/com.system76.CosmicScreenshot.desktop
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-screenshot 'Utility for capturing screenshots via XDG Desktop Portal'
+pkgname="cosmic-screenshot"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'Utility for capturing screenshots via XDG Desktop Portal'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

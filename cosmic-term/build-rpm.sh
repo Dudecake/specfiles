@@ -15,6 +15,11 @@ files="
 %{_datadir}/metainfo/com.system76.CosmicTerm.metainfo.xml
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-term 'WIP COSMIC terminal emulator'
+pkgname="cosmic-term"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'WIP COSMIC terminal emulator'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

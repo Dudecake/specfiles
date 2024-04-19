@@ -30,6 +30,11 @@ files="
 %{_datadir}/polkit-1/rules.d/cosmic-settings.rules
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-settings 'The settings application for the COSMIC desktop environment'
+pkgname="cosmic-settings"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'The settings application for the COSMIC desktop environment'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

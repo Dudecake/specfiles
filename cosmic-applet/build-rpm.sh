@@ -2,6 +2,11 @@
 
 set -e
 
-../create-cosmic-spec.sh cosmic-applets '' cosmic-applet
+pkgname="cosmic-applets"
+../create-cosmic-spec.sh "${2}" ${pkgname} '' cosmic-applet
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

@@ -6,6 +6,11 @@ files="
 %{_bindir}/cosmic-osd
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-osd 'OSDs for the COSMIC desktop environment'
+pkgname="cosmic-osd"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'OSDs for the COSMIC desktop environment'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

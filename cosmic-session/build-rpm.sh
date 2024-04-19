@@ -27,6 +27,11 @@ install -Dm0644 data/cosmic.desktop %{buildroot}%{_datadir}/wayland-sessions/cos
 install -Dm0644 data/cosmic-mimeapps.list %{buildroot}%{_datadir}/applications/cosmic-mimeapps.list
 "
 
-build="just vendor=1 all" install="${install}" files="${files}" ../create-cosmic-spec.sh cosmic-session 'Session manager for the COSMIC desktop environment'
+pkgname="cosmic-session"
+build="just vendor=1 all" install="${install}" files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'Session manager for the COSMIC desktop environment'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

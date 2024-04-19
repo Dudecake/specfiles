@@ -15,7 +15,12 @@ files="
 %{_datadir}/metainfo/com.system76.CosmicFiles.metainfo.xml
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-files 'File browser built using libcosmic for the COSMIC Desktop Environment'
-sed -i '/mkdir/a rm build.rs' cosmic-files.spec
+pkgname="cosmic-files"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'File browser built using libcosmic for the COSMIC Desktop Environment'
+if [[ -f ${pkgname}.spec ]]; then
+  sed -i '/mkdir/a rm build.rs' cosmic-files.spec
 
-exec ../build-rpm.sh "$@"
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

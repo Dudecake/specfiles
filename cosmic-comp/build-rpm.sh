@@ -12,6 +12,11 @@ files="
 %{_sysconfdir}/cosmic-comp/config.ron
 "
 
-install="${install}" files="${files}" ../create-cosmic-spec.sh cosmic-comp 'Compositor for the COSMIC Desktop Environment'
+pkgname="cosmic-comp"
+install="${install}" files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'Compositor for the COSMIC Desktop Environment'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi

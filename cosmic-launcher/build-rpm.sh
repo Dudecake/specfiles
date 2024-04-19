@@ -9,6 +9,11 @@ files="
 %{_datadir}/metainfo/com.system76.CosmicLauncher.metainfo.xml
 "
 
-files="${files}" ../create-cosmic-spec.sh cosmic-launcher 'Layer shell frontend for Pop Launcher'
+pkgname="cosmic-launcher"
+files="${files}" ../create-cosmic-spec.sh "${2}" ${pkgname} 'Layer shell frontend for Pop Launcher'
 
-exec ../build-rpm.sh "$@"
+if [[ -f ${pkgname}.spec ]]; then
+  exec ../build-rpm.sh "$@"
+else
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
+fi
