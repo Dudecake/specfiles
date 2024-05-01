@@ -26,11 +26,11 @@
 %global commit0 5a46c7af4d884a6004e0a47e92204f5aa34172d8
 %global git0 https://%{import_path}
 
-%define built_tag 1.27.1
+%define built_tag 1.28.0
 %define download_url %{git0}/archive/v%{built_tag}.tar.gz
 
 Name: cri-tools
-Version: 1.27.1
+Version: 1.28.0
 Release: 1%{?dist}
 Summary: CLI and validation tools for Container Runtime Interface
 License: ASL 2.0

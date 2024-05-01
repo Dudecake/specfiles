@@ -7,7 +7,7 @@
 %endif
 
 Name:           kubernetes-bin
-Version:        1.27.10
+Version:        1.28.9
 Release:        1%{?dist}
 Summary:        Production-Grade Container Scheduling and Management
 URL:            https://github.com/kubernetes/kubernetes
@@ -257,6 +257,8 @@ Provides:       bundled(golang(sigs.k8s.io/yaml))
 %{_bindir}/kube-controller-manager.docker_tag
 %{_bindir}/kube-controller-manager.tar
 %{_bindir}/kubectl
+%{_bindir}/kubectl.docker_tag
+%{_bindir}/kubectl.tar
 %{_bindir}/kubectl-convert
 %{_bindir}/kubelet
 %{_bindir}/kube-log-runner

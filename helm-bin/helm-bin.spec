@@ -7,7 +7,7 @@
 %endif
 
 Name:           helm-bin
-Version:        3.14.0
+Version:        3.14.4
 Release:        1%{?dist}
 Summary:        Production-Grade Container Scheduling and Management
 URL:            https://github.com/helm/helm
