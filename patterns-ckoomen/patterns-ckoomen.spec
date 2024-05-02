@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.37
-Release:        9%{?dist}
+Version:        0.0.38
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -93,15 +93,15 @@ Requires:       mlocate
 %description base
 %{summary}
 
-%package virtualization
+%package virtualization-minimal
 Summary:        openSUSE base CKoomen pattern
 Group:          Metapackages
-Provides:       pattern() = ckoomen_virtualization
+Provides:       pattern() = ckoomen_virtualization_minimal
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10003
 Provides:       pattern-visible()
-Requires:       pattern() = ckoomen_base
+Requires:       pattern() = ckoomen_base_minimal
 %if 0%{?suse_version} < 1599
 Requires:       pattern() = microos_kvm_host
 %else
@@ -135,15 +135,33 @@ Requires:       virt-top
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
 Requires:       ipxe-bootimgs
+%ifarch x86_64
+Requires:       qemu-kvm
+Requires:       rust-hypervisor-firmware-bin
+%endif
+Requires:       kubernetes1.30-client
+# Storage
+Requires:       ckoomen-config-dracut
+
+%description virtualization-minimal
+%{summary}
+
+%package virtualization
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_virtualization
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10004
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_base
+Requires:       pattern() = ckoomen_virtualization_minimal
+
 Requires:       kernel-%{kernel_flavour}-devel
 %ifarch x86_64
 Requires:       /usr/bin/readelf
-Requires:       qemu-kvm
-Requires:       rust-hypervisor-firmware-bin
 Recommends:     vendor-reset-kmp-%{kernel_flavour}
 %endif
-# Storage
-Requires:       ckoomen-config-dracut
 
 %description virtualization
 %{summary}
@@ -154,7 +172,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_iot
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10004
+Provides:       pattern-order() = 10005
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
@@ -177,7 +195,7 @@ Requires:       ceph-csi-helm-charts
 Requires:       cri-tools
 Requires:       cri-o
 Requires:       cri-o-kubeadm-criconfig
-Requires:       kubernetes1.25-kubeadm
+Requires:       kubernetes-kubeadm
 Requires:       kompose
 %ifarch x86_64
 Requires:       katacontainers
@@ -193,9 +211,9 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_hw_accel
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10005
+Provides:       pattern-order() = 10006
 Provides:       pattern-visible()
-Requires:       pattern() = ckoomen_base
+Requires:       pattern() = ckoomen_base_minimal
 %ifarch x86_64
 Requires:       libvulkan_intel
 Requires:       intel-vaapi-driver
@@ -218,9 +236,10 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10006
+Provides:       pattern-order() = 10007
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_hw_accel
+Requires:       pattern() = ckoomen_base
 Requires:       gamescope
 Requires:       waycheck
 Requires:       xwayland-run
@@ -229,7 +248,6 @@ Requires:       firejail-zsh-completion
 Requires:       firewall-applet
 Requires:       filelight
 Requires:       kdeconnect-kde
-Requires:       yakuake
 Requires:       ckoomen-config-network-wifi
 %ifarch x86_64
 Requires:       steam-devices
@@ -250,7 +268,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop_applications
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10007
+Provides:       pattern-order() = 10008
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 # Coding
@@ -261,7 +279,6 @@ Requires:       java-21-openjdk
 Requires:       java-21-openjdk-devel
 Requires:       java-21-openjdk-javadoc
 Requires:       java-21-openjdk-src
-Requires:       kubernetes-client
 # Utils
 Requires:       android-tools
 Requires:       libcamera-tools
@@ -290,7 +307,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_media
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10008
+Provides:       pattern-order() = 10009
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       gimp
@@ -299,6 +316,7 @@ Requires:       blender
 Requires:       kdenlive
 Requires:       ffmpeg
 Requires:       kicad
+Requires:       FreeCAD
 
 %description media
 %{summary}
@@ -309,7 +327,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_games
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10009
+Provides:       pattern-order() = 10010
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       desmume
@@ -344,10 +362,10 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_plasma
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10010
+Provides:       pattern-order() = 10011
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
-Requires:       (pattern() = kde_plasma or pattern() = kde_plasma6 or pattern() = microos_kde_desktop)
+Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
 Requires:       ark
 Requires:       gwenview
 Requires:       okular
@@ -356,37 +374,16 @@ Requires:       kalk
 Requires:       krecorder
 Requires:       krfb
 Requires:       krdc
-Requires:       (ksshaskpass5 or ksshaskpass6)
+Requires:       ksshaskpass6
 Requires:       xwaylandvideobridge
 
 %description plasma
 %{summary}
 
-%package hyprland
-Summary:        openSUSE base CKoomen pattern
-Group:          Metapackages
-Provides:       pattern() = ckoomen_hyprland
-Provides:       pattern-category() = CKoomen
-Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10011
-Provides:       pattern-visible()
-Requires:       pattern() = ckoomen_desktop
-Requires:       hyprland
-Requires:       nwg-shell
-Requires:       (polkit-kde-agent-5 or polkit-kde-agent-6)
-Requires:       python3-psutil
-Requires:       python3-pybluez
-Requires:       typelib-1_0-Playerctl-2_0
-Requires:       wayvnc
-Requires:       xwaylandvideobridge
-
-%description hyprland
-%{summary}
-
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base-minimal base virtualization iot hw-accel desktop desktop-applications media games plasma hyprland
+    base-minimal base virtualization-minimal virtualization iot hw-accel desktop desktop-applications media games plasma
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
@@ -400,6 +397,10 @@ done
 %files base
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/base.txt
+
+%files virtualization-minimal
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/virtualization-minimal.txt
 
 %files virtualization
 %dir %{_docdir}/patterns-ckoomen
@@ -432,7 +433,3 @@ done
 %files plasma
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/plasma.txt
-
-%files hyprland
-%dir %{_docdir}/patterns-ckoomen
-%{_docdir}/patterns-ckoomen/hyprland.txt
