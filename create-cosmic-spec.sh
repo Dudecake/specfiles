@@ -33,7 +33,8 @@ spec="../cosmic.spec.in"
 sed "s:\${githash}:${githash}:g; s:\${shorthash}:${githash:0:7}:g; s:\${reponame}:${reponame}:g; s:\${pkgname}:${pkgname}:g; s:\${summary}:${summary}:g; s/\${date}/${date}/g; s:\${build}:${build//$'\n'/\\n}:; s:\${install}:${install//$'\n'/\\n}:; s:\${files}:${files//$'\n'/\\n}:g" ${spec} > ${pkgname}.spec
 
 RPM_FILE=$(python3 -c "import specfile; print(specfile.Specfile(\"${pkgname}.spec\").expand(\"%name-%version-%release.src.rpm\"))")
-if [[ -z "${FORCE_REBUILD}" || -f "${repo}/source/tree/${RPM_FILE}" ]]; then
+if [[ -z "${FORCE_REBUILD}" && -f "${repo}/source/tree/${RPM_FILE}" ]]; then
+  echo "No rebuild neccesary for package $(basename $PWD)" >&2
   rm ${pkgname}.spec
   exit
 fi
