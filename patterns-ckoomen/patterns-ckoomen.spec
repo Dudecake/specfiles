@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.38
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -316,7 +316,7 @@ Requires:       blender
 Requires:       kdenlive
 Requires:       ffmpeg
 Requires:       kicad
-Requires:       FreeCAD
+Recommends:     FreeCAD
 
 %description media
 %{summary}
