@@ -2,7 +2,7 @@
 
 Name:               jextract
 Version:            %{jdk_version}
-Release:            1-2.0%{?dist}
+Release:            1_2.0%{?dist}
 Summary:            Native library binding extraction tool.
 URL:                https://github.com/openjdk/%{name}
 License:            GPLv2
