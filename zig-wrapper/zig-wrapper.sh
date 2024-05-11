@@ -23,13 +23,14 @@ cat << EOF > zigw
 set -e
 
 . .zig/wrapper/zig-wrapper.properties
-if [[ ! -f .zig/wrapper/zig || "\$(sh -c '.zig/wrapper/zig version' 2> /dev/null)" != "\${zig_version}" ]]; then
-  [[ -d .zig/wrapper ]] || mkdir -p .zig/wrapper
+wrapper_directory="\${HOME}/.cache/zig/wrapper/\${zig_version}"
+if [[ ! -f \${wrapper_directory}/zig || "\$(sh -c "\${wrapper_directory}/zig version" 2> /dev/null)" != "\${zig_version}" ]]; then
+  [[ -d \${wrapper_directory} ]] || mkdir -p \${wrapper_directory}
   arch="\$(uname -m)"
-  curl -sSL https://ziglang.org/download/\${zig_version}/zig-linux-\${arch}-\${zig_version}.tar.xz | bsdtar -C .zig/wrapper --strip-components 1 -xf -
-  curl -sSL https://github.com/zigtools/zls/releases/download/\${zig_version}/zls-\${arch}-linux.tar.xz | bsdtar -C .zig/wrapper -xf - zls
+  curl -L https://ziglang.org/download/\${zig_version}/zig-linux-\${arch}-\${zig_version}.tar.xz | bsdtar -C \${wrapper_directory} --strip-components 1 -xf -
+  curl -L https://github.com/zigtools/zls/releases/download/\${zig_version}/zls-\${arch}-linux.tar.xz | bsdtar -C \${wrapper_directory} -xf - zls
 fi
 
-exec .zig/wrapper/zig "\$@"
+exec \${wrapper_directory}/zig "\$@"
 EOF
 chmod +x ./zigw
