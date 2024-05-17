@@ -1,0 +1,12 @@
+--- a/src/ncurses_def.cpp	2020-12-09 17:13:49.000000000 +0800
++++ b/src/ncurses_def.cpp	2021-01-07 21:35:09.218508081 +0800
+@@ -6,6 +6,9 @@
+ #include "point.h"
+ #include "translations.h"
+ 
++//patched by Liu Sen, 2021-01-07
++#define NCURSES_REENTRANT 0
++
+ // ncurses can define some functions as macros, but we need those identifiers
+ // to be unchanged by the preprocessor, as we use them as function names.
+ #define NCURSES_NOMACROS

@@ -25,6 +25,9 @@ Group:          Amusements/Games/RPG
 Url:            https://cataclysmdda.org/
 Source0:        https://github.com/CleverRaven/Cataclysm-DDA/archive/refs/tags/%(echo "%{version}" | sed "s/_/-/").tar.gz#Cataclysm-DDA-%{version}.tar.gz
 Patch0:         remove-github-action-escape.patch
+Patch1:         ncursesw-error.patch
+Patch2:         disable-werror.patch
+Patch3:         https://github.com/CleverRaven/Cataclysm-DDA/commit/b7fe8091780e01143e21e11cb726473ff00f82f8.patch
 ExclusiveArch:  x86_64 aarch64
 BuildRequires:  astyle
 BuildRequires:  gcc-c++ >= 5
@@ -65,9 +68,9 @@ Struggle to survive in a harsh, persistent, procedurally generated environment.
 This package contains the data files for Cataclysm: Dark Days Ahead.
 
 %prep
-%autosetup -p0 -n Cataclysm-DDA-%(echo "%{version}" | sed "s/_/-/")
+%autosetup -p1 -n Cataclysm-DDA-%(echo "%{version}" | sed "s/_/-/")
 
-%define cataopts NATIVE=linux64 RELEASE=1 LTO=1 USE_XDG_DIR=1 CFLAGS="${CFLAGS} -Wno-error=dangling-reference" CXXFLAGS="${CXXFLAGS} -Wno-error=dangling-reference"
+%define cataopts NATIVE=linux64 RELEASE=1 LTO=1 RUNTESTS=0 USE_XDG_DIR=1
 #%%define cataopts NATIVE=linux64 RELEASE=1 USE_XDG_DIR=1
 
 %build
@@ -90,16 +93,16 @@ mv data/json/LOADING_ORDER.md doc/JSON_LOADING_ORDER.md
 cp -r doc/* %{buildroot}%{_docdir}/%{name}
 
 #xdg directory
-install -D -m 0644 data/xdg/cataclysm-dda.svg \
-            %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/cataclysm-dda.svg
-install -D -m 0644 data/xdg/cataclysm-dda.desktop \
-            %{buildroot}%{_datadir}/applications/cataclysm-dda.desktop
-install -D -m 0644 data/xdg/cataclysm-dda.appdata.xml \
-            %{buildroot}%{_datadir}/metainfo/cataclysm-dda.appdata.xml
+install -D -m 0644 data/xdg/org.cataclysmdda.CataclysmDDA.svg \
+            %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/org.cataclysmdda.CataclysmDDA.svg
+install -D -m 0644 data/xdg/org.cataclysmdda.CataclysmDDA.desktop \
+            %{buildroot}%{_datadir}/applications/org.cataclysmdda.CataclysmDDA.desktop
+install -D -m 0644 data/xdg/org.cataclysmdda.CataclysmDDA.appdata.xml \
+            %{buildroot}%{_datadir}/metainfo/org.cataclysmdda.CataclysmDDA.appdata.xml
 #Duplicate files
 %fdupes -s %{buildroot}%{_datadir}
 
-%suse_update_desktop_file -i %{name}
+%suse_update_desktop_file -i org.cataclysmdda.CataclysmDDA
 %find_lang %{name}
 
 %files
@@ -107,9 +110,9 @@ install -D -m 0644 data/xdg/cataclysm-dda.appdata.xml \
 %license LICENSE.txt
 %{_bindir}/cataclysm
 %{_bindir}/cataclysm-tiles
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
-%{_datadir}/metainfo/cataclysm-dda.appdata.xml
+%{_datadir}/applications/org.cataclysmdda.CataclysmDDA.desktop
+%{_datadir}/icons/hicolor/scalable/apps/org.cataclysmdda.CataclysmDDA.svg
+%{_datadir}/metainfo/org.cataclysmdda.CataclysmDDA.appdata.xml
 
 %files lang -f %{name}.lang
 %defattr(-,root,root)

@@ -1,0 +1,21 @@
+--- a/Makefile	2021-11-27 16:34:10.000000000 +0100
++++ b/Makefile	2024-05-19 12:23:22.148427168 +0200
+@@ -95,7 +95,7 @@
+ # RELEASE_FLAGS is flags for release builds.
+ RELEASE_FLAGS =
+ WARNINGS = \
+-  -Werror -Wall -Wextra \
++  -Wall -Wextra \
+   -Wformat-signedness \
+   -Wlogical-op \
+   -Wmissing-declarations \
+@@ -106,8 +106,7 @@
+   -Wpedantic \
+   -Wsuggest-override \
+   -Wunused-macros \
+-  -Wzero-as-null-pointer-constant \
+-  -Wno-unknown-warning-option
++  -Wzero-as-null-pointer-constant
+ # Uncomment below to disable warnings
+ #WARNINGS = -w
+ DEBUGSYMS = -g
