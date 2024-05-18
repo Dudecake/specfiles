@@ -2,6 +2,7 @@
 %define shorthash ${shorthash}
 %define reponame ${reponame}
 %define pkgname ${pkgname}
+%define date ${date}
 
 Name:           %{pkgname}
 Version:        0.1.0

@@ -12,14 +12,14 @@ pkgname="${4:-${reponame}}"
 hash_and_date=($(curl -sSL https://api.github.com/repos/pop-os/${reponame}/commits/master | jq -r '.sha,.commit.committer.date'))
 
 githash="${hash_and_date[0]}"
-date="${hash_and_date[1]}"
+date="${hash_and_date[1]:0:10}"
 
 [[ -d ${reponame}-${githash} ]] || curl -L https://github.com/pop-os/${reponame}/archive/${githash}.tar.gz | bsdtar -xf -
 
 uses_make=0
 [[ -f ${reponame}-${githash}/Makefile ]] && uses_make=1
 if [[ -z "${build}" ]]; then
-  build='VERGEN_GIT_SHA="%{githash}" VERGEN_GIT_COMMIT_DATE="\${date}" just build-vendored'
+  build='VERGEN_GIT_SHA="%{githash}" VERGEN_GIT_COMMIT_DATE="%{date}" just build-vendored'
   (( uses_make == 1 )) && build='%make_build all VENDOR=1'
 fi
 if [[ -z "${install}" ]]; then
