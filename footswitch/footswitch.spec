@@ -1,8 +1,9 @@
-%define githash b7493170ecc956ac87df2c36183253c945be2dcf
+%define githash 5d96018a5e83c8dae33cc50ff2b683223561a90b
+%define shorthash 5d96018
 
 Name:               footswitch
 Version:            1.0
-Release:            1.gitb749317%{?dist}
+Release:            1.git%{shorthash}%{?dist}
 Summary:            Command line utlities for programming PCsensor and Scythe foot switches.
 URL:                https://github.com/rgerganov/%{name}
 License:            GPLv2
@@ -26,7 +27,7 @@ Source0:            %{url}/archive/%{githash}.tar.gz
 sed -i 's:/etc:\$\(PREFIX\)/etc:g; s:\$\(PREFIX\)/bin:\$\(PREFIX\)/usr/bin:g' ./Makefile
 
 %build
-%make_build CFLAGS="-fPIE -I/usr/include/hidapi"
+%make_build CFLAGS="-fPIE -I/usr/include/hidapi -I${PWD}/include"
 
 %install
 mkdir -p %{buildroot}%{_bindir} %{buildroot}/etc/udev/rules.d
