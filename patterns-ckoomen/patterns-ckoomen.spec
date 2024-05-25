@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.38
-Release:        4%{?dist}
+Version:        0.0.39
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -280,6 +280,9 @@ Requires:       java-21-openjdk-devel
 Requires:       java-21-openjdk-javadoc
 Requires:       java-21-openjdk-src
 Requires:       zig-wrapper
+Requires:       osc
+Requires:       build
+Requires:       python3-keyring
 # Utils
 Requires:       android-tools
 Requires:       libcamera-tools
