@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.39
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -34,6 +34,16 @@ Requires:       zsh
 Requires:       zsh-syntax-highlighting
 Requires:       flatpak-zsh-completion
 Requires:       ckoomen-config-zsh
+# Network config
+Requires:       bind-utils
+# Monitoring
+Requires:       btop
+Requires:       iotop-c
+Requires:       mtr
+Requires:       ncdu
+Requires:       dysk
+Requires:       nmap
+Requires:       mlocate
 
 %description base-minimal
 %{summary}
@@ -73,22 +83,12 @@ Requires:       oddjob-mkhomedir
 # Network config
 Requires:       firewalld
 Requires:       firewalld-zsh-completion
-Requires:       net-tools
 Requires:       bridge-utils
 Requires:       wireguard-tools
 Requires:       iperf
-Requires:       bind-utils
 Requires:       wol
 Requires:       ckoomen-config
 Requires:       ckoomen-config-network
-# Monitoring
-Requires:       btop
-Requires:       iotop-c
-Requires:       mtr
-Requires:       ncdu
-Requires:       dysk
-Requires:       nmap
-Requires:       mlocate
 
 %description base
 %{summary}
@@ -102,16 +102,13 @@ Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10003
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_base_minimal
-%if 0%{?suse_version} < 1599
-Requires:       pattern() = microos_kvm_host
-%else
-Requires:       pattern() = kvm_server
-%endif
+Requires:       (pattern() = microos_kvm_host or pattern() = kvm_server)
 Requires:       libvirt-client
 Requires:       libvirt-daemon-config-network
 Requires:       libvirt-daemon-config-nwfilter
 Requires:       libvirt-daemon
 Requires:       libvirt-daemon-qemu
+Requires:       qemu-linux-user
 Requires:       qemu-arm
 Requires:       qemu-uefi-aarch64
 Requires:       qemu-x86
@@ -121,17 +118,12 @@ Requires:       qemu-hw-display-qxl
 Requires:       qemu-hw-display-virtio-gpu-pci
 Requires:       qemu-hw-usb-host
 Requires:       qemu-hw-usb-redirect
-Requires:       qemu-ui-spice-app
 Requires:       qemu-vhost-user-gpu
 Requires:       virt-install
-Requires:       glusterfs
-Requires:       libvirt-daemon-driver-storage-gluster
 Requires:       libvirt-daemon-driver-storage-iscsi
 Requires:       qemu-block-iscsi
-Requires:       butane
 Requires:       driverctl
 Requires:       virtio-win
-Requires:       virt-top
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
 Requires:       ipxe-bootimgs
@@ -157,6 +149,10 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_base
 Requires:       pattern() = ckoomen_virtualization_minimal
 
+Requires:       qemu-ui-spice-app
+Requires:       glusterfs
+Requires:       libvirt-daemon-driver-storage-gluster
+Requires:       virt-top
 Requires:       kernel-%{kernel_flavour}-devel
 %ifarch x86_64
 Requires:       /usr/bin/readelf
@@ -283,6 +279,7 @@ Requires:       zig-wrapper
 Requires:       osc
 Requires:       build
 Requires:       python3-keyring
+Requires:       obs-service-format_spec_file
 # Utils
 Requires:       android-tools
 Requires:       libcamera-tools
