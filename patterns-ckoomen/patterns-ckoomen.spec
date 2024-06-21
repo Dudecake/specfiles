@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.39
-Release:        2%{?dist}
+Version:        0.0.40
+Release:        0%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -126,6 +126,7 @@ Requires:       driverctl
 Requires:       virtio-win
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
+Requires:       kernel-cloud-hypervisor-guest
 Requires:       ipxe-bootimgs
 %ifarch x86_64
 Requires:       qemu-kvm
@@ -183,7 +184,19 @@ Requires:       ckoomen-utils-ceph
 Requires:       targetcli-fb
 Requires:       target-isns
 Requires:       tcmu-runner
-# Kubernetes
+
+%description iot
+%{summary}
+
+%package kubernetes
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_kubernetes
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10006
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_iot
 Requires:       helm
 Requires:       helm-zsh-completion
 Requires:       ceph-csi
@@ -194,11 +207,10 @@ Requires:       cri-o-kubeadm-criconfig
 Requires:       kubernetes-kubeadm
 Requires:       kompose
 %ifarch x86_64
-Requires:       katacontainers
+Recommends:       katacontainers
 %endif
-Requires:       kernel-cloud-hypervisor-guest
 
-%description iot
+%description kubernetes
 %{summary}
 
 %package hw-accel
@@ -207,7 +219,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_hw_accel
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10006
+Provides:       pattern-order() = 10007
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_base_minimal
 %ifarch x86_64
@@ -232,7 +244,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10007
+Provides:       pattern-order() = 10008
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_hw_accel
 Requires:       pattern() = ckoomen_base
@@ -264,12 +276,13 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop_applications
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10008
+Provides:       pattern-order() = 10009
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 # Coding
 Requires:       code
 Requires:       lapce
+Requires:       zed
 Requires:       maven-wrapper
 Requires:       java-21-openjdk
 Requires:       java-21-openjdk-devel
@@ -308,7 +321,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_media
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10009
+Provides:       pattern-order() = 10010
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       gimp
@@ -328,7 +341,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_games
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10010
+Provides:       pattern-order() = 10011
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       desmume
@@ -363,7 +376,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_plasma
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10011
+Provides:       pattern-order() = 10012
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
@@ -382,10 +395,24 @@ Requires:       xwaylandvideobridge
 %description plasma
 %{summary}
 
+%package cosmic
+Summary:        openSUSE base CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_plasma
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10012
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_desktop
+Requires:       cosmic-desktop
+
+%description cosmic
+%{summary}
+
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base-minimal base virtualization-minimal virtualization iot hw-accel desktop desktop-applications media games plasma
+    base-minimal base virtualization-minimal virtualization iot kubernetes hw-accel desktop desktop-applications media games plasma cosmic
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
@@ -412,6 +439,10 @@ done
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/iot.txt
 
+%files kubernetes
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/kubernetes.txt
+
 %files hw-accel
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/hw-accel.txt
@@ -435,3 +466,7 @@ done
 %files plasma
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/plasma.txt
+
+%files cosmic
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/cosmic.txt
