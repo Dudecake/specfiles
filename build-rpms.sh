@@ -44,6 +44,25 @@ createrepo --update "${BUILDDIR}/noarch"
 createrepo --update "${BUILDDIR}/${ARCH}"
 rpmdev-setuptree
 set +e
+if [[ ! -z "${GPG_PATH}" ]]; then
+  dnf -y install rpm-sign
+  PASSPHRASE_FILE="$(dirname "${GPG_PATH}")/passphrase"
+  GPG_SIGN_CMD_EXTRA_ARGS="--batch --no-tty"
+  echo "Checking for existence of passphrase file ${PASSPHRASE_FILE}" >&2
+  if [[ -r "${PASSPHRASE_FILE}" ]]; then
+    echo "Found passphrase file" >&2
+    PASSPHRASE="--passphrase-file ${PASSPHRASE_FILE}"
+    GPG_SIGN_CMD_EXTRA_ARGS="--trust-model always --pinentry-mode loopback ${GPG_SIGN_CMD_EXTRA_ARGS} ${PASSPHRASE}"
+  else
+    echo "Passphrase file doesn't exists or isn't readable" >&2
+  fi
+  echo "Using GPG_SIGN_CMD_EXTRA_ARGS '${GPG_SIGN_CMD_EXTRA_ARGS}'" >&2
+  echo "%_gpg_sign_cmd_extra_args ${GPG_SIGN_CMD_EXTRA_ARGS}" >> ~/.rpmmacros
+  echo "%_gpg_name ${GPG_NAME}" >> ~/.rpmmacros
+  gpg --batch ${PASSPHRASE} --import "${GPG_PATH}"
+else
+  echo 'GPG_PATH unset, not signing packages' >&2
+fi
 failed_pkgs=()
 pushd . > /dev/null
 for dir in ./*/; do
@@ -64,38 +83,22 @@ for dir in ./*/; do
     echo "Could not build ${dir}" >&2
     failed_pkgs+=("${dir}")
   else
+    [[ ! -z "${GPG_PATH}" ]] && find ${BUILDDIR} -type f -name \*.rpm -exec rpm --addsign  {} \; 2> /dev/null
+    mv ${BUILDDIR}/source/*src.rpm "${RESULTDIR}/source/tree/"
+    cp -n ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/" 2> /dev/null
+    cp -n ${BUILDDIR}/${ARCH}/*.rpm "${RESULTDIR}/${ARCH}/os" 2> /dev/null
+    cp -n ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/aarch64/os" 2> /dev/null
+    cp -n ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/x86_64/os" 2> /dev/null
+    cp -n ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/ppc64le/os" 2> /dev/null
     createrepo --update "${BUILDDIR}/noarch"
     createrepo --update "${BUILDDIR}/${ARCH}"
   fi
 done
 mkdir -p ${RESULTDIR}/{aarch64,x86_64,ppc64le}/{debug/tree,os} ${RESULTDIR}/source/tree
-if [[ ! -z "${GPG_PATH}" ]]; then
-  dnf -y install rpm-sign
-  PASSPHRASE_FILE="$(dirname "${GPG_PATH}")/passphrase"
-  GPG_SIGN_CMD_EXTRA_ARGS="--batch --no-tty"
-  echo "Checking for existence of passphrase file ${PASSPHRASE_FILE}" >&2
-  if [[ -r "${PASSPHRASE_FILE}" ]]; then
-    echo "Found passphrase file" >&2
-    PASSPHRASE="--passphrase-file ${PASSPHRASE_FILE}"
-    GPG_SIGN_CMD_EXTRA_ARGS="--trust-model always --pinentry-mode loopback ${GPG_SIGN_CMD_EXTRA_ARGS} ${PASSPHRASE}"
-  else
-    echo "Passphrase file doesn't exists or isn't readable" >&2
-  fi
-  echo "Using GPG_SIGN_CMD_EXTRA_ARGS '${GPG_SIGN_CMD_EXTRA_ARGS}'" >&2
-  echo "%_gpg_sign_cmd_extra_args ${GPG_SIGN_CMD_EXTRA_ARGS}" >> ~/.rpmmacros
-  echo "%_gpg_name ${GPG_NAME}" >> ~/.rpmmacros
-  gpg --batch ${PASSPHRASE} --import "${GPG_PATH}"
-  find ${BUILDDIR} -type f -name \*.rpm -exec rpm --addsign  {} \;
-else
-  echo 'GPG_PATH unset, not signing packages' >&2
-fi
-mv ${BUILDDIR}/source/*src.rpm "${RESULTDIR}/source/tree/"
-mv ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/"
-cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/aarch64/os"
-cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/x86_64/os"
-cp ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/ppc64le/os"
+rm ${BUILDDIR}/source/*src.rpm
+rm ${BUILDDIR}/${ARCH}/*.rpm
 rm ${BUILDDIR}/noarch/*.noarch.rpm
-mv ${BUILDDIR}/${ARCH}/*.rpm "${RESULTDIR}/${ARCH}/os"
+rm ${BUILDDIR}/${ARCH}/*.rpm
 for repo in "${RESULTDIR}/source/tree" "${RESULTDIR}/${ARCH}/debug/tree" "${RESULTDIR}/${ARCH}/os"; do
   createrepo --update "${repo}"
   pkgs_to_remove=($(repomanage --old "${repo}" | grep -v /kernel))
