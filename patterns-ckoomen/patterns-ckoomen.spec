@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.40
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -386,6 +386,7 @@ Requires:       okular
 Requires:       kamoso
 Requires:       kalk
 Requires:       krecorder
+Requires:       krdp6
 Requires:       krfb
 Requires:       krdc
 Requires:       ksshaskpass6
