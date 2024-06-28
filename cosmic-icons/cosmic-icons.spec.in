@@ -1,11 +1,12 @@
 %define githash ${githash}
+%define release ${release}
 %define shorthash ${shorthash}
 %define reponame ${reponame}
 %define pkgname ${pkgname}
 
 Name:           %{pkgname}
 Version:        0.1.0
-Release:        1.git%{shorthash}%{?dist}
+Release:        %{release}.git%{shorthash}%{?dist}
 Summary:        ${summary}
 
 License:        GPL-3.0

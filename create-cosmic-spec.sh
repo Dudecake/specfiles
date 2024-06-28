@@ -13,6 +13,7 @@ hash_and_date=($(curl -sSL https://api.github.com/repos/pop-os/${reponame}/commi
 
 githash="${hash_and_date[0]}"
 date="${hash_and_date[1]:0:10}"
+release="$(curl -sSL "https://api.github.com/repos/pop-os/${reponame}/commits?per_page=1" --head | grep -Po '(?<=page=)\d+(?=>; rel="last")')"
 
 [[ -d ${reponame}-${githash} ]] || curl -L https://github.com/pop-os/${reponame}/archive/${githash}.tar.gz | bsdtar -xf -
 
@@ -30,7 +31,7 @@ fi
 spec="../cosmic.spec.in"
 [[ -f ${pkgname}.spec.in ]] && spec="${pkgname}.spec.in"
 
-sed "s:\${githash}:${githash}:g; s:\${shorthash}:${githash:0:7}:g; s:\${reponame}:${reponame}:g; s:\${pkgname}:${pkgname}:g; s:\${summary}:${summary}:g; s/\${date}/${date}/g; s:\${build}:${build//$'\n'/\\n}:; s:\${install}:${install//$'\n'/\\n}:; s:\${files}:${files//$'\n'/\\n}:g" ${spec} > ${pkgname}.spec
+sed "s:\${githash}:${githash}:g; s:\${shorthash}:${githash:0:7}:g; s:\${release}:${release}:g; s:\${reponame}:${reponame}:g; s:\${pkgname}:${pkgname}:g; s:\${summary}:${summary}:g; s/\${date}/${date}/g; s:\${build}:${build//$'\n'/\\n}:; s:\${install}:${install//$'\n'/\\n}:; s:\${files}:${files//$'\n'/\\n}:g" ${spec} > ${pkgname}.spec
 
 RPM_FILE=$(python3 -c "import specfile; print(specfile.Specfile(\"${pkgname}.spec\").expand(\"%name-%version-%release.src.rpm\"))")
 if [[ -z "${FORCE_REBUILD}" && -f "${repo}/source/tree/${RPM_FILE}" ]]; then
