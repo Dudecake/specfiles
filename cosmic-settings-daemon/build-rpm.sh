@@ -4,6 +4,7 @@ set -e
 
 files="
 %{_bindir}/cosmic-settings-daemon
+%{_datadir}/cosmic/com.system76.CosmicSettings.Shortcuts/v1/system_actions
 "
 
 pkgname="cosmic-settings-daemon"
