@@ -1,7 +1,7 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.40
+Version:        0.0.41
 Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
@@ -132,7 +132,6 @@ Requires:       ipxe-bootimgs
 Requires:       qemu-kvm
 Requires:       rust-hypervisor-firmware-bin
 %endif
-Requires:       kubernetes1.30-client
 # Storage
 Requires:       ckoomen-config-dracut
 
@@ -174,13 +173,7 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
 # Storage
-Requires:       ceph
-Requires:       ceph-iscsi
-Requires:       ceph-mgr-dashboard
-Requires:       ceph-radosgw
-Requires:       cephfs-top
-Requires:       nfs-ganesha-ceph
-Requires:       ckoomen-utils-ceph
+Requires:       zfs
 Requires:       targetcli-fb
 Requires:       target-isns
 Requires:       tcmu-runner
@@ -199,8 +192,6 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_iot
 Requires:       helm
 Requires:       helm-zsh-completion
-Requires:       ceph-csi
-Requires:       ceph-csi-helm-charts
 Requires:       cri-tools
 Requires:       cri-o
 Requires:       cri-o-kubeadm-criconfig
