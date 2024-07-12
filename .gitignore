@@ -6,3 +6,4 @@ repo
 cosmic-*/cosmic-*
 !cosmic-*/build-rpm.sh
 !cosmic-*/cosmic-*.spec.in
+zfs/zfs-*
