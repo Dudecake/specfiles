@@ -31,7 +31,7 @@ uses_make=0
 [[ -f ${reponame}-${githash}/Makefile ]] && uses_make=1
 if [[ -z "${build}" ]]; then
   build='VERGEN_GIT_SHA="%{githash}" VERGEN_GIT_COMMIT_DATE="%{date}" just build-vendored'
-  (( uses_make == 1 )) && build='%make_build all VENDOR=1'
+  (( uses_make == 1 )) && build='VERGEN_GIT_SHA="%{githash}" VERGEN_GIT_COMMIT_DATE="%{date}" %make_build all VENDOR=1'
 fi
 if [[ -z "${install}" ]]; then
   install='just rootdir=%{buildroot} prefix=%{_prefix} install'
