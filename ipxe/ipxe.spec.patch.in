@@ -3,7 +3,7 @@
 @@ -24,12 +24,16 @@
 
  Name:           ipxe
- Version:        1.21.1+git20230120.a99e435c
+ Version:        __version__
 -Release:        __release__
 +Release:        __new_release__
  Summary:        A Network Boot Firmware
@@ -11,6 +11,7 @@
  Group:          System/Boot
  URL:            https://ipxe.org/
  Source:         %{name}-%{version}.tar.xz
+ Patch0:         syslinux-mtools.patch
 +Patch0001:      https://src.fedoraproject.org/rpms/ipxe/raw/rawhide/f/0001-build-customize-configuration.patch
 +Patch0002:      https://src.fedoraproject.org/rpms/ipxe/raw/rawhide/f/0002-Use-spec-compliant-timeouts.patch
 +Patch0003:      0003-build-customize-configuration.patch
@@ -51,6 +52,6 @@
  %prep
  %setup -q
 +%autopatch -p1
+ cd src
 
  %build
- cd src
