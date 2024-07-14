@@ -5,6 +5,7 @@ set -e
 files="
 %{_bindir}/cosmic-settings-daemon
 %{_datadir}/cosmic/com.system76.CosmicSettings.Shortcuts/v1/system_actions
+%{_datadir}/polkit-1/rules.d/cosmic-settings-daemon.rules
 "
 
 pkgname="cosmic-settings-daemon"
