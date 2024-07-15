@@ -26,8 +26,21 @@ touch "${srcdir}/TOLERATE-UNKNOWN-NEW-CONFIG-OPTIONS"
 if [[ ! -z "${SBOOT_BASE}" ]]; then
   cp ${SBOOT_BASE}.* "${srcdir}"
   cp ${SBOOT_BASE}.crt "${srcdir}/_projectcert.crt"
-  mkdir "${srcdir}/.kernel_signing_certs"
+  mkdir -p "${srcdir}/.kernel_signing_certs"
   cp ${SBOOT_BASE}.crt "${srcdir}/.kernel_signing_certs/"
+  space="" ; for f in ${srcdir}/*.crt; do
+    if ! test -e "$f"; then
+        continue
+    fi
+    h=$(openssl x509 -inform PEM -fingerprint -noout -in "$f")
+    if [ -z "$h" ] ; then
+        echo Cannot parse "$f" >&2
+        confinue
+    fi
+    cert=$(echo "$h" | sed -rn 's/^SHA1 Fingerprint=//; T; s/://g; s/(.{8}).*/\\1/p')
+    echo Found signing certificate "$f" "($cert)" >&2
+    cat "$f"
+  done
 fi
 popd > /dev/null
 rpmbuild -bs "${specfile}" -D "_srcrpmdir ${PWD}" -D "_sourcedir ${srcdir}"
@@ -41,4 +54,3 @@ if [[ ! -z "${FORCE_REBUILD}" || ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
 else
   echo "No rebuild neccesary for package $(basename $PWD)" >&2
 fi
-[[ -z "${SBOOT_BASE}" ]] || cp ${SBOOT_BASE}.* "${srcdir}/${SBOOT_BASE##*/}"
