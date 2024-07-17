@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -44,6 +44,7 @@ Requires:       ncdu
 Requires:       dysk
 Requires:       nmap
 Requires:       mlocate
+Requires:       tree
 
 %description base-minimal
 %{summary}
@@ -174,6 +175,7 @@ Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
 # Storage
 Requires:       zfs
+Requires:       zfstools
 Requires:       targetcli-fb
 Requires:       target-isns
 Requires:       tcmu-runner
