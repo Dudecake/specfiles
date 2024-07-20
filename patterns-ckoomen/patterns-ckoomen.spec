@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -79,6 +79,7 @@ Requires:       setroubleshoot
 Requires:       setroubleshoot-server
 # IDM
 Requires:       freeipa-client
+Requires:       python3-ifaddr
 Requires:       oddjob
 Requires:       oddjob-mkhomedir
 # Network config
@@ -250,6 +251,7 @@ Requires:       firewall-applet
 Requires:       filelight
 Requires:       kdeconnect-kde
 Requires:       ckoomen-config-network-wifi
+Requires:       /usr/bin/fusermount
 %ifarch x86_64
 Requires:       steam-devices
 %endif
