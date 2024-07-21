@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -283,6 +283,7 @@ Requires:       java-21-openjdk
 Requires:       java-21-openjdk-devel
 Requires:       java-21-openjdk-javadoc
 Requires:       java-21-openjdk-src
+Requires:       java-21-openjdk-jmods
 Requires:       zig-wrapper
 Requires:       osc
 Requires:       build
