@@ -12,7 +12,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.3.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: ZFSTools
 License: BSD
 URL: https://github.com/bdrewery/%{gem_name}
@@ -39,6 +39,7 @@ BuildRequires: ruby
 # BuildRequires: rubygem(jeweler) < 1.9
 # BuildRequires: rubygem(simplecov)
 %endif
+Provides: %{mod_name}
 BuildArch: noarch
 
 %description
