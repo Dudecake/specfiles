@@ -12,11 +12,13 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.3.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: ZFSTools
 License: BSD
 URL: https://github.com/bdrewery/%{gem_name}
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
+Source1: zfs-auto-snapshot.service.in
+Source2: zfs-auto-snapshot.timer.in
 %if 0%{?suse_version}
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby-macros >= 5
@@ -99,6 +101,18 @@ pushd .%{gem_instdir}
 popd
 %endif
 
+%{__mkdir} -p %{buildroot}%{_unitdir}
+sed 's/__name__/frequent/g; s/__time__/\*:0\/15/g; /Persistent/d' %{SOURCE2} > %{buildroot}%{_unitdir}/zfs-auto-snapshot-frequent.timer
+sed 's/__name__/frequent/g; s/__count__/4/g' %{SOURCE1} > %{buildroot}%{_unitdir}/zfs-auto-snapshot-frequent.service
+sed 's/__name__/hourly/g; s/__time__/hourly/g; /Persistent/d' %{SOURCE2} > %{buildroot}%{_unitdir}/zfs-auto-snapshot-hourly.timer
+for unit in daily weekly monthly; do
+  sed "s/__name__/${unit}/g; s/__time__/${unit}/g; /Persistent/d" %{SOURCE2} > %{buildroot}%{_unitdir}/zfs-auto-snapshot-${unit}.timer
+done
+sed 's/__name__/hourly/g; s/__count__/24/g' %{SOURCE1} > %{buildroot}%{_unitdir}/zfs-auto-snapshot-hourly.service
+sed 's/__name__/daily/g; s/__count__/31/g' %{SOURCE1} > %{buildroot}%{_unitdir}/zfs-auto-snapshot-daily.service
+sed 's/__name__/weekly/g; s/__count__/8/g' %{SOURCE1} > %{buildroot}%{_unitdir}/zfs-auto-snapshot-weekly.service
+sed 's/__name__/monthly/g; s/__count__/24/g' %{SOURCE1} > %{buildroot}%{_unitdir}/zfs-auto-snapshot-monthly.service
+
 %files
 %dir %{gem_instdir}
 %{_bindir}/zfs-auto-snapshot*
@@ -110,6 +124,7 @@ popd
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
+%{_unitdir}/zfs-auto-snapshot-*
 
 %files doc
 %doc %{gem_docdir}

@@ -1,0 +1,9 @@
+[Unit]
+Description=Run zfs-auto-snapshot __name__
+
+[Timer]
+OnCalendar=__time__
+Persistent=true
+
+[Install]
+WantedBy=timers.target

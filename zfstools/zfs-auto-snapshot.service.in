@@ -1,0 +1,6 @@
+[Unit]
+Description=zfs-auto-snapshot __name__
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/zfs-auto-snapshot __name__ __count__
