@@ -12,7 +12,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.3.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: ZFSTools
 License: BSD
 URL: https://github.com/bdrewery/%{gem_name}
