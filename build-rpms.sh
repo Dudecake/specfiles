@@ -15,7 +15,7 @@ fi
 
 set -e
 cd ${SCRIPTDIR}
-mkdir -p ${BUILDDIR}/{noarch,${ARCH}}
+mkdir -p ${BUILDDIR}/{noarch,${ARCH},source}
 [[ $(command -v rpmdev-spectool) != '' ]] && ln -sf $(command -v rpmdev-spectool) /usr/local/bin/spectool
 rm -f /etc/yum.repos.d/build.repo
 cat << EOF > /etc/yum.repos.d/build.repo
@@ -84,7 +84,7 @@ for dir in ./*/; do
     failed_pkgs+=("${dir}")
   else
     [[ ! -z "${GPG_PATH}" ]] && find ${BUILDDIR} -type f -name \*.rpm -exec rpm --addsign  {} \; 2> /dev/null
-    mv ${BUILDDIR}/source/*src.rpm "${RESULTDIR}/source/tree/"
+    mv ${BUILDDIR}/source/*src.rpm "${RESULTDIR}/source/tree/" 2> /dev/null
     cp -n ${BUILDDIR}/${ARCH}/*-debug{info,source}-*.rpm "${RESULTDIR}/${ARCH}/debug/tree/" 2> /dev/null
     cp -n ${BUILDDIR}/${ARCH}/*.rpm "${RESULTDIR}/${ARCH}/os" 2> /dev/null
     cp -n ${BUILDDIR}/noarch/*.noarch.rpm "${RESULTDIR}/aarch64/os" 2> /dev/null
