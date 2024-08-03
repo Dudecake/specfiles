@@ -48,7 +48,7 @@ RPM_FILE="$(ls -1 kernel-ckoomen-*.nosrc.rpm)"
 if [[ ! -z "${FORCE_REBUILD}" || ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   dnf builddep -y ./*.nosrc.rpm
   dnf install -y /usr/bin/openssl
-  BRP_PESIGN_COMPRESS_MODULE=${COMPRESS_MODULES} rpmbuild -bb "${specfile}" -D "_rpmdir ${1}" -D "_srcrpmdir ${1}" -D "_sourcedir ${srcdir}"
+  PATH=${PATH}:$(rpm -E "%{_builddir}/$(rpm -q --qf '%{name}-%{version}\n' ${RPM_FILE})/linux-${SRCVERSION}/linux-obj/scripts/mod") BRP_PESIGN_COMPRESS_MODULE=${COMPRESS_MODULES} rpmbuild -bb "${specfile}" -D "_rpmdir ${1}" -D "_srcrpmdir ${1}" -D "_sourcedir ${srcdir}"
   mkdir -p "${1}/source"
   mv ./kernel-ckoomen-*.nosrc.rpm "${1}/source"
 else
