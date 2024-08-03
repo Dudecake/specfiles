@@ -46,9 +46,11 @@ popd > /dev/null
 rpmbuild -bs "${specfile}" -D "_srcrpmdir ${PWD}" -D "_sourcedir ${srcdir}"
 RPM_FILE="$(ls -1 kernel-ckoomen-*.nosrc.rpm)"
 if [[ ! -z "${FORCE_REBUILD}" || ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
+  version=$(rpm -q --qf '%{version}' ${RPM_FILE})
+  release=$(rpm -q --qf '%{release}' ${RPM_FILE})
   dnf builddep -y ./*.nosrc.rpm
   dnf install -y /usr/bin/openssl
-  PATH=${PATH}:$(rpm -E "%{_builddir}/$(rpm -q --qf '%{name}-%{version}\n' ${RPM_FILE})/linux-${SRCVERSION}/linux-obj/scripts/mod") BRP_PESIGN_COMPRESS_MODULE=${COMPRESS_MODULES} rpmbuild -bb "${specfile}" -D "_rpmdir ${1}" -D "_srcrpmdir ${1}" -D "_sourcedir ${srcdir}"
+  PATH=${PATH}:$(rpm -E "%{_builddir}/$(rpm -q --qf '%{name}-%{version}\n' ${RPM_FILE})/linux-${SRCVERSION}/linux-obj/scripts/mod"):$(rpm -D 'NAME kernel-ckoomen' -D "VERSION ${version}" -D "RELEASE ${release}" -E "%{buildroot}/usr/src/linux-${version}-${release}-obj/${ARCH}/ckoomen/scripts/mod") BRP_PESIGN_COMPRESS_MODULE=${COMPRESS_MODULES} rpmbuild -bb "${specfile}" -D "_rpmdir ${1}" -D "_srcrpmdir ${1}" -D "_sourcedir ${srcdir}"
   mkdir -p "${1}/source"
   mv ./kernel-ckoomen-*.nosrc.rpm "${1}/source"
 else
