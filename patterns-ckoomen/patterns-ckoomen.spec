@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -79,6 +79,7 @@ Requires:       setroubleshoot
 Requires:       setroubleshoot-server
 # IDM
 Requires:       freeipa-client
+# For ipa-client-install
 Requires:       python3-ifaddr
 Requires:       oddjob
 Requires:       oddjob-mkhomedir
@@ -129,6 +130,9 @@ Requires:       virtio-win
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
 Requires:       kernel-cloud-hypervisor-guest
+Requires:       /usr/bin/ukify
+# For ukify
+Requires:       python3-pefile
 Requires:       ipxe-bootimgs
 %ifarch x86_64
 Requires:       qemu-kvm
@@ -284,6 +288,8 @@ Requires:       java-21-openjdk-devel
 Requires:       java-21-openjdk-javadoc
 Requires:       java-21-openjdk-src
 Requires:       java-21-openjdk-jmods
+# For openjfx
+Requires:       libgthread-2_0-0
 Requires:       zig-wrapper
 Requires:       osc
 Requires:       build
