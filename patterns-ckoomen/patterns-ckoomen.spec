@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -130,6 +130,7 @@ Requires:       virtio-win
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
 Requires:       kernel-cloud-hypervisor-guest
+Requires:       mtools
 Requires:       /usr/bin/ukify
 # For ukify
 Requires:       python3-pefile
@@ -401,10 +402,10 @@ Requires:       xwaylandvideobridge
 %package cosmic
 Summary:        openSUSE base CKoomen pattern
 Group:          Metapackages
-Provides:       pattern() = ckoomen_plasma
+Provides:       pattern() = ckoomen_cosmic
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10012
+Provides:       pattern-order() = 10013
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       cosmic-desktop
