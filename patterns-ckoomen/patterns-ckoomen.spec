@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -134,7 +134,7 @@ Requires:       mtools
 Requires:       /usr/bin/ukify
 # For ukify
 Requires:       python3-pefile
-Requires:       /usr/lib/systemd/boot/efi/linuxx64.efi.stub
+Requires:       systemd-boot
 Requires:       ipxe-bootimgs
 %ifarch x86_64
 Requires:       qemu-kvm
