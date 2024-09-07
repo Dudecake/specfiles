@@ -10,6 +10,8 @@ Source2:        ls-reset.sh
 Source3:        generate-extlinuxconf.sh
 Source4:        generate-ipxe.sh
 Source5:        targetcli-add-isos.sh
+Source6:        cloud-hypervisor-container.sh
+Source7:        cloud-hypervisor-virtiofs.sh
 Requires:       findutils
 Requires:       pciutils
 
