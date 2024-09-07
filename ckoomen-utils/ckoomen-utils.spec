@@ -1,5 +1,5 @@
 Name:           ckoomen-utils
-Version:        0.0.6
+Version:        0.0.7
 Release:        1%{?dist}
 Summary:        Utils for CKoomen
 
@@ -18,6 +18,15 @@ BuildArch:      noarch
 %description
 %{summary}
 
+%package virt
+Summary:        Virt utils for CKoomen
+Requires:       cloud-hypervisor
+Requires:       kernel-cloud-hypervisor-guest
+Requires:       podman
+
+%description virt
+%{summary}
+
 %package targetcli
 Summary:        Targetcli utils for CKoomen
 
@@ -31,12 +40,16 @@ Summary:        Jetson utils for CKoomen
 %{summary}
 
 %install
-%{__install} -Dm755 -t %{buildroot}%{_bindir} %{_sourcedir}/{generate-{extlinuxconf,ipxe},ls-{iommu,reset},targetcli-add-isos}.sh
+%{__install} -Dm755 -t %{buildroot}%{_bindir} %{_sourcedir}/{cloud-hypervisor-{container,virtiofs},generate-{extlinuxconf,ipxe},ls-{iommu,reset},targetcli-add-isos}.sh
 
 %files
 %{_bindir}/generate-ipxe.sh
 %{_bindir}/ls-iommu.sh
 %{_bindir}/ls-reset.sh
+
+%files virt
+%{_bindir}/cloud-hypervisor-container.sh
+%{_bindir}/cloud-hypervisor-virtiofs.sh
 
 %files targetcli
 %{_bindir}/targetcli-add-isos.sh

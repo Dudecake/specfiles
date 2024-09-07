@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -130,11 +130,6 @@ Requires:       virtio-win
 Requires:       cloud-hypervisor
 Requires:       edk2-cloud-hypervisor
 Requires:       kernel-cloud-hypervisor-guest
-Requires:       mtools
-Requires:       /usr/bin/ukify
-# For ukify
-Requires:       python3-pefile
-Requires:       systemd-boot
 Requires:       ipxe-bootimgs
 %ifarch x86_64
 Requires:       qemu-kvm
@@ -162,6 +157,10 @@ Requires:       glusterfs
 Requires:       libvirt-daemon-driver-storage-gluster
 Requires:       virt-top
 Requires:       kernel-%{kernel_flavour}-devel
+Requires:       mtools
+Requires:       /usr/bin/ukify
+# For ukify
+Requires:       python3-pefile
 %ifarch x86_64
 Requires:       /usr/bin/readelf
 Recommends:     vendor-reset-kmp-%{kernel_flavour}
@@ -234,6 +233,7 @@ Requires:       libvdpau_virtio_gpu
 Requires:       Mesa-libRusticlOpenCL
 Requires:       clinfo
 Requires:       libvirglrenderer1
+Requires:       vulkan-validationlayers
 
 %description hw-accel
 %{summary}
