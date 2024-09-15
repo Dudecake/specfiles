@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -179,6 +179,10 @@ Provides:       pattern-order() = 10005
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
+# DHCP
+Requires:       bind
+Requires:       kea
+Requires:       tftp
 # Storage
 Requires:       zfs
 Requires:       zfstools
