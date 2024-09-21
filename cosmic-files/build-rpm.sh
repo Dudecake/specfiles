@@ -4,6 +4,7 @@ set -e
 
 files="
 %{_bindir}/cosmic-files
+%{_bindir}/cosmic-files-applet
 %{_datadir}/applications/com.system76.CosmicFiles.desktop
 %{_datadir}/icons/hicolor/128x128/apps/com.system76.CosmicFiles.svg
 %{_datadir}/icons/hicolor/16x16/apps/com.system76.CosmicFiles.svg
