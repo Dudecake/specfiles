@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -67,6 +67,7 @@ Requires:       sbsigntools
 Requires:       systemd-zram-service
 Requires:       usbutils
 Requires:       libiscsi-utils
+Requires:       udisks2
 # Container support
 Requires:       arch-install-scripts
 Requires:       qemu-linux-user
