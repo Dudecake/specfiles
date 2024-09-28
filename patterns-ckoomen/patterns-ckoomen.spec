@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -188,6 +188,7 @@ Requires:       tftp
 Requires:       zfs
 Requires:       zfstools
 Requires:       targetcli-fb
+Requires:       ckoomen-utils-targetcli
 Requires:       target-isns
 Requires:       tcmu-runner
 
