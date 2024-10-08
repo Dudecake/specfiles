@@ -1,5 +1,5 @@
 Name:           zig-wrapper
-Version:        0.0.2
+Version:        0.0.5
 Release:        1%{?dist}
 Summary:        Maven wrapper installer script
 
