@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -13,7 +13,7 @@ URL:            https://repo.ckoomen.eu/opensuse/
 %{summary}
 
 %package base-minimal
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE minimal base CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_base_minimal
 Provides:       pattern-category() = CKoomen
@@ -98,7 +98,7 @@ Requires:       ckoomen-config-network
 %{summary}
 
 %package virtualization-minimal
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE minimal virtualization CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_virtualization_minimal
 Provides:       pattern-category() = CKoomen
@@ -143,7 +143,7 @@ Requires:       ckoomen-config-dracut
 %{summary}
 
 %package virtualization
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE virtualization CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_virtualization
 Provides:       pattern-category() = CKoomen
@@ -171,7 +171,7 @@ Recommends:     vendor-reset-kmp-%{kernel_flavour}
 %{summary}
 
 %package iot
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE iot CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_iot
 Provides:       pattern-category() = CKoomen
@@ -196,7 +196,7 @@ Requires:       tcmu-runner
 %{summary}
 
 %package kubernetes
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE kubernetes CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_kubernetes
 Provides:       pattern-category() = CKoomen
@@ -219,7 +219,7 @@ Recommends:       katacontainers
 %{summary}
 
 %package hw-accel
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE hw accel CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_hw_accel
 Provides:       pattern-category() = CKoomen
@@ -245,7 +245,7 @@ Requires:       vulkan-validationlayers
 %{summary}
 
 %package desktop
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE desktop CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop
 Provides:       pattern-category() = CKoomen
@@ -278,7 +278,7 @@ Requires:       nextcloud-client
 %{summary}
 
 %package desktop-applications
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE desktop applications CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop_applications
 Provides:       pattern-category() = CKoomen
@@ -326,7 +326,7 @@ Requires:       qpwgraph
 %{summary}
 
 %package media
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE media CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_media
 Provides:       pattern-category() = CKoomen
@@ -346,7 +346,7 @@ Recommends:     FreeCAD
 %{summary}
 
 %package games
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE games CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_games
 Provides:       pattern-category() = CKoomen
@@ -381,7 +381,7 @@ Requires:       steam
 %{summary}
 
 %package plasma
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE plasma CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_plasma
 Provides:       pattern-category() = CKoomen
@@ -407,7 +407,7 @@ Requires:       xwaylandvideobridge
 %{summary}
 
 %package cosmic
-Summary:        openSUSE base CKoomen pattern
+Summary:        openSUSE COSMIC CKoomen pattern
 Group:          Metapackages
 Provides:       pattern() = ckoomen_cosmic
 Provides:       pattern-category() = CKoomen
@@ -420,10 +420,24 @@ Requires:       cosmic-desktop
 %description cosmic
 %{summary}
 
+%package reform
+Summary:        openSUSE Reform CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_reform
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10014
+Provides:       pattern-visible()
+Requires:       dfu-programmer
+Requires:       picotool
+
+%description reform
+%{summary}
+
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base-minimal base virtualization-minimal virtualization iot kubernetes hw-accel desktop desktop-applications media games plasma cosmic
+    base-minimal base virtualization-minimal virtualization iot kubernetes hw-accel desktop desktop-applications media games plasma cosmic reform
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
@@ -481,3 +495,7 @@ done
 %files cosmic
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/cosmic.txt
+
+%files reform
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/reform.txt
