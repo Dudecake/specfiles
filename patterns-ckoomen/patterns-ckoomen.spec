@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.41
-Release:        13%{?dist}
+Release:        14%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -375,6 +375,9 @@ Requires:       ppsspp-qt
 #Requires:       scorched3d
 Requires:       heroic
 Requires:       steam
+Requires:       umu-launcher
+Requires:       lutris
+Requires:       wine-staging-wow64
 %endif
 
 %description games
