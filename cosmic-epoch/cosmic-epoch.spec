@@ -1,6 +1,6 @@
 # COSMIC Desktop meta package
 Name:           cosmic-epoch
-Version:        0.1.0
+Version:        1.0.0
 
 Release:        1%{?dist}
 Summary:        The next generation COSMIC Desktop Environment

@@ -5,7 +5,7 @@
 %define pkgname cosmic-applet
 
 Name:           %{pkgname}
-Version:        0.1.0
+Version:        1.0.0
 Release:        %{release}.git%{shorthash}%{?dist}
 Summary:        WIP applets for cosmic-panel
 
@@ -103,6 +103,7 @@ Summary:        Common files for WIP applets for the COSMIC Desktop Environment
 
 %package app-list
 Summary:        WIP app list applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -119,6 +120,7 @@ Requires:       cosmic-applet-common
 
 %package audio
 Summary:        WIP audio applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -133,6 +135,7 @@ Requires:       cosmic-applet-common
 
 %package battery
 Summary:        WIP battery applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -188,6 +191,7 @@ Requires:       cosmic-applet-common
 
 %package bluetooth
 Summary:        WIP bluetooth applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -205,6 +209,7 @@ Requires:       cosmic-applet-common
 
 %package minimize
 Summary:        WIP minimize applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -219,6 +224,7 @@ Requires:       cosmic-applet-common
 
 %package network
 Summary:        WIP network applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -233,6 +239,7 @@ Requires:       cosmic-applet-common
 
 %package notifications
 Summary:        WIP notifications applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -251,6 +258,7 @@ Requires:       cosmic-applet-common
 
 %package panel-button
 Summary:        WIP panel button applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -269,6 +277,7 @@ Requires:       cosmic-applet-common
 
 %package power
 Summary:        WIP power applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -283,6 +292,7 @@ Requires:       cosmic-applet-common
 
 %package status-area
 Summary:        WIP status area applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -297,6 +307,7 @@ Requires:       cosmic-applet-common
 
 %package tiling
 Summary:        WIP tiling applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -312,6 +323,7 @@ Requires:       cosmic-applet-common
 
 %package time
 Summary:        WIP time applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
@@ -326,6 +338,7 @@ Requires:       cosmic-applet-common
 
 %package workspaces
 Summary:        WIP workspaces applet for cosmic-panel
+BuildArch:      noarch
 
 Requires:       cosmic-applet-common
 
