@@ -487,6 +487,10 @@ done
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/devel-java.txt
 
+%files devel-cpp
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/devel-cpp.txt
+
 %files devel
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/devel.txt
