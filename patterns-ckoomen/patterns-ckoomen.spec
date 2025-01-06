@@ -1,8 +1,8 @@
 %define kernel_flavour default
 
 Name:           patterns-ckoomen
-Version:        0.0.41
-Release:        14%{?dist}
+Version:        0.0.42
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -181,8 +181,8 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
 # DHCP
-Requires:       bind
-Requires:       kea
+# Requires:       bind
+# Requires:       kea
 Requires:       tftp
 # Storage
 Requires:       zfs
@@ -195,27 +195,43 @@ Requires:       tcmu-runner
 %description iot
 %{summary}
 
-%package kubernetes
-Summary:        openSUSE kubernetes CKoomen pattern
+%package devel-java
+Summary:        openSUSE devel-java CKoomen pattern
 Group:          Metapackages
-Provides:       pattern() = ckoomen_kubernetes
+Provides:       pattern() = ckoomen_devel_java
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
 Provides:       pattern-order() = 10006
 Provides:       pattern-visible()
-Requires:       pattern() = ckoomen_iot
-Requires:       helm
-Requires:       helm-zsh-completion
-Requires:       cri-tools
-Requires:       cri-o
-Requires:       cri-o-kubeadm-criconfig
-Requires:       kubernetes-kubeadm
-Requires:       kompose
-%ifarch x86_64
-Recommends:       katacontainers
-%endif
+Requires:       maven-wrapper
+Requires:       java-21-openjdk-javadoc
+Requires:       java-21-openjdk-src
+Requires:       java-21-openjdk-jmods
 
-%description kubernetes
+%description devel-java
+%{summary}
+
+%package devel
+Summary:        openSUSE devel CKoomen pattern
+Group:          Metapackages
+Provides:       pattern() = ckoomen_devel
+Provides:       pattern-category() = CKoomen
+Provides:       pattern-icon() = pattern-generic
+Provides:       pattern-order() = 10007
+Provides:       pattern-visible()
+Requires:       pattern() = ckoomen_devel_java
+Requires:       code
+Requires:       lapce
+Requires:       zed
+# For openjfx
+Requires:       libgthread-2_0-0
+Requires:       zig-wrapper
+Requires:       osc
+Requires:       build
+Requires:       python3-keyring
+Requires:       obs-service-format_spec_file
+
+%description devel
 %{summary}
 
 %package hw-accel
@@ -224,7 +240,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_hw_accel
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10007
+Provides:       pattern-order() = 10008
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_base_minimal
 %ifarch x86_64
@@ -250,7 +266,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10008
+Provides:       pattern-order() = 10009
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_hw_accel
 Requires:       pattern() = ckoomen_base
@@ -283,26 +299,10 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_desktop_applications
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10009
+Provides:       pattern-order() = 10010
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
-# Coding
-Requires:       code
-Requires:       lapce
-Requires:       zed
-Requires:       maven-wrapper
-Requires:       java-21-openjdk
-Requires:       java-21-openjdk-devel
-Requires:       java-21-openjdk-javadoc
-Requires:       java-21-openjdk-src
-Requires:       java-21-openjdk-jmods
-# For openjfx
-Requires:       libgthread-2_0-0
-Requires:       zig-wrapper
-Requires:       osc
-Requires:       build
-Requires:       python3-keyring
-Requires:       obs-service-format_spec_file
+Requires:       pattern() = ckoomen_devel
 # Utils
 Requires:       android-tools
 Requires:       libcamera-tools
@@ -331,7 +331,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_media
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10010
+Provides:       pattern-order() = 10011
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       gimp
@@ -351,7 +351,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_games
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10011
+Provides:       pattern-order() = 10012
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       desmume
@@ -389,7 +389,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_plasma
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10012
+Provides:       pattern-order() = 10013
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       (pattern() = kde_plasma or pattern() = microos_kde_desktop)
@@ -415,7 +415,7 @@ Group:          Metapackages
 Provides:       pattern() = ckoomen_cosmic
 Provides:       pattern-category() = CKoomen
 Provides:       pattern-icon() = pattern-generic
-Provides:       pattern-order() = 10013
+Provides:       pattern-order() = 10014
 Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_desktop
 Requires:       cosmic-desktop
@@ -440,7 +440,7 @@ Requires:       picotool
 %install
 mkdir -p %{buildroot}%{_docdir}/%{name}
 PATTERNS='
-    base-minimal base virtualization-minimal virtualization iot kubernetes hw-accel desktop desktop-applications media games plasma cosmic reform
+    base-minimal base virtualization-minimal virtualization iot devel-java devel hw-accel desktop desktop-applications media games plasma cosmic reform
 '
 for i in $PATTERNS; do
     echo "This file marks the pattern $i to be installed." \
@@ -467,9 +467,13 @@ done
 %dir %{_docdir}/patterns-ckoomen
 %{_docdir}/patterns-ckoomen/iot.txt
 
-%files kubernetes
+%files devel-java
 %dir %{_docdir}/patterns-ckoomen
-%{_docdir}/patterns-ckoomen/kubernetes.txt
+%{_docdir}/patterns-ckoomen/devel-java.txt
+
+%files devel
+%dir %{_docdir}/patterns-ckoomen
+%{_docdir}/patterns-ckoomen/devel.txt
 
 %files hw-accel
 %dir %{_docdir}/patterns-ckoomen
