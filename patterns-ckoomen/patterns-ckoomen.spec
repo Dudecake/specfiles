@@ -2,7 +2,7 @@
 
 Name:           patterns-ckoomen
 Version:        0.0.42
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -222,6 +222,7 @@ Provides:       pattern-visible()
 Requires:       cmake
 Requires:       meson
 Requires:       zig-wrapper
+Requires:       gdb
 Recommends:     zig
 
 %description devel-cpp
