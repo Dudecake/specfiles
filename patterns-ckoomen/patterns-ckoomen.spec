@@ -1,8 +1,6 @@
-%define kernel_flavour default
-
 Name:           patterns-ckoomen
 Version:        0.0.42
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -157,14 +155,14 @@ Requires:       qemu-ui-spice-app
 Requires:       glusterfs
 Requires:       libvirt-daemon-driver-storage-gluster
 Requires:       virt-top
-Requires:       kernel-%{kernel_flavour}-devel
+Requires:       (kernel-default-devel or kernel-longterm-devel)
 Requires:       mtools
 Requires:       /usr/bin/ukify
 # For ukify
 Requires:       python3-pefile
 %ifarch x86_64
 Requires:       /usr/bin/readelf
-Recommends:     vendor-reset-kmp-%{kernel_flavour}
+Recommends:     (vendor-reset-kmp-default or vendor-reset-kmp-longterm)
 %endif
 
 %description virtualization
