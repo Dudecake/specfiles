@@ -1,6 +1,6 @@
 Name:           patterns-ckoomen
 Version:        0.0.42
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -302,6 +302,7 @@ Requires:       steam-devices
 Requires:       virglrenderer-test-server
 Requires:       radeontop
 # Applications
+Requires:       joycond
 Requires:       joystickwake
 Requires:       nextcloud-client
 

@@ -1,15 +1,15 @@
 Name:           joystickwake
-Version:        0.3
-Release:        3%{?dist}
+Version:        0.4.2
+Release:        0%{?dist}
 Summary:        A joystick-aware screen waker
 
 License:        GPLv3+
 URL:            https://github.com/foresto/%{name}
 Source0:        %{url}/archive/v%{version}.tar.gz
 
-BuildRequires:  python
-Requires:       python
-Requires:       python3-pyudev
+BuildRequires:  python311
+Requires:       python311
+Requires:       python311-pyudev
 Requires:       xset
 Suggests:       xscreensaver-base
 Suggests:       mate-screensaver
@@ -25,7 +25,7 @@ BuildArch:      noarch
 %setup -q
 
 %build
-python -m compileall joystickwake
+python3 -m compileall joystickwake
 
 %install
 mkdir -p %{buildroot}/%{_bindir}
