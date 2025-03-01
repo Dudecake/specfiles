@@ -10,7 +10,7 @@ if [[ ! -z "${FORCE_REBUILD}" || ! -f "${2}/source/tree/${RPM_FILE}" ]]; then
   if grep -q 'BuildRequires:' "${SPEC_FILE}"; then
     dnf builddep -y ./*.src.rpm
   fi
-  rpmbuild --rebuild ./*.src.rpm -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
+  rpmbuild --rebuild ./*.src.rpm -D "autorelease 0" -D "_rpmdir ${1}" -D "_srcrpmdir ${1}"
   mv ./*.src.rpm "${1}/source"
 else
   rm -f ./*.src.rpm
