@@ -1,8 +1,9 @@
-%define githash 9d6965c774eb3b83786276e333014ff78d8e2f15
+%define githash   33a9af7e326aa2544364a9b79a16570570f1934f
+%define shorthash 33a9af7
 
 Name:           x11spice
 Version:        1.2
-Release:        3.git9d6965c%{?dist}
+Release:        4.git%{shorthash}%{?dist}
 Summary:        x11spice connects a running X server as a Spice server.
 URL:            https://gitlab.freedesktop.org/spice/%{name}
 License:        GPLv3
