@@ -1,6 +1,6 @@
 Name:           python3-gbinder
-Version:        1.1.1
-Release:        3%{?dist}
+Version:        1.1.2
+Release:        1%{?dist}
 Summary:        Python bindings for libgbinder
 
 License:        GPLv3
