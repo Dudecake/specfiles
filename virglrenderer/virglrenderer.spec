@@ -24,7 +24,7 @@
 %define         libname lib%{name}1
 Name:           virglrenderer
 Version:        1.1.0
-Release:        0
+Release:        1
 Summary:        Virgl Rendering library
 License:        MIT
 Group:          Development/Libraries/C and C++
@@ -86,6 +86,7 @@ without GL.
     -Dvenus=true \
     -Dvenus-validate=true \
 %endif
+    -Ddrm-renderers=amdgpu-experimental \
     -Dvideo=true
 %meson_build
 
