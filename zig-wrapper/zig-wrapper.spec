@@ -1,11 +1,11 @@
 Name:           zig-wrapper
 Version:        0.0.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Maven wrapper installer script
 
 License:        EUPL-1.2
-URL:            https://repo.ckoomen.eu/
-Source0:        https://github.com/Dudecake/%{name}/archive/refs/tags/v%{version}.tar.gz
+URL:            https://github.com/Dudecake/%{name}
+Source0:        %{url}/archive/refs/tags/v%{version}.tar.gz
 
 BuildArch:      noarch
 
