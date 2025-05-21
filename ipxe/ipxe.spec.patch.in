@@ -1,7 +1,7 @@
 --- ./ipxe.spec	2023-08-30 12:50:21.000000000 +0200
 +++ ./ipxe.spec	2023-09-18 21:02:40.425868121 +0200
-@@ -24,12 +24,16 @@
-
+@@ -25,13 +25,15 @@
+ 
  Name:           ipxe
  Version:        __version__
 -Release:        __release__
@@ -14,44 +14,17 @@
  Patch0:         syslinux-mtools.patch
 +Patch0001:      https://src.fedoraproject.org/rpms/ipxe/raw/rawhide/f/0001-build-customize-configuration.patch
 +Patch0002:      https://src.fedoraproject.org/rpms/ipxe/raw/rawhide/f/0002-Use-spec-compliant-timeouts.patch
-+Patch0003:      0003-build-customize-configuration.patch
-+Patch0004:      https://patch-diff.githubusercontent.com/raw/ipxe/ipxe/pull/612.patch
  BuildRequires:  binutils-devel
  # Do not build i586 for Leap/SLE: no such port available
  %ifarch i586
-@@ -38,19 +42,27 @@ BuildRequires:  binutils-devel
- %endif
- %endif
- %ifnarch %{ix86} x86_64
-+%if 0%{?suse_version}
- %if 0%{?sle_version} >= 150000 && 0%{?sle_version} < 159999
- BuildRequires:  cross-x86_64-gcc7
- %else
- BuildRequires:  cross-x86_64-gcc%{gcc_version}
- %endif
-+%else
-+BuildRequires:  gcc-x86_64-linux-gnu
-+%endif
- %endif
- %if !0%{?no_aarch64_cc}
- %ifnarch aarch64
-+%if 0%{?suse_version}
- %if 0%{?sle_version} >= 150000 && 0%{?sle_version} < 159999
- BuildRequires:  cross-aarch64-gcc7
- %else
- BuildRequires:  cross-aarch64-gcc%{gcc_version}
- %endif
-+%else
-+BuildRequires:  gcc-aarch64-linux-gnu
-+%endif
- %endif
- %endif
- BuildRequires:  perl
-@@ -84,6 +96,7 @@ UNDI formats. EFI is supported, too.
-
- %prep
- %setup -q
-+%autopatch -p1
- cd src
-
+@@ -99,6 +101,11 @@
+ sed -i.bak \
+     -e 's,#undef\(.*DOWNLOAD_PROTO_HTTPS.*\),#define\1,' \
+     config/general.h
++
++# enable nfs
++sed -i.bak \
++    -e 's,#undef\(.*DOWNLOAD_PROTO_NFS.*\),#define\1,' \
++    config/general.h
+ 
  %build
