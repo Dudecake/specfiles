@@ -202,6 +202,9 @@ Provides:       pattern-visible()
 # Requires:       kea
 Requires:       tayga
 
+%description router
+%{summary}
+
 %package devel-java
 Summary:        openSUSE devel-java CKoomen pattern
 Group:          Metapackages
