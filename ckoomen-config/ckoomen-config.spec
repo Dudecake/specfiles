@@ -1,6 +1,6 @@
 Name:           ckoomen-config
 Version:        0.0.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Config for CKoomen
 
 License:        EUPL-1.2
@@ -55,24 +55,12 @@ mkdir -p %{buildroot}%{_sysconfdir}/NetworkManager/conf.d \
         %{buildroot}%{_sysconfdir}/dracut.conf.d \
         %{buildroot}%{_sysconfdir}/skel
 
-cat << EOF > %{buildroot}%{_sysconfdir}/NetworkManager/conf.d/wifi_backend.conf
-[device]
-wifi.backend=iwd
-EOF
-cat << EOF > %{buildroot}%{_sysconfdir}/NetworkManager/conf.d/wake_on_lan.conf
-[connection]
-ethernet.wake-on-lan=magic
-EOF
-cat << EOF > %{buildroot}%{_sysconfdir}/modules-load.d/99-ckoomen.conf
-vfio
-vfio_iommu_type1
-vfio_pci
-EOF
+cp %{_sourcedir}/wifi_backend.conf %{buildroot}%{_sysconfdir}/NetworkManager/conf.d/wifi_backend.conf
+cp %{_sourcedir}/wake_on_lan.conf %{buildroot}%{_sysconfdir}/NetworkManager/conf.d/wake_on_lan.conf
+cp %{_sourcedir}/modules-load-dropin.conf %{buildroot}%{_sysconfdir}/modules-load.d/99-dudecake.conf
+cp %{_sourcedir}/dracut-dropin.conf %{buildroot}%{_sysconfdir}/dracut.conf.d/99-dudecake.conf
 cat << EOF > %{buildroot}%{_sysconfdir}/ld.so.conf.d/jack.conf
 %{_libdir}/pipewire-0.3/jack
-EOF
-cat << EOF > %{buildroot}%{_sysconfdir}/dracut.conf.d/99-ckoomen.conf
-omit_dracutmodules+=" zfs "
 EOF
 cp %{_sourcedir}/zshrc %{buildroot}%{_sysconfdir}/skel/.zshrc
 

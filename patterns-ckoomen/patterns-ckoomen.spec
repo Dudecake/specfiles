@@ -1,6 +1,6 @@
 Name:           patterns-ckoomen
 Version:        0.0.43
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -250,7 +250,7 @@ Requires:       pattern() = ckoomen_devel_java
 Requires:       pattern() = ckoomen_devel_cpp
 Requires:       code
 Requires:       lapce
-Requires:       qtcreator
+Requires:       qt-creator
 Requires:       zed
 # For openjfx
 Requires:       libgthread-2_0-0
