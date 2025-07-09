@@ -1,6 +1,6 @@
 Name:           patterns-ckoomen
 Version:        0.0.43
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -255,7 +255,6 @@ Requires:       zed
 # For openjfx
 Requires:       libgthread-2_0-0
 Requires:       osc
-Requires:       build
 Requires:       python3-keyring
 Requires:       obs-service-format_spec_file
 
@@ -301,6 +300,7 @@ Requires:       pattern() = ckoomen_base
 Requires:       gamescope
 Requires:       waycheck
 Requires:       xwayland-run
+Requires:       wayback
 Requires:       firejail
 Requires:       firejail-zsh-completion
 Requires:       firewall-applet
