@@ -1,6 +1,6 @@
 Name:           patterns-ckoomen
-Version:        0.0.43
-Release:        2%{?dist}
+Version:        0.0.44
+Release:        0%{?dist}
 Summary:        Patterns for openSUSE
 
 License:        EUPL-1.2
@@ -177,6 +177,7 @@ Provides:       pattern-visible()
 Requires:       pattern() = ckoomen_virtualization
 Requires:       tcpdump
 Requires:       tftp
+Requires:       (pattern() = microos_cockpit or pattern() cockpit)
 # Storage
 Requires:       zfs
 Requires:       zfstools
@@ -251,7 +252,6 @@ Requires:       pattern() = ckoomen_devel_cpp
 Requires:       code
 Requires:       lapce
 Requires:       qt-creator
-Requires:       zed
 # For openjfx
 Requires:       libgthread-2_0-0
 Requires:       osc
